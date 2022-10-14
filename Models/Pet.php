@@ -3,6 +3,7 @@
 
     class Pet{
         private $photo;
+        private $petType;
         private $raze;
         private $size;
         private $vaccinationPhoto;
@@ -67,6 +68,16 @@
         public function setPhoto($photo)
         {
             $this->photo = $photo;
+        }
+
+        public function getPetType()
+        {
+            return $this->petType;
+        }
+
+        public function setPetType($petType)
+        {
+            $this->petType = $petType;
         }
     }
 ?>

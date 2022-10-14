@@ -1,84 +1,29 @@
 <?php
     namespace Models;
 
-    class Keeper{
-        private $keeperId;
-        private $firstName;
-        private $lastName;
-        private $dni;
-        private $email;
-        private $password;
-        private $phoneNumber;
+    class Keeper extends User{
         
+        private $bookings;
+        private $petType;
         
-        public function getKeeperId()
+        public function getBookings()
         {
-            return $this->keeperId;
+            return $this->bookings;
         }
 
-        public function setKeeperId($keeperId)
+        public function setBookings($bookings)
         {
-            $this->keeperId = $keeperId;
+            $this->bookings = $bookings;
         }
 
-        public function getFirstName()
+        public function getPetType()
         {
-            return $this->firstName;
+            return $this->petType;
         }
 
-        public function setFirstName($firstName)
+        public function setPetType($petType)
         {
-            $this->firstName = $firstName;
-        }
-        
-        public function getLastName()
-        {
-            return $this->lastName;
-        }
-
-        public function setLastName($lastName)
-        {
-            $this->lastName = $lastName;
-        }
-
-        public function getDni()
-        {
-            return $this->dni;
-        }
-
-        public function setDni($dni)
-        {
-            $this->dni = $dni;
-        }
-
-        public function getEmail()
-        {
-            return $this->email;
-        }
-
-        public function setEmail($email)
-        {
-            $this->email = $email;
-        }
-
-        public function getPassword()
-        {
-            return $this->password;
-        }
-
-        public function setPassword($password)
-        {
-            $this->password = $password;
-        }
-        
-        public function getPhoneNumber()
-        {
-            return $this->phoneNumber;
-        }
-
-        public function setPhoneNumber($phoneNumber)
-        {
-            $this->phoneNumber = $phoneNumber;
+            $this->petType = $petType;
         }
     }
 ?>
