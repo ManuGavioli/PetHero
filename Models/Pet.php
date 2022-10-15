@@ -2,6 +2,7 @@
     namespace Models;
 
     class Pet{
+        private $id;
         private $photo;
         private $petType;
         private $raze;
@@ -78,6 +79,18 @@
         public function setPetType($petType)
         {
             $this->petType = $petType;
+        }
+
+      
+        public function getId()
+        {
+                return $this->id;
+        }
+
+        public function setId($id)
+        {
+                $this->id = $id;
+
         }
     }
 ?>
