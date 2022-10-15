@@ -27,10 +27,10 @@ class OwnerController{
         
     }
 
-    function AddOwner($firstname, $lasName, $dni, $email, $password, $phonenumber){
+    function AddOwner($id, $firstname, $lasName, $dni, $email, $password, $phonenumber){
 
                 $ownerNew=new Owner();
-                
+                $ownerNew->setId($id);
                 $ownerNew->setFirstName($firstname);
                 $ownerNew->setLastName($lasName);
                 $ownerNew->setDni($dni);

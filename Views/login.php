@@ -21,7 +21,5 @@
                <label for="">
                     <a href="<?php echo FRONT_ROOT.'' ?>">Crear nueva cuenta como DUEÑO</a>
                </label>
-          </form>
-               
      </div>
 </main>
