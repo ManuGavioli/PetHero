@@ -1,7 +1,7 @@
 <div class="container">
                <h2 class="mb-4">Completa los Datos del registro</h2>
 
-               <form class="bg-light-alpha p-5" method="get" action="Process/newBill.php">
+               <form class="bg-light-alpha p-5" method="" action="">
                     <div class="row">
                          <div class="col-lg-3">
                               <div class="form-group">
