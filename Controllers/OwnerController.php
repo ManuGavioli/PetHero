@@ -16,7 +16,7 @@ class OwnerController{
     }
 
     function ShowRegisterView(){
-
+        require_once(VIEWS_PATH."register.php");
     }
 
     function ShowAddPetView(){

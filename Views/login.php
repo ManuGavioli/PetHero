@@ -15,10 +15,10 @@
                </div>
                <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button>
           </form>
-          <form action="<?php echo FRONT_ROOT.'/User/LogIn/'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
-               <button class="btn btn-primary btn-block btn-lg" type="submit">Crear Nueva Cuenta</button>
+          <form action="<?php echo FRONT_ROOT.'/Keeper/ShowRegisterView/'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
+               <button class="btn btn-primary btn-block btn-lg" type="submit">Crear Nueva Cuenta como Keeper </button>
           </form>
-          <form action="<?php echo FRONT_ROOT.'/Owner/AddOwner/'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
+          <form action="<?php echo FRONT_ROOT.'/Owner/ShowRegisterView/'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
                <button class="btn btn-primary btn-block btn-lg" type="submit">Crear Nueva Cuenta como Owner</button>
           </form>
      </div>
