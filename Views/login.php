@@ -1,7 +1,7 @@
 <main class="d-flex align-items-center justify-content-center height-100" >
      <div class="content">
           <header class="text-center">
-               <h2>Segundo Parcial</h2>
+               <h2>¡Bienvenido a Pet Hero!</h2>
           </header>
 
           <form action="<?php echo FRONT_ROOT.'/User/LogIn/'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
@@ -14,9 +14,15 @@
                     <input type="password" name="password" class="form-control form-control-lg" placeholder="Ingresar constraseña" required>
                </div>
                <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button>
+               <br>
+               <label for="">
+                    <a href="<?php echo FRONT_ROOT.'Keeper/RegisterNewKeeper/' ?>">Crear nueva cuenta como CUIDADOR</a>
+               </label>
+               <label for="">
+                    <a href="<?php echo FRONT_ROOT.'' ?>">Crear nueva cuenta como DUEÑO</a>
+               </label>
+               
           </form>
-          <form action="<?php echo FRONT_ROOT.'/User/LogIn/'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
-               <button class="btn btn-primary btn-block btn-lg" type="submit">Crear Nueva Cuenta</button>
-          </form>
+          
      </div>
 </main>

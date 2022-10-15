@@ -18,6 +18,7 @@
             $this->RetrieveData();
 
             $newKeeper->setUserId($this->GetNextId());
+            $newKeeper->setBookings(null);
 
             array_push($this->KeeperList, $newKeeper);
 
@@ -52,7 +53,7 @@
                 $valuesArray["last_name"] = $Keeper->getLastName();
                 $valuesArray["dni"] = $Keeper->getDni();
                 $valuesArray["email"] = $Keeper->getEmail();
-                $valuesArray["password"] = $Keeper->getPassword();
+                $valuesArray["passw"] = $Keeper->getPassword();
                 $valuesArray["phone_number"] = $Keeper->getPhoneNumber();
 
                 //type
