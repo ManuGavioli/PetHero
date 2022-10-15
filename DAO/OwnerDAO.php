@@ -5,8 +5,6 @@ namespace DAO;
 use Models\Owner as Owner;
 use Models\Pet as Pet;
 use DAO\IOwnerDAO as IOwnerDAO;
-use Models\Pet as Pet;
-use Models\User as User;
 
 class OwnerDAO implements IOwnerDAO{
 
@@ -28,7 +26,7 @@ class OwnerDAO implements IOwnerDAO{
 
     function Add_Owner(Owner $newOwner){
         $this->RetriveData();
-        $newOwner->setId($this->GetNewId());
+        $newOwner->setUserId($this->GetNewId());
         array_push($this->OwnersList, $newOwner);
 
         $this->SaveData();
@@ -45,7 +43,7 @@ class OwnerDAO implements IOwnerDAO{
 
     function GetNewId(){
         $id=0;
-        $this->RetrieveData();
+        $this->RetriveData();
 
         foreach($this->OwnersList as $owner){
 
@@ -67,7 +65,7 @@ class OwnerDAO implements IOwnerDAO{
         if (file_exists($this->fileName)){
             foreach($ArrayToDecode as $owner){
                 $ownerNew=new Owner();
-                $ownerNew->setId($owner['ownerId']);
+                $ownerNew->setUserId($owner['ownerId']);
                 $ownerNew->setFirstName($owner['firstName']);
                 $ownerNew->setLastName($owner['lastName']);
                 $ownerNew->setDni($owner['dni']);
@@ -113,10 +111,10 @@ class OwnerDAO implements IOwnerDAO{
 
         if(file_exists($this->fileName)){
 
-            foreach($this->Listowners as $owners){
+            foreach($this->OwnersList as $owners){
 
 
-                $ownerJson['ownerId']=$owners->getId();
+                $ownerJson['ownerId']=$owners->getUserId();
                 $ownerJson['firstName']=$owners->getFirstName();
                 $ownerJson['lastName']=$owners->getLastName();
                 $ownerJson['dni']=$owners->getDni();

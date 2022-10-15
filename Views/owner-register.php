@@ -1,28 +1,48 @@
-<div class="container">
-               <h2 class="mb-4">Completa los Datos del registro</h2>
+<main class="py-5">
+     <section id="listado" class="mb-5">
+          <div class="container">
+               <h2 class="mb-4">Registro de nuevo Dueño</h2>
+               <form action="<?php echo FRONT_ROOT.'Owner/AddOwner'?>" method="post" class="bg-light-alpha p-5">
 
-               <form class="bg-light-alpha p-5" method="" action="">
-                    <div class="row">
-                         <div class="col-lg-3">
-                              <div class="form-group">
-                                   <label for=""></label>
-                                   <input type="date" name="" class="form-control">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="">Nombre</label>
+                                   <input maxlength="30" type="text" name="first_name" class="form-control" required>
                               </div>
-                         </div>
-                         <div class="col-lg-3">
+                        </div>
+                        <div class="col-lg-4">
                               <div class="form-group">
-                                   <p></p>
-                                   <input type="radio" name="" value="" class="radioSize">Factura A
-                                   <input type="radio" name="" value="" class="radioSize">Factura B
+                                   <label for="">Apellido</label>
+                                   <input maxlength="30" type="text" name="last_name" class="form-control" required>
                               </div>
-                         </div>
-                         <div class="col-lg-3">
+                        </div>
+                        <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for=""></label>
-                                   <input type="number" name="" value="" class="form-control" min="0">
+                                   <label for="">DNI</label>
+                                   <input maxlength="8" type="number" name="dni" class="form-control" required>
                               </div>
-                         </div>
+                        </div>
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Email</label>
+                                   <input type="email" name="email" class="form-control" required>
+                              </div>
+                        </div>
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Contraseña</label>
+                                   <input type="password" name="password" class="form-control" required>
+                              </div>
+                        </div>
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Numero de telefono</label>
+                                   <input type="number" name="phone_number" class="form-control" required>
+                              </div>
+                        </div>
+                        <button type="submit" class="btn btn-dark ml-auto d-block">Registrarse en el sistema</button>
                     </div>
-                    <button type="submit" name="button" class="btn btn-dark ml-auto d-block">Agregar</button>
                </form>
           </div>
+     </section>
+</main>

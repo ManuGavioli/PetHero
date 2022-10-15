@@ -19,7 +19,7 @@
                     <a href="<?php echo FRONT_ROOT.'Keeper/RegisterNewKeeper/' ?>">Crear nueva cuenta como CUIDADOR</a>
                </label>
                <label for="">
-                    <a href="<?php echo FRONT_ROOT.'' ?>">Crear nueva cuenta como DUEÑO</a>
+                    <a href="<?php echo FRONT_ROOT.'Owner/ShowRegisterView/' ?>">Crear nueva cuenta como DUEÑO</a>
                </label>
      </div>
 </main>

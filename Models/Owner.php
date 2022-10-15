@@ -2,8 +2,8 @@
 
 namespace Models;
 
-use Model\User as User;
-use Model\Pet as Pet;
+use Models\User as User;
+use Models\Pet as Pet;
 
 class Owner extends User{
 
