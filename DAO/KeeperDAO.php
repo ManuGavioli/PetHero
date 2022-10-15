@@ -18,6 +18,7 @@
             $this->RetrieveData();
 
             $newKeeper->setUserId($this->GetNextId());
+            $newKeeper->setBookings(null);
 
             array_push($this->KeeperList, $newKeeper);
 
@@ -44,9 +45,9 @@
 
         private function SaveData(){
             $arrayToEncode = array();
-    
+
             foreach($this->KeeperList as $Keeper){
-                
+
                 $valuesArray["user_id"] = $Keeper->getUserId();
                 $valuesArray["first_name"] = $Keeper->getFirstName();
                 $valuesArray["last_name"] = $Keeper->getLastName();
@@ -58,10 +59,10 @@
                 //type
                 $valuesArray["bookings"] = $Keeper->getBookings();
                 $valuesArray["pet_type"] = $Keeper->getPetType();
-                
+
                 array_push($arrayToEncode, $valuesArray);
             }
-    
+
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
 
             file_put_contents($this->fileName, $jsonContent);
@@ -90,12 +91,12 @@
                     //type
                     $Keeper->setBookings($content["bookings"]);
                     $Keeper->setPetType($content["pet_type"]);
-                    
-        
+
+
                     array_push($this->KeeperList, $Keeper);
                 }
             }
         }
-        
+
     }
 ?>

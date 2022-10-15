@@ -3,7 +3,7 @@
           <div class="container">
                <h2 class="mb-4">Registro de nuevo cuidador</h2>
                <form action="<?php echo FRONT_ROOT.'Keeper/AddKeeper'?>" method="post" class="bg-light-alpha p-5">
-                                             
+
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Nombre</label>

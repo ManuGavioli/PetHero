@@ -1,7 +1,7 @@
 <main class="d-flex align-items-center justify-content-center height-100" >
      <div class="content">
           <header class="text-center">
-               <h2>Segundo Parcial</h2>
+          <h2>¡Bienvenido a Pet Hero!</h2>
           </header>
 
           <form action="<?php echo FRONT_ROOT.'/User/LogIn/'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
@@ -19,7 +19,7 @@
                     <a href="<?php echo FRONT_ROOT.'Keeper/RegisterNewKeeper/' ?>">Crear nueva cuenta como CUIDADOR</a>
                </label>
                <label for="">
-                    <a href="<?php echo FRONT_ROOT.'Owner/ShowRegisterView/' ?>">Crear nueva cuenta como DUEÑO</a>
+                    <a href="<?php echo FRONT_ROOT.'' ?>">Crear nueva cuenta como DUEÑO</a>
                </label>
           </form>
                

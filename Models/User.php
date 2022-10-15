@@ -4,7 +4,7 @@ namespace Models;
 
 class User{
 
-    private $ownerId;
+    private $userId;
     private $firstName;
     private $lastName;
     private $dni;
@@ -13,14 +13,14 @@ class User{
     private $phoneNumber;
  
 
-    public function getOwnerId()
+    public function getUserId()
     {
-        return $this->ownerId;
+        return $this->userId;
     }
 
-    public function setOwnerId($ownerId)
+    public function setUserId($userId)
     {
-        $this->ownerId = $ownerId;
+        $this->userId = $userId;
     }
 
 
