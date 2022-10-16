@@ -17,8 +17,12 @@ class OwnerController{
         require_once(VIEWS_PATH."owner-register.php");
     }
 
-    function ShowAddPetView(){
+    function ShowListPetView(){
         
+    }
+
+    function ShowAddPetView(){
+        require_once(VIEWS_PATH."pet-add.php");
     }
 
     function ShowReservationView(){
@@ -37,6 +41,10 @@ class OwnerController{
 
 
         $this->DataOwners->Add_Owner($ownerNew);
+    }
+
+    function AddPet(){
+        
     }
 
     

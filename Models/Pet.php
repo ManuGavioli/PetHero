@@ -10,6 +10,7 @@
         private $vaccinationPhoto;
         private $observations;
         private $video;
+        private $myowner;
 
         public function getVideo()
         {
@@ -90,6 +91,19 @@
         public function setId($id)
         {
                 $this->id = $id;
+
+        }
+
+       
+        public function getMyowner()
+        {
+                return $this->myowner;
+        }
+
+       
+        public function setMyowner($myowner)
+        {
+                $this->myowner = $myowner;
 
         }
     }
