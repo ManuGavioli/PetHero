@@ -3,6 +3,7 @@
 
     class Pet{
         private $id;
+        private $name;
         private $photo;
         private $petType;
         private $raze;
@@ -104,6 +105,18 @@
         public function setMyowner($myowner)
         {
                 $this->myowner = $myowner;
+
+        }
+
+        public function getName()
+        {
+                return $this->name;
+        }
+
+      
+        public function setName($name)
+        {
+                $this->name = $name;
 
         }
     }

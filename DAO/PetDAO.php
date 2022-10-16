@@ -3,7 +3,6 @@
 namespace DAO;
 
 use Models\Pet as Pet;
-use Models\Pet as Pet;
 use DAO\IPetDAO as IPetDAO;
 
 class PetDAO implements IPetDAO{
@@ -67,6 +66,7 @@ class PetDAO implements IPetDAO{
                 
                         $petNew=new Pet();
                         $petNew->setId($Pet['id']);
+                        $petNew->setName($Pet['name']);
                         $petNew->setPhoto($Pet['photo']);
                         $petNew->setPetType($Pet['petType']);
                         $petNew->setRaze($Pet['raze']);
@@ -113,6 +113,7 @@ class PetDAO implements IPetDAO{
             foreach($this->PetList as $Pets){
 
                     $PetJson['id']=$pets->getId();
+                    $PetJson['name']=$pets->getName();
                     $PetJson['photo']=$pets->getPhoto();
                     $PetJson['petType']=$pets->getPetType();
                     $PetJson['raze']=$pets->getRaze();

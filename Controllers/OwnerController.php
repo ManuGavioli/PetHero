@@ -5,12 +5,15 @@ namespace Controllers;
 use Models\Owner as Owner;
 use Models\Pet as Pet;
 use DAO\OwnerDAO as OwnerDAO;
+use DAO\PetDAO as PetDAO;
 
 class OwnerController{
     private $DataOwners;
+    private $DataPets;
 
     function __construct(){
         $this->DataOwners=new OwnerDAO();
+        $this->DataPets=new PetDAO();
     }
 
     function ShowRegisterView(){
@@ -43,8 +46,18 @@ class OwnerController{
         $this->DataOwners->Add_Owner($ownerNew);
     }
 
-    function AddPet(){
-        
+    function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
+        $petNew=new Pet();
+        $petNew->setName($name);
+        $petNew->setPhoto($photo);
+        $petNew->setPetType($petType);
+        $petNew->setRaze($raze);
+        $petNew->setSize($size);
+        $petNew->setVaccinationPhoto($vaccinationPhoto);
+        $petNew->setObservations($observations);
+        $petNew->setVideo($video);
+
+        $this->DataPets->AddPet($petNew);
     }
 
     

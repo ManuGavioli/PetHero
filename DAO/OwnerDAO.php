@@ -85,14 +85,15 @@ class OwnerDAO implements IOwnerDAO{
                 
                 foreach($owner['pets'] as $pets){
                         $petNew=new Pet();
-                        $petNew->setId($owner['id']);
-                        $petNew->setPhoto($owner['photo']);
-                        $petNew->setPetType($owner['petType']);
-                        $petNew->setRaze($owner['raze']);
-                        $petNew->setSize($owner['size']);
-                        $petNew->setVaccinationPhoto($owner['vaccinationPhoto']);
-                        $petNew->setObservations($owner['observations']);
-                        $petNew->setVideo($owner['video']);
+                        $petNew->setId($pets['id']);
+                        $petNew->setId($pets['name']);
+                        $petNew->setPhoto($pets['photo']);
+                        $petNew->setPetType($pets['petType']);
+                        $petNew->setRaze($pets['raze']);
+                        $petNew->setSize($pets['size']);
+                        $petNew->setVaccinationPhoto($pets['vaccinationPhoto']);
+                        $petNew->setObservations($pets['observations']);
+                        $petNew->setVideo($pets['video']);
                         
                         $ownerNew->AddPets($petNew);
                 }
@@ -126,6 +127,7 @@ class OwnerDAO implements IOwnerDAO{
                 foreach($owners->getPets() as $pets){
 
                     $petNew['id']=$pets->getId();
+                    $petNew['name']=$pets->getName();
                     $petNew['photo']=$pets->getPhoto();
                     $petNew['petType']=$pets->getPetType();
                     $petNew['raze']=$pets->getRaze();
