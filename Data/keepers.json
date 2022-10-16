@@ -1,0 +1,13 @@
+[
+    {
+        "user_id": 1,
+        "first_name": "Manuel",
+        "last_name": "Gavioli",
+        "dni": "42282600",
+        "email": "email@user.com",
+        "password": "321",
+        "phone_number": "123456789",
+        "bookings": null,
+        "pet_type": "big"
+    }
+]

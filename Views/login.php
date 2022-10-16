@@ -16,7 +16,7 @@
                <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button>
                <br>
                <label for="">
-                    <a href="<?php echo FRONT_ROOT.'Keeper/RegisterNewKeeper/' ?>">Crear nueva cuenta como CUIDADOR</a>
+                    <a href="<?php echo FRONT_ROOT.'Keeper/RegisterNewKeeper' ?>">Crear nueva cuenta como CUIDADOR</a>
                </label>
                <label for="">
                     <a href="<?php echo FRONT_ROOT.'Owner/ShowRegisterView/' ?>">Crear nueva cuenta como DUEÑO</a>

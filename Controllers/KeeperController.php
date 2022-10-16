@@ -18,16 +18,17 @@
         
         
 
-        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $pet_type){
+        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number, $pet_type){
             $Keeper = new Keeper;
             $Keeper->setFirstName($first_name);
             $Keeper->setLastName($last_name);
             $Keeper->setDni($dni);
             $Keeper->setEmail($email);
             $Keeper->setPassword($passw);
+            $Keeper->setPhoneNumber($phone_number);
             $Keeper->setPetType($pet_type);
 
             $this->KeeperDAO->Add_Keeper($Keeper);
-
+        }
     }
 ?>     
