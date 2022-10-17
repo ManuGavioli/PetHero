@@ -8,13 +8,15 @@
         private $KeeperList = array();
         private $fileName = ROOT."Data/keepers.json";
 
-        public function GetAll(){
+        public function GetAll()
+        {
             $this->RetrieveData();
 
             return $this->KeeperList;
         }
 
-        public function Add_Keeper(Keeper $newKeeper){
+        public function Add_Keeper(Keeper $newKeeper)
+        {
             $this->RetrieveData();
 
             $newKeeper->setUserId($this->GetNextId());
@@ -25,7 +27,21 @@
             $this->SaveData();
         }
 
-        private function GetNextId(){
+        public function SearchEmail($email)
+        {
+            $this->RetrieveData();
+
+            $keepers = array_filter($this->KeeperList, function($keeperExist) use($email){
+                return $keeperExist->getEmail() == $email;
+            });
+
+            $keepers = array_values($keepers);
+
+            return (count($keepers) > 0) ? $keepers[0] : null;
+        }
+
+        private function GetNextId()
+        {
             $id = 0;
             foreach($this->KeeperList as $Keeper){
                 $id = ($Keeper->getUserId() > $id) ? $Keeper->getUserId() : $id; 
@@ -33,7 +49,8 @@
             return $id + 1;
         }
 
-        public function Remove($id){
+        public function Remove($id)
+        {
             $this->RetrieveData();
 
             $this->KeeperList = array_filter($this->KeeperList, function($Keeper) use ($id){
@@ -43,7 +60,8 @@
             $this->SaveData();
         }
 
-        private function SaveData(){
+        private function SaveData()
+        {
             $arrayToEncode = array();
 
             foreach($this->KeeperList as $Keeper){
@@ -68,7 +86,8 @@
             file_put_contents($this->fileName, $jsonContent);
         }
 
-        private function RetrieveData(){
+        private function RetrieveData()
+        {
 
             $this->KeeperList = array();
 

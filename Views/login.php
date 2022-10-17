@@ -4,7 +4,7 @@
           <h2>¡Bienvenido a Pet Hero!</h2>
           </header>
 
-          <form action="<?php echo FRONT_ROOT.'/User/LogIn/'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
+          <form action="<?php echo FRONT_ROOT.'User/LogIn'?>" method="post" class="login-form bg-dark-alpha p-5 bg-light">
                <div class="form-group">
                     <label for="">Email</label>
                     <input type="text" name="email" class="form-control form-control-lg" placeholder="Ingresar usuario" required>

@@ -8,5 +8,6 @@
         function GetAll();
         function Add_Keeper(Keeper $newKeeper);
         function Remove($id);
+        function SearchEmail($email);
     }
 ?>

@@ -106,6 +106,18 @@ class OwnerDAO implements IOwnerDAO{
 
     }
 
+    public function SearchEmail($email){
+            $this->RetriveData();
+
+            $owners = array_filter($this->OwnersList, function($ownerExist) use($email){
+                return $ownerExist->getEmail() == $email;
+            });
+
+            $owners = array_values($owners);
+
+            return (count($owners) > 0) ? $owners[0] : null;
+    }
+
     private function SaveData(){
         $ArrayToEncode=array();
 

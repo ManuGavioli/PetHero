@@ -8,5 +8,6 @@
         function GetAll();
         function Add_Owner(Owner $newOwner);
         function Remove($id);
+        function SearchEmail($email);
     }
 ?>
