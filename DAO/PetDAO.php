@@ -108,7 +108,7 @@ class PetDAO implements IPetDAO{
                 $userNew->setFirstName($Pet['user']['firstName']);*/               
                 
 
-                array_push($this->PetList, $PetNew);
+                array_push($this->PetList, $petNew);
 
             }
         }

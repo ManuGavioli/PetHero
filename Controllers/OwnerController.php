@@ -63,7 +63,9 @@ class OwnerController{
 
         $this->DataPets->AddPet($petNew);
 
-        
+        $this->DataOwners->AddPet($_SESSION['userlog']->getUserId(), $petNew);
+
+
 
         $this->ShowListPetView();
     }

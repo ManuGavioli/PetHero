@@ -59,7 +59,7 @@ class OwnerDAO implements IOwnerDAO{
         $this->RetriveData();
         foreach($this->OwnersList as $owner){
             if($id == $owner->getUserId()){
-                $owner->AddPet($petnew);
+                $owner->AddPets($petnew);
             }
         }
         $this->SaveData();
