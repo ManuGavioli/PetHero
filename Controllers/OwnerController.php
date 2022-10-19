@@ -21,7 +21,7 @@ class OwnerController{
     }
 
     function ShowListPetView(){
-        
+       $petsforowner=$this->DataPets->GetAllforOwner($_SESSION['userlog']->getUserId());
     }
 
     function ShowAddPetView(){
@@ -62,6 +62,10 @@ class OwnerController{
         $petNew->setMyowner($_SESSION['userlog']);
 
         $this->DataPets->AddPet($petNew);
+
+        
+
+        $this->ShowListPetView();
     }
 
     

@@ -2,6 +2,7 @@
     namespace DAO;
 
     use Models\Owner as Owner;
+    use Models\Pet as Pet;
 
     interface IOwnerDAO
     {
@@ -9,5 +10,6 @@
         function Add_Owner(Owner $newOwner);
         function Remove($id);
         function SearchEmail($email);
+        function AddPet($id, Pet $petnew);
     }
 ?>

@@ -8,5 +8,6 @@
         function GetAll();
         function AddPet(Pet $newPet);
         function Remove($id);
+        function GetAllforOwner($id);
     }
 ?>

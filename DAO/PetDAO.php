@@ -3,6 +3,7 @@
 namespace DAO;
 
 use Models\Pet as Pet;
+use Models\Owner as Owner;
 use DAO\IPetDAO as IPetDAO;
 
 class PetDAO implements IPetDAO{
@@ -39,13 +40,23 @@ class PetDAO implements IPetDAO{
 
     }
 
+    function GetAllforOwner($id){
+        $this->RetriveData();
+        $ownerPet=array();
+        foreach ($this->PetList as $pets){
+            if($pets->getMyOwner()->getUserId()==$id){
+                array_push($ownerPet, $pets);
+            }
+        }
+        return $ownerPet;
+    }
+
 
     function GetNewId(){
         $id=0;
         $this->RetriveData();
 
         foreach($this->PetList as $Pet){
-
             if($id<$Pet->getId()){
                 $id=$Pet->getId();
             }
