@@ -28,8 +28,8 @@ class OwnerDAO implements IOwnerDAO{
         $this->RetriveData();
         $newOwner->setUserId($this->GetNewId());
         array_push($this->OwnersList, $newOwner);
-
         $this->SaveData();
+        return $newOwner;
     }
 
 
@@ -47,8 +47,8 @@ class OwnerDAO implements IOwnerDAO{
 
         foreach($this->OwnersList as $owner){
 
-            if($id<$owner->getId()){
-                $id=$owner->getId();
+            if($id<$owner->getUserId()){
+                $id=$owner->getUserId();
             }
         }
 

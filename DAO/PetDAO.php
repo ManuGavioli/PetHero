@@ -110,7 +110,7 @@ class PetDAO implements IPetDAO{
 
         if(file_exists($this->fileName)){
 
-            foreach($this->PetList as $Pets){
+            foreach($this->PetList as $pets){
 
                     $PetJson['id']=$pets->getId();
                     $PetJson['name']=$pets->getName();
@@ -121,13 +121,13 @@ class PetDAO implements IPetDAO{
                     $PetJson['vaccinationPhoto']=$pets->getVaccinationPhoto();
                     $PetJson['observations']=$pets->getObservations();
                     $PetJson['video']=$pets->getVideo();
-                    $PetJson['myowner']['ownerId']=$Pets->getMyOwner()->getUserId();
-                    $PetJson['myowner']['firstName']=$Pets->getMyOwner()->getFirstName();
-                    $PetJson['myowner']['lastName']=$Pets->getMyOwner()->getLastName();
-                    $PetJson['myowner']['dni']=$Pets->getMyOwner()->getDni();
-                    $PetJson['myowner']['email']=$Pets->getMyOwner()->getEmail();
-                    $PetJson['myowner']['password']=$Pets->getMyOwner()->getPassword();
-                    $PetJson['myowner']['phoneNumber']=$Pets->getMyOwner()->getPhoneNumber();
+                    $PetJson['myowner']['ownerId']=$pets->getMyOwner()->getUserId();
+                    $PetJson['myowner']['firstName']=$pets->getMyOwner()->getFirstName();
+                    $PetJson['myowner']['lastName']=$pets->getMyOwner()->getLastName();
+                    $PetJson['myowner']['dni']=$pets->getMyOwner()->getDni();
+                    $PetJson['myowner']['email']=$pets->getMyOwner()->getEmail();
+                    $PetJson['myowner']['password']=$pets->getMyOwner()->getPassword();
+                    $PetJson['myowner']['phoneNumber']=$pets->getMyOwner()->getPhoneNumber();
 
 
                 array_push($ArrayToEncode, $PetJson);

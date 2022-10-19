@@ -1,12 +1,12 @@
 [
     {
         "ownerId": 1,
-        "firstName": "Matias",
+        "firstName": "Federico Matias",
         "lastName": "Torres",
         "dni": "43387498",
         "email": "user@myapp.com",
         "password": "123456",
-        "phoneNumber": "2230000000",
+        "phoneNumber": "02235898117",
         "pets": []
     }
 ]

@@ -34,6 +34,7 @@ class OwnerController{
 
     function AddOwner($firstname, $lasName, $dni, $email, $password, $phonenumber){
 
+
                 $ownerNew=new Owner();
                 $ownerNew->setFirstName($firstname);
                 $ownerNew->setLastName($lasName);
@@ -42,8 +43,10 @@ class OwnerController{
                 $ownerNew->setPassword($password);
                 $ownerNew->setPhoneNumber($phonenumber);
 
-
-        $this->DataOwners->Add_Owner($ownerNew);
+        
+                $_SESSION['userlog']=$this->DataOwners->Add_Owner($ownerNew);
+        
+        $this->ShowAddPetView();
     }
 
     function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
@@ -56,6 +59,7 @@ class OwnerController{
         $petNew->setVaccinationPhoto($vaccinationPhoto);
         $petNew->setObservations($observations);
         $petNew->setVideo($video);
+        $petNew->setMyowner($_SESSION['userlog']);
 
         $this->DataPets->AddPet($petNew);
     }
