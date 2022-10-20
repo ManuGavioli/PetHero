@@ -9,15 +9,15 @@
         "phoneNumber": "02235898117",
         "pets": [
             {
-                "id": 3,
+                "id": 1,
                 "name": "popy",
                 "photo": "los-10-sonidos-principales-del-perro.jpg",
                 "petType": "medium",
-                "raze": "55",
-                "size": "4",
+                "raze": "caniche",
+                "size": "6",
                 "vaccinationPhoto": "16456899624763.jpg",
-                "observations": "999999ykhgk",
-                "video": "5030546.jpg"
+                "observations": "dorado",
+                "video": "Portadas videos CPA Modulos y Extras.003 (1).png"
             }
         ]
     }
