@@ -55,12 +55,7 @@
                <?php
                }else{
                     if($_SESSION['loggedUser']->isKeeperOrOwner() == 0){
-               ?>
-                    <h2 class="mb-4">Listado de cuidadores</h2>
-                    <table class="table bg-light-alpha">
-                    <?php //ACA VA TU PARTE DEL HOME COMO OWNER MATI (se deberia mostrar el listado de keepers a contratar)?>
-                    
-               <?php
+                         header("location:".FRONT_ROOT.'Owner/ShowListKeepersView/');
                     }
                }
                ?>

@@ -6,7 +6,7 @@
      <section id="listado" class="mb-5">
           
           <div class="container">
-               <h2 class="mb-4">Keepers</h2>
+               <h2 class="mb-4">Keepers List</h2>
                <?php foreach($keepers as $keeper){ if ($keeper->getAvailableDates()!=null){?> 
                <table class="table bg-light-alpha">
                     <thead>
