@@ -26,7 +26,7 @@ class UserController{
         if($keeper != null){
             if($keeper->getPassword() == $password){
                 $_SESSION["loggedUser"] = $keeper; 
-                require_once(VIEWS_PATH."home-keeper.php"); 
+                require_once(VIEWS_PATH."home.php"); 
             }else{
                 echo "<script> confirm('Contraseña incorrecta... vuelva a intentar');</script>";
                 require_once(VIEWS_PATH."login.php");
@@ -36,7 +36,7 @@ class UserController{
             if($owner != null){
                 if($owner->getPassword() == $password){
                     $_SESSION["loggedUser"] = $owner;
-                    require_once(VIEWS_PATH."home-owner.php");
+                    require_once(VIEWS_PATH."home.php");
                 }else{
                     echo "<script> confirm('Contraseña incorrecta... vuelva a intentar');</script>";
                     require_once(VIEWS_PATH."login.php");
