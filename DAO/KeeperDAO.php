@@ -62,11 +62,12 @@
         }
 
         public function EditDates($keeper,$dates){
+            $id = $keeper->getUserId(); 
             $this->Remove($keeper->getUserId());
 
             $this->RetrieveData();
 
-            $keeper->setUserId($this->GetNextId());
+            $keeper->setUserId($id);
             $keeper->setAvailableDates($dates);
 
             array_push($this->KeeperList, $keeper);
