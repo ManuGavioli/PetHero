@@ -61,13 +61,11 @@ class OwnerController{
         $petNew->setVideo($video);
         $petNew->setMyowner($_SESSION['userlog']);
 
-        $this->DataPets->AddPet($petNew);
+        $petNew=$this->DataPets->AddPet($petNew);
 
         $_SESSION['userlog']=$this->DataOwners->AddPet($_SESSION['userlog']->getUserId(), $petNew);
 
-
-
-        $this->ShowListPetView();
+        header("location:".FRONT_ROOT."Owner/ShowListPetView");
     }
 
     

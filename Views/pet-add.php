@@ -15,7 +15,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Photo</label>
-                                   <input  type="file" name="photo" class="form-control" required>
+                                   <input  type="url" name="photo" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
@@ -42,7 +42,7 @@
                         <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="">Vaccination Photo</label>
-                                   <input  type="file" name="vaccination" class="form-control" required>
+                                   <input  type="url" name="vaccination" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
@@ -54,7 +54,7 @@
                         <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="">Video</label>
-                                   <input  type="file" name="video" class="form-control" required>
+                                   <input  type="url" name="video" class="form-control" required>
                               </div>
                         </div>
                         <button type="submit" class="btn btn-dark ml-auto d-block">Register My Pet</button>

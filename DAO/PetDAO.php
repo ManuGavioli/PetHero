@@ -30,6 +30,7 @@ class PetDAO implements IPetDAO{
         array_push($this->PetList, $newPet);
 
         $this->SaveData();
+        return $newPet;
     }
 
 
