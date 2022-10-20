@@ -54,6 +54,10 @@ class UserController{
         require_once(VIEWS_PATH.'login.php');
     }
 
+    public function Home(){
+        require_once(VIEWS_PATH.'home.php');
+    }
+
 
 }
 

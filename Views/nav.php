@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
      <span class="navbar-text">
-     <strong>Pet Hero</strong>
+          <a class="nav-link" href="<?php echo FRONT_ROOT.'User/Home'?>" >Pet Hero</a>
      </span>
      <ul class="navbar-nav ml-auto">
           <?php
