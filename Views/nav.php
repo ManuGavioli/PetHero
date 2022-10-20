@@ -12,11 +12,28 @@
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/MyProfile'?>">MI PERFIL</a>
                </li>
+          <?php
+          //} else {
+          ?>   
+          <?php /*<li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowAddPetView'?>">AGREGAR NUEVA MASCOTA</a>
+               </li>
                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowListPetView'?>">VER MIS MASCOTAS</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>">MI PERFIL</a>
+               </li>    
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>">GENERAR RESEÑA</a>
+               </li>   
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>">BUSCAR KEEPER</a>
+               </li>   
+               */?>
+          <?php // } ?> 
+          <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'User/Logout'?>">CERRAR SESIÓN</a>
                </li>
-          <?php
-          //} 
-          ?>       
      </ul>
 </nav>
