@@ -1,17 +1,5 @@
 [
     {
-        "user_id": 1,
-        "first_name": "Manuel",
-        "last_name": "Gavioli",
-        "dni": "42282600",
-        "email": "email@user.com",
-        "password": "321",
-        "phone_number": "1111111111112",
-        "bookings": null,
-        "pet_type": "big",
-        "available_dates": null
-    },
-    {
         "user_id": 2,
         "first_name": "ejemplo2",
         "last_name": "apellido2",
@@ -22,5 +10,29 @@
         "bookings": null,
         "pet_type": "medium",
         "available_dates": null
+    },
+    {
+        "user_id": 3,
+        "first_name": "Manuel",
+        "last_name": "Gavioli",
+        "dni": "42282600",
+        "email": "email@user.com",
+        "password": "321",
+        "phone_number": "1111111111112",
+        "bookings": null,
+        "pet_type": "big",
+        "available_dates": [
+            "10-10-2022",
+            "11-10-2022",
+            "12-10-2022",
+            "13-10-2022",
+            "14-10-2022",
+            "15-10-2022",
+            "16-10-2022",
+            "17-10-2022",
+            "18-10-2022",
+            "19-10-2022",
+            "20-10-2022"
+        ]
     }
 ]

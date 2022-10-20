@@ -61,6 +61,19 @@
             $this->SaveData();
         }
 
+        public function EditDates($keeper,$dates){
+            $this->Remove($keeper->getUserId());
+
+            $this->RetrieveData();
+
+            $keeper->setUserId($this->GetNextId());
+            $keeper->setAvailableDates($dates);
+
+            array_push($this->KeeperList, $keeper);
+
+            $this->SaveData();
+        }
+
         private function SaveData()
         {
             $arrayToEncode = array();

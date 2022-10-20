@@ -60,6 +60,8 @@
                     array_push($dates,$dateToAdd);
                 }
                 $_SESSION['loggedUser']->setAvailableDates($dates);
+                $this->KeeperDAO->EditDates($_SESSION['loggedUser'],$dates);
+                
                 echo "<script> confirm('Fechas guardadas en su cuenta con exito!');</script>";
                 require_once(VIEWS_PATH."home.php");
             }
