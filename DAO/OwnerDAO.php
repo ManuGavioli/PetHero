@@ -100,7 +100,7 @@ class OwnerDAO implements IOwnerDAO{
                 foreach($owner['pets'] as $pets){
                         $petNew=new Pet();
                         $petNew->setId($pets['id']);
-                        $petNew->setId($pets['name']);
+                        $petNew->setName($pets['name']);
                         $petNew->setPhoto($pets['photo']);
                         $petNew->setPetType($pets['petType']);
                         $petNew->setRaze($pets['raze']);
@@ -123,8 +123,8 @@ class OwnerDAO implements IOwnerDAO{
     public function SearchEmail($email){
             $this->RetriveData();
 
-            $owners = array_filter($this->OwnersList, function($ownerExist) use($email){
-                return $ownerExist->getEmail() == $email;
+            $owners = array_filter($this->OwnersList, function($OwnersList) use($email){
+                return $OwnersList->getEmail() == $email;
             });
 
             $owners = array_values($owners);

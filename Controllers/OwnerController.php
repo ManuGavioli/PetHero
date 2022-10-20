@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Models\Owner as Owner;
 use Models\Pet as Pet;
+use Models\Kepper as Kepper;
 use DAO\OwnerDAO as OwnerDAO;
 use DAO\PetDAO as PetDAO;
 
@@ -44,7 +45,7 @@ class OwnerController{
                 $ownerNew->setPhoneNumber($phonenumber);
 
         
-                $_SESSION['userlog']=$this->DataOwners->Add_Owner($ownerNew);
+                $_SESSION['loggedUser']=$this->DataOwners->Add_Owner($ownerNew);
         
         $this->ShowAddPetView();
     }
@@ -59,11 +60,11 @@ class OwnerController{
         $petNew->setVaccinationPhoto($vaccinationPhoto);
         $petNew->setObservations($observations);
         $petNew->setVideo($video);
-        $petNew->setMyowner($_SESSION['userlog']);
+        $petNew->setMyowner($_SESSION['loggedUser']);
 
         $petNew=$this->DataPets->AddPet($petNew);
 
-        $_SESSION['userlog']=$this->DataOwners->AddPet($_SESSION['userlog']->getUserId(), $petNew);
+        $_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
 
         header("location:".FRONT_ROOT."Owner/ShowListPetView");
     }

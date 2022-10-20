@@ -4,9 +4,10 @@
 <main class="py-5">
      
      <section id="listado" class="mb-5">
+          
           <div class="container">
                <h2 class="mb-4">My Pets</h2>
-               <?php  foreach($_SESSION['userlog']->getPets() as $pets){ ?>
+               <?php foreach($_SESSION['loggedUser']->getPets() as $pets){ ?> 
                <table class="table bg-light-alpha">
                
                     <thead>
@@ -25,21 +26,22 @@
                               <td><?php  echo $pets->getObservations();  ?></td>
 
                          </tr>
-                    </tbody>
+                    </tbody> 
                     <thead>
                          <th>Photo</th>
                          <th>Vaccination</th>
                          <th>Video</th>
-                    </thead>
+                    </thead> 
                     <tbody> 
                          <tr>
-                              <td><img width="300" height="200" src="<?php  echo $pets->getPhoto();  ?>"></td>
-                              <td><img width="300" height="200" src="<?php  echo $pets->getVaccinationPhoto();  ?>"></td>
-                              <td><iframe width="300" height="200" src="<?php  echo $pets->getVideo();  ?>"> </td>
+                              <td><img width="308" height="173.25" src="<?php  echo $pets->getPhoto();  ?>"></td> 
+                              <td><img width="308" height="173.25" src="<?php  echo $pets->getVaccinationPhoto();  ?>"></td> 
+                              <td><iframe width="308" height="173.25" src="<?php echo $pets->getVideo();  ?>" 
+                                   title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
                          </tr>
-                        </tbody>
+                        </tbody> 
                     
-                        
-                    </table> <?php  } ?> 
+                        <?php  } ?> 
+                       
           </div>
 </main>
