@@ -4,17 +4,20 @@ namespace Controllers;
 
 use Models\Owner as Owner;
 use Models\Pet as Pet;
-use Models\Kepper as Kepper;
+use Models\Keeper as Keeper;
 use DAO\OwnerDAO as OwnerDAO;
 use DAO\PetDAO as PetDAO;
+use DAO\KeeperDAO as KeeperDAO;
 
 class OwnerController{
     private $DataOwners;
     private $DataPets;
+    private $DataKeepers;
 
     function __construct(){
         $this->DataOwners=new OwnerDAO();
         $this->DataPets=new PetDAO();
+        $this->DataKeepers=new KeeperDAO();
     }
 
     function ShowRegisterView(){
@@ -23,6 +26,11 @@ class OwnerController{
 
     function ShowListPetView(){
         require_once(VIEWS_PATH."pet-list.php");
+    }
+
+    function ShowListKeepersView(){
+        $keepers=$this->DataKeepers->GetAll();
+        require_once(VIEWS_PATH."keepers-list.php");
     }
 
     function ShowAddPetView(){

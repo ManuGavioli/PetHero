@@ -29,7 +29,7 @@
                     <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>">GENERAR RESEÑA</a>
                </li>   
                <li class="nav-item">
-                    <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>">BUSCAR KEEPER</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowListKeepersView'?>">BUSCAR KEEPER</a>
                </li>   
           <?php 
                }
