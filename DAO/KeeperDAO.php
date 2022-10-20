@@ -21,6 +21,7 @@
 
             $newKeeper->setUserId($this->GetNextId());
             $newKeeper->setBookings(null);
+            $newKeeper->setAvailableDates(null);
 
             array_push($this->KeeperList, $newKeeper);
 
@@ -77,6 +78,7 @@
                 //type
                 $valuesArray["bookings"] = $Keeper->getBookings();
                 $valuesArray["pet_type"] = $Keeper->getPetType();
+                $valuesArray["available_dates"] = $Keeper->getAvailableDates();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -110,6 +112,7 @@
                     //type
                     $Keeper->setBookings($content["bookings"]);
                     $Keeper->setPetType($content["pet_type"]);
+                    $Keeper->setAvailableDates($content["available_dates"]);
 
 
                     array_push($this->KeeperList, $Keeper);

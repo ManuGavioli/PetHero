@@ -6,8 +6,21 @@
         "dni": "42282600",
         "email": "email@user.com",
         "password": "321",
-        "phone_number": "123456789",
+        "phone_number": "1111111111112",
         "bookings": null,
-        "pet_type": "big"
+        "pet_type": "big",
+        "available_dates": null
+    },
+    {
+        "user_id": 2,
+        "first_name": "ejemplo2",
+        "last_name": "apellido2",
+        "dni": "22222222",
+        "email": "ejemplo2@mail.com",
+        "password": "1234",
+        "phone_number": "8888888888",
+        "bookings": null,
+        "pet_type": "medium",
+        "available_dates": null
     }
 ]

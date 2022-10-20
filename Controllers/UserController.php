@@ -48,6 +48,10 @@ class UserController{
         }
     }
 
+    public function Logout(){
+        
+    }
+
 
 }
 

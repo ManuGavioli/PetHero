@@ -5,6 +5,7 @@
         
         private $bookings;
         private $petType;
+        private $availableDates;
         
         public function getBookings()
         {
@@ -24,6 +25,20 @@
         public function setPetType($petType)
         {
             $this->petType = $petType;
+        }
+
+        public function getAvailableDates()
+        {
+            return $this->availableDates;
+        }
+
+        public function setAvailableDates($availableDates)
+        {
+            $this->availableDates = $availableDates;
+        }
+
+        public function isKeeper(){
+            return 1;
         }
     }
 ?>

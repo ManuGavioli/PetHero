@@ -3,11 +3,20 @@
      <strong>Pet Hero</strong>
      </span>
      <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>">###</a>
-          </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>">###</a>
-          </li>          
+          <?php
+          //if(){  aca va el condicional para que se muestre el nav de owner o keeper dependiendo el caso
+          ?>    
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/RegisterAvailableDates'?>">AGREGAR FECHAS DISPONIBLES</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/MyProfile'?>">MI PERFIL</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'User/Logout'?>">CERRAR SESIÓN</a>
+               </li>
+          <?php
+          //} 
+          ?>       
      </ul>
 </nav>
