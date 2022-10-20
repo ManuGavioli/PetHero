@@ -49,7 +49,9 @@ class UserController{
     }
 
     public function Logout(){
-        
+        session_destroy();
+
+        require_once(VIEWS_PATH.'login.php');
     }
 
 

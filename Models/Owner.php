@@ -26,6 +26,10 @@ class Owner extends User{
     public function AddPets(Pet $newPet){
         array_push($this->pets, $newPet);
     }
+
+    public function isKeeperOrOwner(){
+        return 0;
+    }
 }
 
 

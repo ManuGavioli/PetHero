@@ -37,7 +37,7 @@
             $this->availableDates = $availableDates;
         }
 
-        public function isKeeper(){
+        public function isKeeperOrOwner(){
             return 1;
         }
     }

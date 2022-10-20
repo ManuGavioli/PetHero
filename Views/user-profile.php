@@ -15,7 +15,7 @@
                     <th>Contraseña</th>
                     <th>Numero de telefono</th>
                     <?php
-                    if($_SESSION['loggedUser']->isKeeper()== 1){
+                    if($_SESSION['loggedUser']->isKeeperOrOwner()== 1){
                     ?>
                     <th>Tamaño de perro</th>
                     <th>Fechas disponibles</th>
@@ -26,7 +26,7 @@
 
                 <tbody>
                     <?php
-                    if($_SESSION['loggedUser']->isKeeper()== 1){ 
+                    if($_SESSION['loggedUser']->isKeeperOrOwner()== 1){ 
                     ?>   
                     <tr>
                         <td><?php echo $_SESSION['loggedUser']->getUserId(); ?></td>  
