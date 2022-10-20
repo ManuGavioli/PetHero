@@ -42,5 +42,15 @@
                 "video": "https:\/\/www.youtube.com\/watch?v=aZK1Fk9POCY"
             }
         ]
+    },
+    {
+        "ownerId": 2,
+        "firstName": "Agustin",
+        "lastName": "asdasd",
+        "dni": "5345435",
+        "email": "user2@myapp.com",
+        "password": "123456",
+        "phoneNumber": "3454355",
+        "pets": []
     }
 ]

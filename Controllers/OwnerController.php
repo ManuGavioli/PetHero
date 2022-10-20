@@ -43,7 +43,7 @@ class OwnerController{
 
     function AddOwner($firstname, $lasName, $dni, $email, $password, $phonenumber){
 
-
+        if($this->DataOwners->SearchEmail($email) == null){
                 $ownerNew=new Owner();
                 $ownerNew->setFirstName($firstname);
                 $ownerNew->setLastName($lasName);
@@ -52,10 +52,14 @@ class OwnerController{
                 $ownerNew->setPassword($password);
                 $ownerNew->setPhoneNumber($phonenumber);
 
-        
-                $_SESSION['loggedUser']=$this->DataOwners->Add_Owner($ownerNew);
-        
-        $this->ShowAddPetView();
+                $this->DataOwners->Add_Owner($ownerNew);
+                echo "<script> confirm('Cuenta creada con exito!');</script>";
+                require_once(VIEWS_PATH."login.php");
+            }else{
+                echo "<script> confirm('Ya hay un usuario en el sistema utilizando el email ingresado... vuelva a intentar con uno nuevo');</script>";
+                require_once(VIEWS_PATH."owner-register.php");
+
+            } 
     }
 
     function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
