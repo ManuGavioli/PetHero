@@ -85,9 +85,21 @@ class OwnerController{
         require_once(VIEWS_PATH."user-profile.php");
     }
 
-    
+    public function Edit($user_id){
+        require_once(VIEWS_PATH."owner-edit.php");        
+    }
 
-
+    public function EditAux($firstname, $lasName, $dni, $email, $password, $phonenumber){
+        $_SESSION['loggedUser']->setFirstName($firstname);
+        $_SESSION['loggedUser']->setLastName($lasName);
+        $_SESSION['loggedUser']->setDni($dni);
+        $_SESSION['loggedUser']->setEmail($email);
+        $_SESSION['loggedUser']->setPassword($password);
+        $_SESSION['loggedUser']->setPhoneNumber($phonenumber);
+        $this->DataOwners->EditUser($_SESSION['loggedUser']);
+        echo "<script> confirm('Información actualizada con éxito!');</script>";
+        require_once(VIEWS_PATH."user-profile.php");
+    }
 
 }
 

@@ -7,7 +7,7 @@
           if($_SESSION['loggedUser']->isKeeperOrOwner() == 1){
           ?>    
                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/RegisterAvailableDates'?>">AGREGAR FECHAS DISPONIBLES</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/EditKeeperContent'?>">EDITAR CUIDADOR</a>
                </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/MyProfile'?>">MI PERFIL</a>

@@ -10,47 +10,47 @@
                
                <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Name</label>
+                                   <label for="">Nombre</label>
                                    <input type="text" name="name" class="form-control" required>
                               </div>
                         </div>
               
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Photo</label>
+                            <label for="">Foto</label>
                                    <input  type="url" name="photo" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Type</label>
+                                   <label for="">Tipo</label>
                                    <br>
-                                   <input type="radio", name="type" value="small"  required>Small
-                                   <input type="radio", name="type" value="medium"  required>Medium
-                                   <input type="radio", name="type" value="big" required>Big
+                                   <input type="radio", name="type" value="small"  required> Pequeño
+                                   <input type="radio", name="type" value="medium"  required> Mediano
+                                   <input type="radio", name="type" value="big" required> Grande
                               </div>
                         </div>
                         <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Raze</label>
+                                   <label for="">Raza</label>
                                    <input type="text" name="raze" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Size</label>
+                                   <label for="">Tamaño</label>
                                    <input type="number" name="size" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="">Vaccination Photo</label>
+                                    <label for="">Foto de Vacunacion</label>
                                    <input  type="url" name="vaccination" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Observations</label>
+                                   <label for="">Observaciones</label>
                                    <input type="text" name="observations" class="form-control" required>
                               </div>
                         </div>
@@ -60,7 +60,7 @@
                                    <input  type="url" name="video" class="form-control" required>
                               </div>
                         </div>
-                        <button type="submit" class="btn btn-dark ml-auto d-block">Register My Pet</button>
+                        <button type="submit" class="btn btn-dark ml-auto d-block">Registrar My Pet</button>
                     </div>
                </form>
           </div>

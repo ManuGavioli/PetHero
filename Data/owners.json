@@ -30,5 +30,49 @@
         "password": "123456",
         "phoneNumber": "3454355",
         "pets": []
+    },
+    {
+        "ownerId": 1,
+        "firstName": "Federico Matias",
+        "lastName": "Torres",
+        "dni": "43387498",
+        "email": "user@myapp.com",
+        "password": "123456",
+        "phoneNumber": "02235898228",
+        "pets": [
+            {
+                "id": 1,
+                "name": "popy",
+                "photo": "https:\/\/www.clarin.com\/img\/2021\/08\/01\/un-precioso-caniche-toy-adulto___xbahCUoy-_640x361__1.jpg",
+                "petType": "medium",
+                "raze": "caniche",
+                "size": "45",
+                "vaccinationPhoto": "https:\/\/www.clarin.com\/img\/2021\/08\/01\/8ezm074YT_720x0__1.jpg",
+                "observations": "dorado",
+                "video": "G3g5KYMijDY"
+            }
+        ]
+    },
+    {
+        "ownerId": 1,
+        "firstName": "Federico Matias",
+        "lastName": "Torres",
+        "dni": "43387498",
+        "email": "user@myapp.com",
+        "password": "123456",
+        "phoneNumber": "02235898117",
+        "pets": [
+            {
+                "id": 1,
+                "name": "popy",
+                "photo": "https:\/\/www.clarin.com\/img\/2021\/08\/01\/un-precioso-caniche-toy-adulto___xbahCUoy-_640x361__1.jpg",
+                "petType": "medium",
+                "raze": "caniche",
+                "size": "45",
+                "vaccinationPhoto": "https:\/\/www.clarin.com\/img\/2021\/08\/01\/8ezm074YT_720x0__1.jpg",
+                "observations": "dorado",
+                "video": "G3g5KYMijDY"
+            }
+        ]
     }
 ]

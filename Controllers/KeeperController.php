@@ -14,8 +14,16 @@
         public function RegisterNewKeeper(){
             require_once(VIEWS_PATH."keeper-register.php");
         }
+        
+        public function EditKeeperContent(){
+            require_once(VIEWS_PATH."keeper-content.php");
+        }
+        
+        public function MyProfile(){
+            require_once(VIEWS_PATH."user-profile.php");
+        }
 
-        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number, $pet_type){
+        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number){
 
             $this->KeeperDAO->GetAll(); 
 
@@ -28,7 +36,6 @@
                 $Keeper->setEmail($email);
                 $Keeper->setPassword($passw);
                 $Keeper->setPhoneNumber($phone_number);
-                $Keeper->setPetType($pet_type);
 
                 $this->KeeperDAO->Add_Keeper($Keeper);
                 echo "<script> confirm('Cuenta creada con exito!');</script>";
@@ -41,14 +48,10 @@
             } 
         }
 
-        public function RegisterAvailableDates(){
-            require_once(VIEWS_PATH."keeper-dates.php");
-        }
-
-        public function AddAvailableDates($first_date, $end_date){
+        public function AddContent($first_date, $end_date, $price, $pet_type){
             if($first_date > $end_date){
                 echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
-                require_once(VIEWS_PATH."keeper-dates.php");
+                require_once(VIEWS_PATH."keeper-content.php");
             }else{
                 $first_date = strtotime($first_date);
                 $end_date = strtotime($end_date);
@@ -61,14 +64,35 @@
                 }
                 $_SESSION['loggedUser']->setAvailableDates($dates);
                 $this->KeeperDAO->EditDates($_SESSION['loggedUser'],$dates);
-                
-                echo "<script> confirm('Fechas guardadas en su cuenta con exito!');</script>";
-                require_once(VIEWS_PATH."home.php");
             }
+            if($price <= 0){
+                echo "<script> confirm('Ingreso un valor invalido como precio por estadia... Vuelva a intentar');</script>";
+                require_once(VIEWS_PATH."keeper-content.php");
+            }else{
+                $_SESSION['loggedUser']->setPrice($price);
+                $this->KeeperDAO->EditPrice($_SESSION['loggedUser'],$price);
+            }
+            $_SESSION['loggedUser']->setPetType($pet_type);
+            $this->KeeperDAO->EditPetType($_SESSION['loggedUser'],$pet_type);
+            echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
+            require_once(VIEWS_PATH."home.php");
         }
 
-        public function MyProfile(){
+        public function Edit($user_id){
+            require_once(VIEWS_PATH."keeper-edit.php");
+        }
+
+        public function EditAux($first_name, $last_name, $dni, $email, $passw, $phone_number){
+            $_SESSION['loggedUser']->setFirstName($first_name);
+            $_SESSION['loggedUser']->setLastName($last_name);
+            $_SESSION['loggedUser']->setDni($dni);
+            $_SESSION['loggedUser']->setEmail($email);
+            $_SESSION['loggedUser']->setPassword($passw);
+            $_SESSION['loggedUser']->setPhoneNumber($phone_number);
+            $this->KeeperDAO->EditUser($_SESSION['loggedUser']);
+            echo "<script> confirm('Información actualizada con éxito!');</script>";
             require_once(VIEWS_PATH."user-profile.php");
         }
+
     }
 ?>     

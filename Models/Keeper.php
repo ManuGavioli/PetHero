@@ -5,6 +5,7 @@
         
         private $bookings;
         private $petType;
+        private $price;
         private $availableDates;
         
         public function getBookings()
@@ -37,6 +38,16 @@
             $this->availableDates = $availableDates;
         }
 
+        public function getPrice()
+        {
+            return $this->price;
+        }
+
+        public function setPrice($price)
+        {
+            $this->price = $price;
+        }
+        
         public function isKeeperOrOwner(){
             return 1;
         }

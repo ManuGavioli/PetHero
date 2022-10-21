@@ -40,16 +40,6 @@
                                    <input type="number" name="phone_number" class="form-control" required>
                               </div>
                         </div>
-                        <div class="col-lg-4">
-                              <div class="form-group">
-                                <label for="">Tamaño de perro dispuesto a cuidar</label>
-                                <select name="pet_type" required>
-                                    <option value="big">Grande</option>
-                                    <option value="medium">Mediano</option>
-                                    <option value="small">Pequeño</option>                                
-                                </select>
-                              </div>
-                        </div>
                         <button type="submit" class="btn btn-dark ml-auto d-block">Registrarse en el sistema</button>
                     </div>
                </form>

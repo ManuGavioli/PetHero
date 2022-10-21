@@ -1,15 +1,36 @@
 [
     {
         "user_id": 2,
-        "first_name": "ejemplo2",
-        "last_name": "apellido2",
-        "dni": "22222222",
-        "email": "ejemplo2@mail.com",
-        "password": "1234",
-        "phone_number": "8888888888",
+        "first_name": "Nestor",
+        "last_name": "Perez",
+        "dni": "14254260",
+        "email": "NPerez@hotmail.com",
+        "password": "222",
+        "phone_number": "123456789",
         "bookings": null,
-        "pet_type": "medium",
-        "available_dates": null
+        "pet_type": null,
+        "available_dates": null,
+        "price": null
+    },
+    {
+        "user_id": 3,
+        "first_name": "Clara",
+        "last_name": "Velez",
+        "dni": "65645456",
+        "email": "CVelez@hotmail.com",
+        "password": "333",
+        "phone_number": "987456321",
+        "bookings": null,
+        "pet_type": "small",
+        "available_dates": [
+            "15-10-2022",
+            "16-10-2022",
+            "17-10-2022",
+            "18-10-2022",
+            "19-10-2022",
+            "20-10-2022"
+        ],
+        "price": "10"
     },
     {
         "user_id": 1,
@@ -18,51 +39,21 @@
         "dni": "42282600",
         "email": "email@user.com",
         "password": "321",
-        "phone_number": "1111111111112",
+        "phone_number": "2223333333",
         "bookings": null,
         "pet_type": "big",
-        "available_dates": [
-            "12-10-2022",
-            "13-10-2022",
-            "14-10-2022",
-            "15-10-2022",
-            "16-10-2022",
-            "17-10-2022",
-            "18-10-2022",
-            "19-10-2022",
-            "20-10-2022",
-            "21-10-2022",
-            "22-10-2022"
-        ]
-    },
-    {
-        "user_id": 4,
-        "first_name": "Clara",
-        "last_name": "Velez",
-        "dni": "999999999",
-        "email": "CVelez@hotmail.com",
-        "password": "333",
-        "phone_number": "159753",
-        "bookings": null,
-        "pet_type": "small",
-        "available_dates": null
-    },
-    {
-        "user_id": 3,
-        "first_name": "Nestor",
-        "last_name": "Pereira",
-        "dni": "89898989",
-        "email": "npereira@hotmail.com",
-        "password": "222",
-        "phone_number": "789456123",
-        "bookings": null,
-        "pet_type": "medium",
         "available_dates": [
             "01-10-2022",
             "02-10-2022",
             "03-10-2022",
             "04-10-2022",
-            "05-10-2022"
-        ]
+            "05-10-2022",
+            "06-10-2022",
+            "07-10-2022",
+            "08-10-2022",
+            "09-10-2022",
+            "10-10-2022"
+        ],
+        "price": "15"
     }
 ]

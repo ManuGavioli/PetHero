@@ -40,6 +40,19 @@ class OwnerDAO implements IOwnerDAO{
 
     }
 
+    public function EditUser($owner){
+        $id = $owner->getUserId(); 
+        $this->Remove($owner->getUserId());
+
+        $this->RetriveData();
+
+        $owner->setUserId($id);
+
+        array_push($this->OwnersList, $owner);
+
+        $this->SaveData();
+    }
+
 
     function GetNewId(){
         $id=0;

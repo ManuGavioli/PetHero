@@ -62,13 +62,14 @@
                ?>
                          <h2 class="mb-4">Lista de cuidadores</h2>
                          <?php 
-                         foreach($keeper_list as $keeper){ if ($keeper->getAvailableDates()!=null){
+                         foreach($keeper_list as $keeper){ if ($keeper->getAvailableDates() != null && $keeper->getPrice() != null && $keeper->getPetType() != null){
                          ?> 
                               <table class="table bg-light-alpha">
                               <thead>
                                    <th>Nombre y apellido</th>
                                    <th>Tamaño de mascota que cuida</th>
                                    <th>Fechas Disponibles</th>
+                                   <th>Precio por estadía</th>
                               </thead>
                               <tbody> 
                                    <tr>
@@ -84,13 +85,8 @@
                                                   }
                                              }
                                         ?></td>
-                                        <td><?php 
-                                             if($keeper->getAvailableDates() != null){
-                                                  echo "Desde el " . $keeper->getAvailableDates()[0] . " Hasta el " . $keeper->getAvailableDates()[count($keeper->getAvailableDates())-1];
-                                             }else{
-                                                  echo "NO ASIGNADAS";
-                                             }
-                                        ?></td>
+                                        <td><?php echo "Desde el " . $keeper->getAvailableDates()[0] . " Hasta el " . $keeper->getAvailableDates()[count($keeper->getAvailableDates())-1];    ?></td>
+                                        <td><?php echo "$".$keeper->getPrice() * count($keeper->getAvailableDates()); ?></td>
                                    </tr>
                               </tbody> 
                               </table>
