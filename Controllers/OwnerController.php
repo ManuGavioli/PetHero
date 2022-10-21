@@ -8,6 +8,7 @@ use Models\Keeper as Keeper;
 use DAO\OwnerDAO as OwnerDAO;
 use DAO\PetDAO as PetDAO;
 use DAO\KeeperDAO as KeeperDAO;
+use Helper\Validation as Validation;
 
 class OwnerController{
     private $DataOwners;
@@ -25,10 +26,12 @@ class OwnerController{
     }
 
     function ShowListPetView(){
+        Validation::ValidUser();
         require_once(VIEWS_PATH."pet-list.php");
     }
 
     function ShowAddPetView(){
+        Validation::ValidUser();
         require_once(VIEWS_PATH."pet-add.php");
     }
 
@@ -37,6 +40,8 @@ class OwnerController{
     }
 
     function AddOwner($firstname, $lasName, $dni, $email, $password, $phonenumber){
+
+        
 
         if($this->DataOwners->SearchEmail($email) == null){
                 $ownerNew=new Owner();
@@ -58,6 +63,9 @@ class OwnerController{
     }
 
     function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
+
+        Validation::ValidUser();
+
         $petNew=new Pet();
         $petNew->setName($name);
         $petNew->setPhoto($photo);
@@ -82,14 +90,18 @@ class OwnerController{
     }
 
     public function MyProfile(){
+        Validation::ValidUser();
+
         require_once(VIEWS_PATH."user-profile.php");
     }
 
     public function Edit($user_id){
+        Validation::ValidUser();
         require_once(VIEWS_PATH."owner-edit.php");        
     }
 
     public function EditAux($firstname, $lasName, $dni, $email, $password, $phonenumber){
+        Validation::ValidUser();
         $_SESSION['loggedUser']->setFirstName($firstname);
         $_SESSION['loggedUser']->setLastName($lasName);
         $_SESSION['loggedUser']->setDni($dni);

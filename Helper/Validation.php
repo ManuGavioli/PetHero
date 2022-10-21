@@ -1,8 +1,8 @@
 
 <?php
-namespace ValidateLog;
+namespace Helper;
 
-class UserValidate{
+class Validation{
 
     static function ValidUser(){
         if(!isset($_SESSION['loggedUser'])){
