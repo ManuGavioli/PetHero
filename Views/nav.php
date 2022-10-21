@@ -23,6 +23,9 @@
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowListPetView'?>">VER MIS MASCOTAS</a>
                </li>
                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/MyProfile'?>">MI PERFIL</a>
+               </li>
+               <li class="nav-item">
                     <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>"><!--MI PERFIL--></a>
                </li>    
                <li class="nav-item">

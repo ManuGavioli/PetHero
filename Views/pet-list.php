@@ -8,14 +8,14 @@
           <div class="container">
                <h2 class="mb-4">My Pets</h2>
                <?php foreach($_SESSION['loggedUser']->getPets() as $pets){ ?> 
-               <table class="table bg-light-alpha">
+                                   <table class="table bg-light-alpha">
                
                     <thead>
-                         <th>Name</th>
-                         <th>Raze</th>
-                         <th>Type</th>
-                         <th>Size</th>
-                         <th>Observations</th>
+                         <th>Nombre</th>
+                         <th>Raza</th>
+                         <th>Tipo</th>
+                         <th>Tamaño</th>
+                         <th>Observaciones</th>
                     </thead>
                     <tbody> 
                          <tr>
@@ -28,16 +28,15 @@
                          </tr>
                     </tbody> 
                     <thead>
-                         <th>Photo</th>
-                         <th>Vaccination</th>
+                         <th>Foto</th>
+                         <th>Vacunación</th>
                          <th>Video</th>
                     </thead> 
                     <tbody> 
                          <tr>
                               <td><img width="308" height="173.25" src="<?php  echo $pets->getPhoto();  ?>"></td> 
                               <td><img width="308" height="173.25" src="<?php  echo $pets->getVaccinationPhoto();  ?>"></td> 
-                              <td><iframe width="308" height="173.25" src="<?php echo $pets->getVideo();  ?>" 
-                                   title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+                              <td><iframe width="308" height="173.25" src="https://www.youtube.com/embed/<?php echo $pets->getVideo(); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
                          </tr>
                         </tbody> 
                     

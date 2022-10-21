@@ -66,6 +66,11 @@ class OwnerController{
         $petNew->setSize($size);
         $petNew->setVaccinationPhoto($vaccinationPhoto);
         $petNew->setObservations($observations);
+
+        //convertir la url de un video para luego poder incrustarlo automaticamente en la vista 
+
+        $video=substr($video, 32);
+
         $petNew->setVideo($video);
         $petNew->setMyowner($_SESSION['loggedUser']);
 
@@ -74,6 +79,10 @@ class OwnerController{
         $_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
 
         header("location:".FRONT_ROOT."Owner/ShowListPetView");
+    }
+
+    public function MyProfile(){
+        require_once(VIEWS_PATH."user-profile.php");
     }
 
     

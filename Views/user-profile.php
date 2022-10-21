@@ -20,6 +20,10 @@
                     <th>Tamaño de perro</th>
                     <th>Fechas disponibles</th>
                     <?php
+                    }else{
+                    ?>
+                    <th>Cantidad de Mascotas Cargadas</th>
+                    <?php
                     }
                     ?>
                 </thead>
@@ -56,9 +60,19 @@
                         ?></td>                                                                                                                                                                
                     </tr>
                     <?php
-                    }
+                    }else{
                     ?>
-                </tbody>
+                    <tr>
+                        <td><?php echo $_SESSION['loggedUser']->getUserId(); ?></td>  
+                        <td><?php echo $_SESSION['loggedUser']->getFirstName(); ?></td>
+                        <td><?php echo $_SESSION['loggedUser']->getLastName(); ?></td>
+                        <td><?php echo $_SESSION['loggedUser']->getDni(); ?></td>
+                        <td><?php echo $_SESSION['loggedUser']->getEmail(); ?></td>
+                        <td><?php echo $_SESSION['loggedUser']->getPassword(); ?></td>
+                        <td><?php echo $_SESSION['loggedUser']->getPhoneNumber(); ?></td>
+                        <td><?php  echo count($_SESSION['loggedUser']->getPets()); ?></td>                                                                                                                                                       
+                    </tr>
+                <?php } ?> </tbody>
             </table>
         </div>
     </section>
