@@ -3,6 +3,7 @@
 
     use DAO\KeeperDAO as KeeperDAO;
     use Models\Keeper as Keeper;
+    use Helper\Validation as Validation;
 
     class KeeperController{
         private $KeeperDAO;
@@ -16,14 +17,17 @@
         }
         
         public function EditKeeperContent(){
+            Validation::ValidUser();
             require_once(VIEWS_PATH."keeper-content.php");
         }
         
         public function MyProfile(){
+            Validation::ValidUser();
             require_once(VIEWS_PATH."user-profile.php");
         }
 
         public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number){
+            
 
             $this->KeeperDAO->GetAll(); 
 
@@ -49,6 +53,7 @@
         }
 
         public function AddContent($first_date, $end_date, $price, $pet_type){
+            Validation::ValidUser();
             if($first_date > $end_date){
                 echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
                 require_once(VIEWS_PATH."keeper-content.php");
@@ -79,10 +84,12 @@
         }
 
         public function Edit($user_id){
+            Validation::ValidUser();
             require_once(VIEWS_PATH."keeper-edit.php");
         }
 
         public function EditAux($first_name, $last_name, $dni, $email, $passw, $phone_number){
+            Validation::ValidUser();
             $_SESSION['loggedUser']->setFirstName($first_name);
             $_SESSION['loggedUser']->setLastName($last_name);
             $_SESSION['loggedUser']->setDni($dni);

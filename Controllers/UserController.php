@@ -56,6 +56,7 @@ class UserController{
     }
 
     public function Home(){
+        Validation::ValidUser();
         $keeper_list=$this->DataKeepers->GetAll();
         require_once(VIEWS_PATH.'home.php');
     }
