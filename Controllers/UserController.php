@@ -36,6 +36,7 @@ class UserController{
             if($owner != null){
                 if($owner->getPassword() == $password){
                     $_SESSION["loggedUser"] = $owner;
+                    $keeper_list=$this->DataKeepers->GetAll();
                     require_once(VIEWS_PATH."home.php");
                 }else{
                     echo "<script> confirm('Contraseña incorrecta... vuelva a intentar');</script>";
@@ -55,6 +56,7 @@ class UserController{
     }
 
     public function Home(){
+        $keeper_list=$this->DataKeepers->GetAll();
         require_once(VIEWS_PATH.'home.php');
     }
 

@@ -28,11 +28,6 @@ class OwnerController{
         require_once(VIEWS_PATH."pet-list.php");
     }
 
-    function ShowListKeepersView(){
-        $keepers=$this->DataKeepers->GetAll();
-        require_once(VIEWS_PATH."keepers-list.php");
-    }
-
     function ShowAddPetView(){
         require_once(VIEWS_PATH."pet-add.php");
     }

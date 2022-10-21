@@ -10,7 +10,9 @@
                <h2 class="mb-4">Listado de reservas</h2>
                <table class="table bg-light-alpha">
                     <form action="<?php echo FRONT_ROOT.''?>" method="post" class="bg-light-alpha p-5">     
-                         
+                      
+                    <?php
+                    /*
                     <thead>
                          <th>Id</th>
                          <th>Name</th>
@@ -19,10 +21,12 @@
                          <th>Phone</th>
                          <th></th>
                     </thead>
+                    */
+                    ?>
 
                     <tbody>
                          <?php
-                              foreach($booking_list as $booking)                       // completar con todas las reservas que figuren y sean pasadas 
+                              /*foreach($booking_list as $booking)                       // completar con todas las reservas que figuren y sean pasadas 
                               {
                                    ?>
                                         <tr>
@@ -38,7 +42,7 @@
                                         </tr>
                                         
                                    <?php
-                              }
+                              }*/
                          ?>
 
                     </tbody>
@@ -55,7 +59,43 @@
                <?php
                }else{
                     if($_SESSION['loggedUser']->isKeeperOrOwner() == 0){
-                         header("location:".FRONT_ROOT.'Owner/ShowListKeepersView/');
+               ?>
+                         <h2 class="mb-4">Lista de cuidadores</h2>
+                         <?php 
+                         foreach($keeper_list as $keeper){ if ($keeper->getAvailableDates()!=null){
+                         ?> 
+                              <table class="table bg-light-alpha">
+                              <thead>
+                                   <th>Nombre y apellido</th>
+                                   <th>Tamaño de mascota que cuida</th>
+                                   <th>Fechas Disponibles</th>
+                              </thead>
+                              <tbody> 
+                                   <tr>
+                                        <td><?php  echo $keeper->getFirstName()." ".$keeper->getLastName();  ?></td>
+                                        <td><?php 
+                                             if($keeper->getPetType() == "big"){
+                                                  echo "GRANDE";
+                                             }else{
+                                                  if($keeper->getPetType() == "medium"){
+                                                       echo "MEDIANO";
+                                                  }else{
+                                                       echo "PEQUEÑO";
+                                                  }
+                                             }
+                                        ?></td>
+                                        <td><?php 
+                                             if($keeper->getAvailableDates() != null){
+                                                  echo "Desde el " . $keeper->getAvailableDates()[0] . " Hasta el " . $keeper->getAvailableDates()[count($keeper->getAvailableDates())-1];
+                                             }else{
+                                                  echo "NO ASIGNADAS";
+                                             }
+                                        ?></td>
+                                   </tr>
+                              </tbody> 
+                              </table>
+                       <?php
+                       }}
                     }
                }
                ?>

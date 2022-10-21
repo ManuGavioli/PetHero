@@ -23,13 +23,10 @@
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowListPetView'?>">VER MIS MASCOTAS</a>
                </li>
                <li class="nav-item">
-                    <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>">MI PERFIL</a>
+                    <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>"><!--MI PERFIL--></a>
                </li>    
                <li class="nav-item">
-                    <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>">GENERAR RESEÑA</a>
-               </li>   
-               <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowListKeepersView'?>">BUSCAR KEEPER</a>
+                    <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>"><!--GENERAR RESEÑA--></a>
                </li>   
           <?php 
                }
