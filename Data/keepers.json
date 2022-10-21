@@ -33,6 +33,19 @@
         "price": "10"
     },
     {
+        "user_id": 4,
+        "first_name": "ejemplo3",
+        "last_name": "asdasdasd",
+        "dni": "5555555",
+        "email": "asdasd@ewwe",
+        "password": "159753",
+        "phone_number": "999999",
+        "bookings": null,
+        "pet_type": null,
+        "available_dates": null,
+        "price": null
+    },
+    {
         "user_id": 1,
         "first_name": "Manuel",
         "last_name": "Gavioli",
@@ -54,6 +67,6 @@
             "09-10-2022",
             "10-10-2022"
         ],
-        "price": "15"
+        "price": "10"
     }
 ]
