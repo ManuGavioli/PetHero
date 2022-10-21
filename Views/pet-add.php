@@ -25,9 +25,9 @@
                               <div class="form-group">
                                    <label for="">Tipo</label>
                                    <br>
-                                   <input type="radio", name="type" value="small"  required> Pequeño
-                                   <input type="radio", name="type" value="medium"  required> Mediano
-                                   <input type="radio", name="type" value="big" required> Grande
+                                   <input type="radio", name="petType" value="small"  required> Pequeño
+                                   <input type="radio", name="petType" value="medium"  required> Mediano
+                                   <input type="radio", name="petType" value="big" required> Grande
                               </div>
                         </div>
                         <div class="col-lg-4">
@@ -45,7 +45,7 @@
                         <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="">Foto de Vacunacion</label>
-                                   <input  type="url" name="vaccination" class="form-control" required>
+                                   <input  type="url" name="vaccinationPhoto" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
