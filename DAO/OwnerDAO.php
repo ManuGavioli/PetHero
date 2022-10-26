@@ -29,15 +29,18 @@ class OwnerDAO implements IOwnerDAO{
         $newOwner->setUserId($this->GetNewId());
         array_push($this->OwnersList, $newOwner);
         $this->SaveData();
-        return $newOwner;
     }
 
 
 
     function Remove($id){
-        
+        $this->RetriveData();
 
+            $this->OwnersList = array_filter($this->OwnersList, function($Owner) use ($id){
+                return $Owner->getUserId() != $id;
+            });
 
+        $this->SaveData();
     }
 
     public function EditUser($owner){
@@ -70,7 +73,7 @@ class OwnerDAO implements IOwnerDAO{
 
     function AddPet($id, Pet $petnew){
         $this->RetriveData();
-        $ownerRefresh;
+        $ownerRefresh = null;
         foreach($this->OwnersList as $owner){
             if($id == $owner->getUserId()){
                 $owner->AddPets($petnew);
