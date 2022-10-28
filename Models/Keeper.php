@@ -3,10 +3,11 @@
 
     class Keeper extends User{
         
-        private $bookings;
+        private $bookings;  // lista de reservas: listado de dias, id, importe_abonado, valor_total
+        private $reviews;  // lista de reviews: desc, fecha, id, puntuacion
         private $petType;
         private $price;
-        private $availableDates;
+        private $availableDates;  // lista de fechas_disponibles: dia, disponible, id_keeper (probablemente tabla intermedia)
         
         public function getBookings()
         {
@@ -46,6 +47,16 @@
         public function setPrice($price)
         {
             $this->price = $price;
+        }
+
+        public function getReviews()
+        {
+            return $this->reviews;
+        }
+
+        public function setReviews($reviews)
+        {
+            $this->reviews = $reviews;
         }
         
         public function isKeeperOrOwner(){
