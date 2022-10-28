@@ -61,6 +61,13 @@
                     if($_SESSION['loggedUser']->isKeeperOrOwner() == 0){
                ?>
                          <h2 class="mb-4">Lista de cuidadores</h2>
+                         <form action="<?php echo FRONT_ROOT."Owner/FilterKeepers"?>" method="post">
+
+                         <a>Desde:</a> <input maxlength="20" type="date" name="search" placeholder="fecha de inicio">
+                         <a>Hasta:</a> <input maxlength="20" type="date" name="search" placeholder="fecha de fin">
+                            <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Search🔎</button>
+                         </form>
+                         <form action="<?php echo FRONT_ROOT."Owner/ShowViewReservation"?>" method="post">
                          <?php 
                          foreach($keeper_list as $keeper){ if ($keeper->getAvailableDates() != null && $keeper->getPrice() != null && $keeper->getPetType() != null){
                          ?> 
@@ -70,6 +77,7 @@
                                    <th>Tamaño de mascota que cuida</th>
                                    <th>Fechas Disponibles</th>
                                    <th>Precio por estadía</th>
+                                   <th></th> 
                               </thead>
                               <tbody> 
                                    <tr>
@@ -87,9 +95,14 @@
                                         ?></td>
                                         <td><?php echo "Desde el " . $keeper->getAvailableDates()[0] . " Hasta el " . $keeper->getAvailableDates()[count($keeper->getAvailableDates())-1];    ?></td>
                                         <td><?php echo "$".$keeper->getPrice() * count($keeper->getAvailableDates()); ?></td>
+                                        <td><button type="submit" class="btn" value="<?php $keeper->getUserId(); ?>" style="background-color: #FFEC00; color: #000000" >Reservar💰</button></td>
                                    </tr>
                               </tbody> 
+                              
+
                               </table>
+                              
+                                        </form>
                        <?php
                        }}
                     }
