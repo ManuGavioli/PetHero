@@ -7,6 +7,13 @@ define("VIEWS_PATH", "Views/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "Styles/css/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "Styles/js/");
 define("IMG_PATH", FRONT_ROOT.VIEWS_PATH . "Styles/img/");
+
+define("DB_HOST", "localhost");
+define("DB_NAME", "TpFinal_PetHeroDb");
+define("DB_USER", "root");
+define("DB_PASS", "");
+
+
 ?>
 
 
