@@ -9,6 +9,7 @@ class Booking{
     private $totalValue;
     private $startDate;
     private $finalDate;
+    private $confirmed;
     private $petId;
 
 
@@ -90,6 +91,16 @@ class Booking{
     public function setPetId($petId)
     {
         $this->petId = $petId;
+    }
+
+    public function getConfirmed()
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
     }
 }
 
