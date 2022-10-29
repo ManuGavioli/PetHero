@@ -8,6 +8,10 @@ class Booking{
     private $bookingDates;
     private $amountPaid;
     private $totalValue;
+    //
+    private $startDate;
+    private $finalDate;
+    private $petId;
 
 
     public function getIdBooking()
