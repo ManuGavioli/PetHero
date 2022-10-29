@@ -2,7 +2,13 @@ CREATE DATABASE IF NOT EXISTS TpFinal_PetHeroDB;
 
 USE TpFinal_PetHeroDB;
 
+DROP TABLE IF EXISTS Availability;
+DROP TABLE IF EXISTS Bookings;
+DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Pets;
+DROP TABLE IF EXISTS Owners;
 DROP TABLE IF EXISTS Keepers;
+
 CREATE TABLE Keepers 
 (
         user_id int(11) NOT NULL AUTO_INCREMENT,
@@ -18,7 +24,6 @@ CREATE TABLE Keepers
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS Owners;
 CREATE TABLE Owners 
 (
         user_id int(11) NOT NULL AUTO_INCREMENT,
@@ -32,7 +37,6 @@ CREATE TABLE Owners
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS Pets;
 CREATE TABLE Pets 
 (
          id_pet int(11) NOT NULL AUTO_INCREMENT,
@@ -50,7 +54,6 @@ CREATE TABLE Pets
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS Reviews;
 CREATE TABLE Reviews
 (
         keeperId int(11) NOT NULL,
@@ -63,7 +66,6 @@ CREATE TABLE Reviews
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS Bookings;
 CREATE TABLE Bookings 
 (
     keeperId int(11) NOT NULL,
@@ -79,11 +81,12 @@ CREATE TABLE Bookings
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS Availability;
 CREATE TABLE Availability 
 (
-    keeperId int(11) NOT NULL,
-    keeperDate date DEFAULT NULL,
-    available boolean DEFAULT FALSE,
+	availabilityId int(11) NOT NULL AUTO_INCREMENT,
+	keeperId int(11) NOT NULL,
+	keeperDate date DEFAULT NULL,
+	available boolean DEFAULT FALSE,
+        PRIMARY KEY(availabilityId),
 	CONSTRAINT fk_availability_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

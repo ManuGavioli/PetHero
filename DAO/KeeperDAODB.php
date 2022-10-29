@@ -2,7 +2,6 @@
     namespace DAO;
 
     use Exception as Exception;
-    use Models\Booking as Booking;
     use Models\Keeper as Keeper;
 
     class KeeperDAODB implements IKeeperDAO{

@@ -3,11 +3,12 @@ namespace Models;
 
 
 class Availability{
+
+    private $availabilityId;
     private $keeperId;
     private $keeperDate;
     private $available;
 
-    
 
     public function getkeeperId()
     {
@@ -41,6 +42,16 @@ class Availability{
     {
         $this->available = $available;
 
+    }
+
+    public function getAvailabilityId()
+    {
+        return $this->availabilityId;
+    }
+
+    public function setAvailabilityId($availabilityId)
+    {
+        $this->availabilityId = $availabilityId;
     }
 }
 
