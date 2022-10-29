@@ -9,7 +9,8 @@ use Models\Booking as Booking;
 //use DAO\OwnerDAO as OwnerDAO; Persistencia en JSON
 use DAO\OwnerDAODB as OwnerDAODB;
 use DAO\PetDAO as PetDAO;
-use DAO\KeeperDAO as KeeperDAO;
+//use DAO\KeeperDAO as KeeperDAO;
+use DAO\KeeperDAODB as KeeperDAODB;
 use Helper\Validation as Validation;
 
 class OwnerController{
@@ -21,7 +22,8 @@ class OwnerController{
         //$this->DataOwners=new OwnerDAO();
         $this->DataOwners= new OwnerDAODB();
         $this->DataPets=new PetDAO();
-        $this->DataKeepers=new KeeperDAO();
+        //$this->DataKeepers=new KeeperDAO();
+        $this->DataKeepers=new KeeperDAODB;
     }
 
     function ShowRegisterView(){
@@ -107,7 +109,7 @@ class OwnerController{
         $_SESSION['loggedUser']->setEmail($email);
         $_SESSION['loggedUser']->setPassword($password);
         $_SESSION['loggedUser']->setPhoneNumber($phonenumber);
-        $this->DataOwners->EditUser($_SESSION['loggedUser']);
+        //$this->DataOwners->EditUser($_SESSION['loggedUser']);
         echo "<script> confirm('Información actualizada con éxito!');</script>";
         require_once(VIEWS_PATH."user-profile.php");
     }
@@ -134,10 +136,10 @@ class OwnerController{
 
     public function NewBooking($id_mascot, $id_keeper, $first_date, $end_date){
         $bookininProgres=new Booking;
-        $bookininProgres->set();
-        $bookininProgres->set();
-        $bookininProgres->set();
-        $bookininProgres->set();
+        //$bookininProgres->set();
+        //$bookininProgres->set();
+        //$bookininProgres->set();
+        //$bookininProgres->set();
         /* se crea una nueva reserva se guarad y se redirije al home al owner, va a tener una pestaña mas con una solapa que dice reservas y le van a aparecer las reservas, pendiente o a pagar o confirmada*/ 
         /*el keeper al cancelar la reserva la elimina directamente*/
         /*el keeper al entrar a su home va a a ver la reserva pendiente y la va  aconfirmar y se cambia el confirmar a true y se espera a que el owner pague el 50 % */

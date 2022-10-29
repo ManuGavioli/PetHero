@@ -1,15 +1,18 @@
 <?php
     namespace Controllers;
 
-    use DAO\KeeperDAO as KeeperDAO;
+    //use DAO\KeeperDAO as KeeperDAO;
+    use DAO\KeeperDAODB as KeeperDAODB;
     use Models\Keeper as Keeper;
     use Helper\Validation as Validation;
 
     class KeeperController{
         private $KeeperDAO;
+        
 
         public function __construct(){
-            $this->KeeperDAO = new KeeperDAO;
+            //$this->KeeperDAO = new KeeperDAO;
+            $this->KeeperDAO = new KeeperDAODB;
         }
 
         public function RegisterNewKeeper(){
@@ -68,17 +71,17 @@
                     array_push($dates,$dateToAdd);
                 }
                 $_SESSION['loggedUser']->setAvailableDates($dates);
-                $this->KeeperDAO->EditDates($_SESSION['loggedUser'],$dates);
+                //$this->KeeperDAO->EditDates($_SESSION['loggedUser'],$dates);
             }
             if($price <= 0){
                 echo "<script> confirm('Ingreso un valor invalido como precio por estadia... Vuelva a intentar');</script>";
                 require_once(VIEWS_PATH."keeper-content.php");
             }else{
                 $_SESSION['loggedUser']->setPrice($price);
-                $this->KeeperDAO->EditPrice($_SESSION['loggedUser'],$price);
+                //$this->KeeperDAO->EditPrice($_SESSION['loggedUser'],$price);
             }
             $_SESSION['loggedUser']->setPetType($pet_type);
-            $this->KeeperDAO->EditPetType($_SESSION['loggedUser'],$pet_type);
+            //$this->KeeperDAO->EditPetType($_SESSION['loggedUser'],$pet_type);
             echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
             require_once(VIEWS_PATH."home.php");
         }
@@ -96,7 +99,7 @@
             $_SESSION['loggedUser']->setEmail($email);
             $_SESSION['loggedUser']->setPassword($passw);
             $_SESSION['loggedUser']->setPhoneNumber($phone_number);
-            $this->KeeperDAO->EditUser($_SESSION['loggedUser']);
+            //$this->KeeperDAO->EditUser($_SESSION['loggedUser']);
             echo "<script> confirm('Información actualizada con éxito!');</script>";
             require_once(VIEWS_PATH."user-profile.php");
         }

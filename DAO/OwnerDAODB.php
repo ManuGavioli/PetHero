@@ -87,21 +87,21 @@
 
                     $owner = new Owner;
 
-                if(isset($result[0])){
-                    $row = $result[0];
+                    if(isset($result[0])){
+                        $row = $result[0];
 
-                    $owner->setUserId($row["user_id"]);
-                    $owner->setFirstName($row["firstName"]);
-                    $owner->setLastName($row["lastName"]);
-                    $owner->setDni($row["dni"]);
-                    $owner->setEmail($row["email"]);
-                    $owner->setPassword($row["pass"]);
-                    $owner->setPhoneNumber($row["phoneNumber"]);
+                        $owner->setUserId($row["user_id"]);
+                        $owner->setFirstName($row["firstName"]);
+                        $owner->setLastName($row["lastName"]);
+                        $owner->setDni($row["dni"]);
+                        $owner->setEmail($row["email"]);
+                        $owner->setPassword($row["pass"]);
+                        $owner->setPhoneNumber($row["phoneNumber"]);
                     
-                }else
-                {
-                    $owner=null;
-                }
+                    }else
+                    {
+                        $owner=null;
+                    }
                 return $owner;
 
                 }catch(Exception $ex){

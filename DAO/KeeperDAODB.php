@@ -3,6 +3,7 @@
 
     use Exception as Exception;
     use Models\Keeper as Keeper;
+    use DAO\Connection as Connection;
 
     class KeeperDAODB implements IKeeperDAO{
 
@@ -12,19 +13,18 @@
         public function Add_Keeper(Keeper $newKeeper)
         {
             try{
-                $query = " INSERT INTO ". $this->tableName . " (user_id, first_name, last_name, dni, email, passw, phone_number, pet_type, price ) VALUES (:user_id, :first_name, :last_name, :dni, :email, :passw, :phone_number, :pet_type, :price );";
+                $query = " INSERT INTO ". $this->tableName . " (firstName, lastName, dni, email, pass, phoneNumber, petType, price ) VALUES (:firstName, :lastName, :dni, :email, :pass, :phoneNumber, :petType, :price );";
 
-                $parameters["user_id"] = $newKeeper->getUserId();
-                $parameters["first_name"] = $newKeeper->getFirstName();
-                $parameters["last_name"] = $newKeeper->getLastName();
+                $parameters["firstName"] = $newKeeper->getFirstName();
+                $parameters["lastName"] = $newKeeper->getLastName();
                 $parameters["dni"] = $newKeeper->getDni();
                 $parameters["email"] = $newKeeper->getEmail();
-                $parameters["passw"] = $newKeeper->getPassword();
-                $parameters["phone_number"] = $newKeeper->getPhoneNumber();
+                $parameters["pass"] = $newKeeper->getPassword();
+                $parameters["phoneNumber"] = $newKeeper->getPhoneNumber();
 
                 //atributos unicos de keeper
 
-                $parameters["pet_type"] = $newKeeper->getPetType();
+                $parameters["petType"] = $newKeeper->getPetType();
                 $parameters["price"] = $newKeeper->getPrice();
 
                 $this->connection = Connection::GetInstance();
@@ -41,7 +41,7 @@
             try{
                 $keeperList = array();
 
-                $query = "SELECT * FROM ".$this->tableName."INNER JOIN bookings ON keepers.";// aca iria el inner join pero tengo que acceder al id dentro de la lista de objetos que tiene el keeper
+                $query = "SELECT * FROM ".$this->tableName;
 
                 $this->connection = Connection::GetInstance();
 
@@ -50,13 +50,14 @@
                 foreach($resultSet as $row){
                     $keeper = new Keeper;
                     $keeper->setUserId($row["user_id"]);
-                    $keeper->setFirstName($row["first_name"]);
-                    $keeper->setLastName($row["last_name"]);
+                    $keeper->setFirstName($row["firstName"]);
+                    $keeper->setLastName($row["lastName"]);
                     $keeper->setDni($row["dni"]);
                     $keeper->setEmail($row["email"]);
-                    $keeper->setPassword($row["passw"]);
-                    $keeper->setPhoneNumber($row["phone_number"]);
-                    //INCOMPLETO
+                    $keeper->setPassword($row["pass"]);
+                    $keeper->setPhoneNumber($row["phoneNumber"]);
+                    $keeper->setPetType($row["petType"]);
+                    $keeper->setPrice($row["price"]);
 
 
                     array_push($keeperList, $keeper);
@@ -75,7 +76,36 @@
 
         public function SearchEmail($email)
         {
-            
+            try{
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE email = :email";
+                $parameters["email"] = $email;
+    
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->Execute($query,$parameters);
+
+                $keeper = new Keeper;
+
+                if(isset($result[0])){
+                    $row = $result[0];
+
+                    $keeper->setUserId($row["user_id"]);
+                    $keeper->setFirstName($row["firstName"]);
+                    $keeper->setLastName($row["lastName"]);
+                    $keeper->setDni($row["dni"]);
+                    $keeper->setEmail($row["email"]);
+                    $keeper->setPassword($row["pass"]);
+                    $keeper->setPhoneNumber($row["phoneNumber"]);
+                    $keeper->setPetType($row["petType"]);
+                    $keeper->setPrice($row["price"]);
+                }else{
+                    $keeper = null;
+                }
+                return $keeper;
+    
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
     }
