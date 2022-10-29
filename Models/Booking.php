@@ -5,10 +5,8 @@ namespace Models;
 class Booking{
     private $keeperId;
     private $idBooking;
-    private $bookingDates;
     private $amountPaid;
     private $totalValue;
-    //
     private $startDate;
     private $finalDate;
     private $petId;
@@ -62,6 +60,36 @@ class Booking{
     public function setKeeperId($keeperId)
     {
         $this->keeperId = $keeperId;
+    }
+
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function getFinalDate()
+    {
+        return $this->finalDate;
+    }
+
+    public function setFinalDate($finalDate)
+    {
+        $this->finalDate = $finalDate;
+    }
+
+    public function getPetId()
+    {
+        return $this->petId;
+    }
+
+    public function setPetId($petId)
+    {
+        $this->petId = $petId;
     }
 }
 

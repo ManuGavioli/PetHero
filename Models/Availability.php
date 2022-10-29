@@ -3,46 +3,43 @@ namespace Models;
 
 
 class Availability{
-    private $idKeeper;
-    private $date;
-    private $boolean;
+    private $keeperId;
+    private $keeperDate;
+    private $available;
 
     
 
-    public function getIdKeeper()
+    public function getkeeperId()
     {
-        return $this->idKeeper;
+        return $this->keeperId;
     }
 
-
-    public function setIdKeeper($idKeeper)
+    public function setkeeperId($keeperId)
     {
-        $this->idKeeper = $idKeeper;
-
-    }
-
-
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    public function setDate($date)
-    {
-        $this->date = $date;
+        $this->keeperId = $keeperId;
 
     }
 
- 
-    public function getBoolean()
+    public function getKeeperDate()
     {
-        return $this->boolean;
+        return $this->keeperDate;
+    }
+
+    public function setKeeperDate($keeperDate)
+    {
+        $this->keeperDate = $keeperDate;
+
+    }
+
+    public function getAvailable()
+    {
+        return $this->available;
     }
 
 
-    public function setBoolean($boolean)
+    public function setAvailable($available)
     {
-        $this->boolean = $boolean;
+        $this->available = $available;
 
     }
 }

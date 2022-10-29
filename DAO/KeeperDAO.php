@@ -20,8 +20,6 @@
             $this->RetrieveData();
 
             $newKeeper->setUserId($this->GetNextId());
-            $newKeeper->setBookings(null);
-            $newKeeper->setAvailableDates(null);
             $newKeeper->setPrice(null);
             $newKeeper->setPetType(null);
 
@@ -59,20 +57,6 @@
             $this->KeeperList = array_filter($this->KeeperList, function($Keeper) use ($id){
                 return $Keeper->getUserId() != $id;
             });
-
-            $this->SaveData();
-        }
-
-        public function EditDates($keeper,$dates){
-            $id = $keeper->getUserId(); 
-            $this->Remove($keeper->getUserId());
-
-            $this->RetrieveData();
-
-            $keeper->setUserId($id);
-            $keeper->setAvailableDates($dates);
-
-            array_push($this->KeeperList, $keeper);
 
             $this->SaveData();
         }
@@ -133,9 +117,7 @@
                 $valuesArray["phone_number"] = $Keeper->getPhoneNumber();
 
                 //type
-                $valuesArray["bookings"] = $Keeper->getBookings();
                 $valuesArray["pet_type"] = $Keeper->getPetType();
-                $valuesArray["available_dates"] = $Keeper->getAvailableDates();
                 $valuesArray["price"] = $Keeper->getPrice();
 
                 array_push($arrayToEncode, $valuesArray);
@@ -168,9 +150,7 @@
                     $Keeper->setPhoneNumber($content["phone_number"]);
 
                     //type
-                    $Keeper->setBookings($content["bookings"]);
                     $Keeper->setPetType($content["pet_type"]);
-                    $Keeper->setAvailableDates($content["available_dates"]);
                     $Keeper->setPrice($content["price"]);
 
 

@@ -2,31 +2,31 @@
     namespace DAO;
 
     use Exception as Exception;
-    use Models\Booking;
+    use Models\Booking as Booking;
     use Models\Keeper as Keeper;
 
-    class KeeperDAODB implements IKeeperDAODB{
+    class KeeperDAODB implements IKeeperDAO{
 
         private $connection;
         private $tableName = "keepers";
 
-        public function Add(Keeper $keeper)
+        public function Add_Keeper(Keeper $newKeeper)
         {
             try{
                 $query = " INSERT INTO ". $this->tableName . " (user_id, first_name, last_name, dni, email, passw, phone_number, pet_type, price ) VALUES (:user_id, :first_name, :last_name, :dni, :email, :passw, :phone_number, :pet_type, :price );";
 
-                $parameters["user_id"] = $keeper->getUserId();
-                $parameters["first_name"] = $keeper->getFirstName();
-                $parameters["last_name"] = $keeper->getLastName();
-                $parameters["dni"] = $keeper->getDni();
-                $parameters["email"] = $keeper->getEmail();
-                $parameters["passw"] = $keeper->getPassword();
-                $parameters["phone_number"] = $keeper->getPhoneNumber();
+                $parameters["user_id"] = $newKeeper->getUserId();
+                $parameters["first_name"] = $newKeeper->getFirstName();
+                $parameters["last_name"] = $newKeeper->getLastName();
+                $parameters["dni"] = $newKeeper->getDni();
+                $parameters["email"] = $newKeeper->getEmail();
+                $parameters["passw"] = $newKeeper->getPassword();
+                $parameters["phone_number"] = $newKeeper->getPhoneNumber();
 
                 //atributos unicos de keeper
 
-                $parameters["pet_type"] = $keeper->getPetType();
-                $parameters["price"] = $keeper->getPrice();
+                $parameters["pet_type"] = $newKeeper->getPetType();
+                $parameters["price"] = $newKeeper->getPrice();
 
                 $this->connection = Connection::GetInstance();
 
@@ -67,6 +67,16 @@
             }catch(Exception $ex){
                 throw $ex;
             }
+        }
+
+        public function Remove($id)
+        {
+            
+        }
+
+        public function SearchEmail($email)
+        {
+            
         }
 
     }

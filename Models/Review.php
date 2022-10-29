@@ -5,7 +5,7 @@ namespace Models;
 class Review{
     private $keeperId;
     private $idReview;
-    private $description;
+    private $desc;
     private $reviewDate;
     private $score;
     
@@ -30,14 +30,14 @@ class Review{
         $this->reviewDate = $reviewDate;
     }
 
-    public function getDescription()
+    public function getDesc()
     {
-        return $this->description;
+        return $this->desc;
     }
 
-    public function setDescription($description)
+    public function setDesc($desc)
     {
-        $this->description = $description;
+        $this->desc = $desc;
     }
 
     public function getIdReview()
