@@ -36,7 +36,7 @@
                     $ownerNew->setPassword($owner['pass']);
                     $ownerNew->setPhoneNumber($owner['phoneNumber']);
 
-                    array_push($ownerList, $owner);
+                    array_push($ownerList, $ownerNew);
                 }
 
                 return $ownerList;
@@ -87,21 +87,21 @@
 
                     $owner = new Owner;
 
-                    if(isset($result[0])){
-                        $row = $result[0];
+                if(isset($result[0])){
+                    $row = $result[0];
 
-                        $owner->setUserId($row["user_id"]);
-                        $owner->setFirstName($row["firstName"]);
-                        $owner->setLastName($row["lastName"]);
-                        $owner->setDni($row["dni"]);
-                        $owner->setEmail($row["email"]);
-                        $owner->setPassword($row["pass"]);
-                        $owner->setPhoneNumber($row["phoneNumber"]);
+                    $owner->setUserId($row["user_id"]);
+                    $owner->setFirstName($row["firstName"]);
+                    $owner->setLastName($row["lastName"]);
+                    $owner->setDni($row["dni"]);
+                    $owner->setEmail($row["email"]);
+                    $owner->setPassword($row["pass"]);
+                    $owner->setPhoneNumber($row["phoneNumber"]);
                     
-                    }else
-                    {
-                        $owner=null;
-                    }
+                }else
+                {
+                    $owner=null;
+                }
                 return $owner;
 
                 }catch(Exception $ex){
@@ -109,11 +109,34 @@
                 }
 
         }
-        public function AddPet($id, Pet $petnew){
+        /*public function AddPet($id, Pet $petnew){
+
+        }*/
+
+        public function EditUser($owner){
+            try
+            {
+                $query = "UPDATE ".$this->tableName." SET firstName= :firstName, lastName= :lastName, dni= :dni, email= :email, pass= :pass, phoneNumber= :phoneNumber WHERE user_id= :user_id;";
+
+                $parameters['user_id']=$owner->getUserId();
+                $parameters['firstName']=$owner->getFirstName();
+                $parameters['lastName']=$owner->getLastName();
+                $parameters['dni']=$owner->getDni();
+                $parameters['email']=$owner->getEmail();
+                $parameters['pass']=$owner->getPassword();
+                $parameters['phoneNumber']=$owner->getPhoneNumber();
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
 
         }
-
-
         
 
 

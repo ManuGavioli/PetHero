@@ -8,7 +8,8 @@ use Models\Keeper as Keeper;
 use Models\Booking as Booking;
 //use DAO\OwnerDAO as OwnerDAO; Persistencia en JSON
 use DAO\OwnerDAODB as OwnerDAODB;
-use DAO\PetDAO as PetDAO;
+//use DAO\PetDAO as PetDAO;
+use DAO\PetDAODB as PetDAODB;
 //use DAO\KeeperDAO as KeeperDAO;
 use DAO\KeeperDAODB as KeeperDAODB;
 use Helper\Validation as Validation;
@@ -21,7 +22,8 @@ class OwnerController{
     function __construct(){
         //$this->DataOwners=new OwnerDAO();
         $this->DataOwners= new OwnerDAODB();
-        $this->DataPets=new PetDAO();
+        //$this->DataPets=new PetDAO();
+        $this->DataPets=new PetDAODB();
         //$this->DataKeepers=new KeeperDAO();
         $this->DataKeepers=new KeeperDAODB;
     }
@@ -32,6 +34,10 @@ class OwnerController{
 
     function ShowListPetView(){
         Validation::ValidUser();
+
+        //PASAR lista de pets
+        $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
+        
         require_once(VIEWS_PATH."pet-list.php");
     }
 
@@ -43,8 +49,7 @@ class OwnerController{
     function AddOwner($firstname, $lasName, $dni, $email, $password, $phonenumber){
 
         
-
-        //if($this->DataOwners->SearchEmail($email) == null){
+            if($this->DataOwners->SearchEmail($email) == null){
                 $ownerNew=new Owner();
                 $ownerNew->setFirstName($firstname);
                 $ownerNew->setLastName($lasName);
@@ -56,11 +61,11 @@ class OwnerController{
                 $this->DataOwners->Add_Owner($ownerNew);
                 echo "<script> confirm('Cuenta creada con exito!');</script>";
                 require_once(VIEWS_PATH."login.php");
-            /*}else{
+            }else{
                 echo "<script> confirm('Ya hay un usuario en el sistema utilizando el email ingresado... vuelva a intentar con uno nuevo');</script>";
                 require_once(VIEWS_PATH."owner-register.php");
 
-            } */
+            } 
     }
 
     function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
@@ -81,18 +86,20 @@ class OwnerController{
         $video=substr($video, 32);
 
         $petNew->setVideo($video);
-        $petNew->setMyowner($_SESSION['loggedUser']);
+        //agrego solo el id
+        $petNew->setMyowner($_SESSION['loggedUser']->getUserId());
 
-        $petNew=$this->DataPets->AddPet($petNew);
+        $this->DataPets->AddPet($petNew);
 
-        $_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
+        //no hay mas lista de pets en owner
+       //$_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
 
         header("location:".FRONT_ROOT."Owner/ShowListPetView");
     }
 
     public function MyProfile(){
         Validation::ValidUser();
-
+        $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         require_once(VIEWS_PATH."user-profile.php");
     }
 
@@ -109,9 +116,9 @@ class OwnerController{
         $_SESSION['loggedUser']->setEmail($email);
         $_SESSION['loggedUser']->setPassword($password);
         $_SESSION['loggedUser']->setPhoneNumber($phonenumber);
-        //$this->DataOwners->EditUser($_SESSION['loggedUser']);
+        $this->DataOwners->EditUser($_SESSION['loggedUser']);
         echo "<script> confirm('Información actualizada con éxito!');</script>";
-        require_once(VIEWS_PATH."user-profile.php");
+        header("location:".FRONT_ROOT."Owner/MyProfile");
     }
 
     public function FilterKeepers($beginning, $end){

@@ -10,6 +10,7 @@
         function Add_Owner(Owner $newOwner);
         function Remove($id);
         function SearchEmail($email);
-        function AddPet($id, Pet $petnew);
+        function EditUser($owner);
+      //  function AddPet($id, Pet $petnew);
     }
 ?>

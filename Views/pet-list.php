@@ -7,7 +7,7 @@
           
           <div class="container">
                <h2 class="mb-4">My Pets</h2>
-               <?php foreach($_SESSION['loggedUser']->getPets() as $pets){ ?> 
+               <?php foreach($petsofowner as $pets){ ?> 
                                    <table class="table bg-light-alpha">
                
                     <thead>

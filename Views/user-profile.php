@@ -92,7 +92,7 @@
                             <td><?php echo $_SESSION['loggedUser']->getEmail(); ?></td>
                             <td><?php echo $_SESSION['loggedUser']->getPassword(); ?></td>
                             <td><?php echo $_SESSION['loggedUser']->getPhoneNumber(); ?></td>
-                            <td><?php  echo count($_SESSION['loggedUser']->getPets()); ?></td>                                                                                                                                                        
+                            <td><?php  echo count($petsofowner); ?></td>                                                                                                                                                        
                         </tr>
                         <?php } ?> 
                     </tbody>
