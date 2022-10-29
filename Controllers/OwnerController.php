@@ -6,7 +6,8 @@ use Models\Owner as Owner;
 use Models\Pet as Pet;
 use Models\Keeper as Keeper;
 use Models\Booking as Booking;
-use DAO\OwnerDAO as OwnerDAO;
+//use DAO\OwnerDAO as OwnerDAO; Persistencia en JSON
+use DAO\OwnerDAODB as OwnerDAODB;
 use DAO\PetDAO as PetDAO;
 use DAO\KeeperDAO as KeeperDAO;
 use Helper\Validation as Validation;
@@ -17,7 +18,8 @@ class OwnerController{
     private $DataKeepers;
 
     function __construct(){
-        $this->DataOwners=new OwnerDAO();
+        //$this->DataOwners=new OwnerDAO();
+        $this->DataOwners= new OwnerDAODB();
         $this->DataPets=new PetDAO();
         $this->DataKeepers=new KeeperDAO();
     }
@@ -40,7 +42,7 @@ class OwnerController{
 
         
 
-        if($this->DataOwners->SearchEmail($email) == null){
+        //if($this->DataOwners->SearchEmail($email) == null){
                 $ownerNew=new Owner();
                 $ownerNew->setFirstName($firstname);
                 $ownerNew->setLastName($lasName);
@@ -52,11 +54,11 @@ class OwnerController{
                 $this->DataOwners->Add_Owner($ownerNew);
                 echo "<script> confirm('Cuenta creada con exito!');</script>";
                 require_once(VIEWS_PATH."login.php");
-            }else{
+            /*}else{
                 echo "<script> confirm('Ya hay un usuario en el sistema utilizando el email ingresado... vuelva a intentar con uno nuevo');</script>";
                 require_once(VIEWS_PATH."owner-register.php");
 
-            } 
+            } */
     }
 
     function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
