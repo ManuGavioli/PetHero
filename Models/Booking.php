@@ -3,6 +3,7 @@
 namespace Models;
 
 class Booking{
+    private $keeperId;
     private $idBooking;
     private $bookingDates;
     private $amountPaid;
@@ -47,6 +48,16 @@ class Booking{
     public function setTotalValue($totalValue)
     {
         $this->totalValue = $totalValue;
+    }
+
+    public function getKeeperId()
+    {
+        return $this->keeperId;
+    }
+
+    public function setKeeperId($keeperId)
+    {
+        $this->keeperId = $keeperId;
     }
 }
 

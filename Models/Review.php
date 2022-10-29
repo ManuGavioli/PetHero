@@ -3,6 +3,7 @@
 namespace Models;
 
 class Review{
+    private $keeperId;
     private $idReview;
     private $description;
     private $reviewDate;
@@ -47,6 +48,16 @@ class Review{
     public function setIdReview($idReview)
     {
         $this->idReview = $idReview;
+    }
+
+    public function getKeeperId()
+    {
+        return $this->keeperId;
+    }
+
+    public function setKeeperId($keeperId)
+    {
+        $this->keeperId = $keeperId;
     }
 }
 

@@ -9,7 +9,7 @@ define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "Styles/js/");
 define("IMG_PATH", FRONT_ROOT.VIEWS_PATH . "Styles/img/");
 
 define("DB_HOST", "localhost");
-define("DB_NAME", "TpFinal_PetHeroDb");
+define("DB_NAME", "tpfinal_petherodb");
 define("DB_USER", "root");
 define("DB_PASS", "");
 
