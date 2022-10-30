@@ -2,17 +2,21 @@
     namespace Controllers;
 
     //use DAO\KeeperDAO as KeeperDAO;
+
+    use DAO\AvailabilityDAODB as AvailabilityDAODB;
     use DAO\KeeperDAODB as KeeperDAODB;
     use Models\Keeper as Keeper;
     use Helper\Validation as Validation;
 
     class KeeperController{
         private $KeeperDAO;
+        private $AvailablilityDAO;
         
 
         public function __construct(){
             //$this->KeeperDAO = new KeeperDAO;
             $this->KeeperDAO = new KeeperDAODB;
+            $this->AvailablilityDAO = new AvailabilityDAODB;
         }
 
         public function RegisterNewKeeper(){
@@ -26,6 +30,7 @@
         
         public function MyProfile(){
             Validation::ValidUser();
+            $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
             require_once(VIEWS_PATH."user-profile.php");
         }
 

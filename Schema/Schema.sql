@@ -74,7 +74,7 @@ CREATE TABLE Bookings
     totalValue float(10) DEFAULT NULL,
     startDate date DEFAULT NULL,
     finalDate date DEFAULT NULL,
-    confirmed boolean DEFAULT FALSE;
+    confirmed boolean DEFAULT FALSE,
     petId int(11) NOT NULL,
     PRIMARY KEY(idBooking),
     CONSTRAINT fk_booking_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION,

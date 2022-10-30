@@ -59,9 +59,9 @@
                                     echo "NO ASIGNADO";
                                 }
                             ?></td>
-                            <td><?php 
-                                if($_SESSION['loggedUser']->getAvailableDates() != null){
-                                    echo "Desde el " . $_SESSION['loggedUser']->getAvailableDates()[0] . " Hasta el " . $_SESSION['loggedUser']->getAvailableDates()[count($_SESSION['loggedUser']->getAvailableDates())-1];
+                            <td><?php
+                                if($availableDatesFromKeeper != null){
+                                    echo "Desde el " . $availableDatesFromKeeper[0] . " Hasta el " . $availableDatesFromKeeper[count($availableDatesFromKeeper)-1];
                                 }else{
                                     echo "NO ASIGNADAS";
                                 }
@@ -75,7 +75,7 @@
                             ?></td> 
                             <td><?php 
                                 if($_SESSION['loggedUser']->getPrice() != null){
-                                    echo "$".$_SESSION['loggedUser']->getPrice() * count($_SESSION['loggedUser']->getAvailableDates());
+                                    echo "$".$_SESSION['loggedUser']->getPrice() * count($availableDatesFromKeeper);
                                 }else{
                                     echo "NO ASIGNADO";
                                 }

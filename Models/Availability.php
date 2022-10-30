@@ -10,12 +10,12 @@ class Availability{
     private $available;
 
 
-    public function getkeeperId()
+    public function getKeeperId()
     {
         return $this->keeperId;
     }
 
-    public function setkeeperId($keeperId)
+    public function setKeeperId($keeperId)
     {
         $this->keeperId = $keeperId;
 
