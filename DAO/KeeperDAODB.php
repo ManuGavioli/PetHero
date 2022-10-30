@@ -71,7 +71,16 @@
 
         public function Remove($id)
         {
-            
+            try{
+                $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
+                $parameter["id"] = $id;
+    
+                $this->connection = connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query,$parameter);
+    
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
         public function SearchEmail($email)
@@ -103,6 +112,27 @@
                 }
                 return $keeper;
     
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
+        public function EditUser(Keeper $editKeeper)
+        {
+            try{
+                $query = "UPDATE ".$this->tableName." SET firstName = :firstName, lastName = :lastName,  dni = :dni, email = :email, pass = :pass, phoneNumber = :phoneNumber
+                WHERE user_id = ".$editKeeper->getUserId();
+
+                $parameters["firstName"] = $editKeeper->getFirstName();
+                $parameters["lastName"] = $editKeeper->getLastName();
+                $parameters["dni"] = $editKeeper->getDni();
+                $parameters["email"] = $editKeeper->getEmail();
+                $parameters["pass"] = $editKeeper->getPassword();
+                $parameters["phoneNumber"] = $editKeeper->getPhoneNumber();
+                
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+                
             }catch(Exception $ex){
                 throw $ex;
             }

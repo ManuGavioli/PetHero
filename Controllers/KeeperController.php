@@ -28,13 +28,13 @@
             require_once(VIEWS_PATH."keeper-content.php");
         }
         
-        public function MyProfile(){
+        public function MyProfile(){ //ya adaptado a BDD
             Validation::ValidUser();
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
             require_once(VIEWS_PATH."user-profile.php");
         }
 
-        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number){
+        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number){ // ya adaptado a BDD
             
 
             $this->KeeperDAO->GetAll(); 
@@ -91,7 +91,7 @@
             require_once(VIEWS_PATH."home.php");
         }
 
-        public function Edit($user_id){
+        public function Edit($user_id){  // hay que cambiar esta redireccion por un header en el "user-profile"
             Validation::ValidUser();
             require_once(VIEWS_PATH."keeper-edit.php");
         }
@@ -104,8 +104,12 @@
             $_SESSION['loggedUser']->setEmail($email);
             $_SESSION['loggedUser']->setPassword($passw);
             $_SESSION['loggedUser']->setPhoneNumber($phone_number);
-            //$this->KeeperDAO->EditUser($_SESSION['loggedUser']);
+            $this->KeeperDAO->EditUser($_SESSION['loggedUser']);
+
             echo "<script> confirm('Información actualizada con éxito!');</script>";
+
+            $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
+
             require_once(VIEWS_PATH."user-profile.php");
         }
 
