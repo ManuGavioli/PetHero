@@ -6,6 +6,7 @@ use Models\Owner as Owner;
 use Models\Pet as Pet;
 use Models\Keeper as Keeper;
 use Models\Booking as Booking;
+use Models\Availability as Availability;
 //use DAO\OwnerDAO as OwnerDAO; Persistencia en JSON
 use DAO\OwnerDAODB as OwnerDAODB;
 //use DAO\PetDAO as PetDAO;
@@ -13,6 +14,7 @@ use DAO\PetDAODB as PetDAODB;
 //use DAO\KeeperDAO as KeeperDAO;
 use DAO\KeeperDAODB as KeeperDAODB;
 use Helper\Validation as Validation;
+use DAO\AvailabilityDAODB as AvailabilityDAODB;
 
 class OwnerController{
     private $DataOwners;
@@ -26,6 +28,7 @@ class OwnerController{
         $this->DataPets=new PetDAODB();
         //$this->DataKeepers=new KeeperDAO();
         $this->DataKeepers=new KeeperDAODB;
+        $this->DataDates = new AvailabilityDAODB;
     }
 
     function ShowRegisterView(){
@@ -122,7 +125,8 @@ class OwnerController{
     }
 
     public function FilterKeepers($beginning, $end){
-        //$keeper_list=$this->DataKeepers->GetFilters($beginning, $end); funcion que devuelva una lista de keepers filtrada
+        //funcion que devuelva una lista de keepers filtrada
+        $dates_list=$this->DataDates->GetFiltersDates($beginning, $end); 
         require_once(VIEWS_PATH."home.php");
     }
 
