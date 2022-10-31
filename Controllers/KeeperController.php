@@ -4,7 +4,8 @@
     //use DAO\KeeperDAO as KeeperDAO;
 
     use DAO\AvailabilityDAODB as AvailabilityDAODB;
-    use DAO\KeeperDAODB as KeeperDAODB;
+use DAO\KeeperDAO;
+use DAO\KeeperDAODB as KeeperDAODB;
     use Models\Keeper as Keeper;
     use Helper\Validation as Validation;
 
@@ -30,6 +31,7 @@
         
         public function MyProfile(){ //ya adaptado a BDD
             Validation::ValidUser();
+            $_SESSION['loggedUser'] = $this->KeeperDAO->getKeeper($_SESSION['loggedUser']->getUserId());
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
             require_once(VIEWS_PATH."user-profile.php");
         }
@@ -60,33 +62,38 @@
             } 
         }
 
-        public function AddContent($first_date, $end_date, $price, $pet_type){
+        public function AddContent($first_date, $end_date, $price, $pet_type){ // ya adaptado a BDD
             Validation::ValidUser();
             if($first_date > $end_date){
                 echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
                 require_once(VIEWS_PATH."keeper-content.php");
             }else{
+
                 $first_date = strtotime($first_date);
                 $end_date = strtotime($end_date);
 
                 $day = 86400; //24 horas * 60 minutos x hora * 60 segundos x minuto (24*60*60)=86400 
                 $dates = array();
                 for($i = $first_date; $i <= $end_date; $i += $day){
-                    $dateToAdd = date("d-m-Y", $i);
+                    $dateToAdd = date("Y-m-d", $i);
                     array_push($dates,$dateToAdd);
                 }
-                $_SESSION['loggedUser']->setAvailableDates($dates);
-                //$this->KeeperDAO->EditDates($_SESSION['loggedUser'],$dates);
+                if($this->AvailablilityDAO->Exist($_SESSION['loggedUser']->getUserId()) != null){   //si hay datos cargados previamente por el usuario logueado
+                    $this->AvailablilityDAO->Remove($_SESSION['loggedUser']->getUserId());          //borra todos los datos de la tabla para evitar superponerlos
+                }
+                foreach($dates as $date){
+                    $this->AvailablilityDAO->Add_AvailavilityDate($date, $_SESSION['loggedUser']->getUserId());
+                }
             }
             if($price <= 0){
                 echo "<script> confirm('Ingreso un valor invalido como precio por estadia... Vuelva a intentar');</script>";
                 require_once(VIEWS_PATH."keeper-content.php");
             }else{
                 $_SESSION['loggedUser']->setPrice($price);
-                //$this->KeeperDAO->EditPrice($_SESSION['loggedUser'],$price);
+                $this->KeeperDAO->EditPrice($_SESSION['loggedUser']->getUserId(),$price);
             }
             $_SESSION['loggedUser']->setPetType($pet_type);
-            //$this->KeeperDAO->EditPetType($_SESSION['loggedUser'],$pet_type);
+            $this->KeeperDAO->EditPetType($_SESSION['loggedUser']->getUserId(),$pet_type);
             echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
             require_once(VIEWS_PATH."home.php");
         }
