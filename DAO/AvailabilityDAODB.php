@@ -4,12 +4,12 @@ namespace DAO;
     use DAO\IAvailabilityDAO as IAvailabilityDAO;
     use \Exception as Exception;
     use DAO\Connection as Connection;
-use Models\Availability;
+    use Models\Availability as Availability;
 
 class AvailabilityDAODB implements IAvailabilityDAO{
 
     private $connection;
-    private $tableName = "Availability";
+    private $tableName = "AvailabilityDate";
 
     public function GetAll()
     {
@@ -44,14 +44,71 @@ class AvailabilityDAODB implements IAvailabilityDAO{
 
     public function GetAllforKeeper($id){
         try{
-            $allDates = $this->GetAll();
+            $allDates = $this->GetAll();// cada elemento del array que se guarda en $allDates es un Availability
             $keeper_dates = array();
             foreach ($allDates as $dates){
-                if($dates->getKeeperId() == $id){
-                    array_push($keeper_dates, $dates);
+                if($dates['keeperId'] == $id){
+                    array_push($keeper_dates, $dates['keeperDate']);
                 }
             }
             return $keeper_dates;
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
+    public function Add_AvailavilityDate($date, $id){
+        try{ 
+            $query = "INSERT INTO ". $this->tableName . " ( keeperId, keeperDate, available ) VALUES ( :keeperId, :keeperDate, :available );"; 
+
+                $parameters["keeperId"] = $id;
+                $parameters["keeperDate"] = $date;
+                $parameters["available"] = true;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
+    public function Remove($id)
+    {
+        try{
+            $query = "DELETE FROM ".$this->tableName." WHERE keeperId = :keeperId";
+            $parameter["keeperId"] = $id;
+
+            $this->connection = connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query,$parameter);
+
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
+    public function Exist($id){
+        try{
+
+            $query = "SELECT * FROM ".$this->tableName." WHERE keeperId = :keeperId";
+            $parameters["keeperId"] = $id;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query,$parameters);
+            
+            $availability = new Availability;
+
+            if(isset($result[0])){
+                $row = $result[0];
+
+                $availability = $row;
+                
+            }else{
+                $availability = null;
+            }
+            return $availability;
         }catch(Exception $ex){
             throw $ex;
         }

@@ -73,7 +73,7 @@
         {
             try{
                 $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
-                $parameter["id"] = $id;
+                $parameter["user_id"] = $id;
     
                 $this->connection = connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query,$parameter);
@@ -129,6 +129,72 @@
                 $parameters["email"] = $editKeeper->getEmail();
                 $parameters["pass"] = $editKeeper->getPassword();
                 $parameters["phoneNumber"] = $editKeeper->getPhoneNumber();
+                
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+                
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
+        public function getKeeper($id){
+            try{
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE user_id = :user_id";
+                $parameters["user_id"] = $id;
+    
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->Execute($query,$parameters);
+
+                $keeper = new Keeper;
+
+                if(isset($result[0])){
+                    $row = $result[0];
+
+                    $keeper->setUserId($row["user_id"]);
+                    $keeper->setFirstName($row["firstName"]);
+                    $keeper->setLastName($row["lastName"]);
+                    $keeper->setDni($row["dni"]);
+                    $keeper->setEmail($row["email"]);
+                    $keeper->setPassword($row["pass"]);
+                    $keeper->setPhoneNumber($row["phoneNumber"]);
+                    $keeper->setPetType($row["petType"]);
+                    $keeper->setPrice($row["price"]);
+                }else{
+                    $keeper = null;
+                }
+                return $keeper;
+    
+
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
+        public function EditPrice($id, $price)
+        {
+            try{
+                $query = "UPDATE ".$this->tableName." SET price = :price 
+                WHERE user_id = ".$id;
+
+                $parameters["price"] = $price;
+                
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+                
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
+        public function EditPetType($id, $petType)
+        {
+            try{
+                $query = "UPDATE ".$this->tableName." SET petType = :petType 
+                WHERE user_id = ".$id;
+
+                $parameters["petType"] = $petType;
                 
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);

@@ -10,5 +10,8 @@
         function EditUser(Keeper $editKeeper);
         function Remove($id);
         function SearchEmail($email);
+        function getKeeper($id);
+        function EditPrice($id, $price);
+        function EditPetType($id, $petType);
     }
 ?>

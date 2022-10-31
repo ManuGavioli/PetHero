@@ -82,7 +82,7 @@ CREATE TABLE Bookings
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE Availability 
+CREATE TABLE AvailabilityDate 
 (
 	availabilityId int(11) NOT NULL AUTO_INCREMENT,
 	keeperId int(11) NOT NULL,
