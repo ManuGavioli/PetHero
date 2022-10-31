@@ -31,7 +31,7 @@ class AvailabilityDAODB implements IAvailabilityDAO{
                         $availabilityNew->setKeeperDate($availability['keeperDate']);
                         $availabilityNew->setAvailable($availability['available']);
 
-                array_push($availabilityList, $availability);
+                array_push($availabilityList, $availabilityNew);
             }
 
             return $availabilityList;
@@ -112,6 +112,10 @@ class AvailabilityDAODB implements IAvailabilityDAO{
         }catch(Exception $ex){
             throw $ex;
         }
+    }
+
+    public function GetFiltersDates($beginning, $end){
+
     }
 
 }
