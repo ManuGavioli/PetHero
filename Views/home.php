@@ -102,7 +102,7 @@
                                              <?php 
                                              foreach($dates_list as $dates){
                                                   if ($dates->getKeeperId()==$keeper->getUserId() && $dates->getAvailable()==true){
-                                                      ?> <option type="date" value="<?php $dates->getKeeperDate() ?>">  <?php echo $dates->getKeeperDate().'<br>'; 
+                                                      ?> <option type="date" value="<?php echo $dates->getKeeperDate() ?>">  <?php echo $dates->getKeeperDate().'<br>'; 
                                                   } 
                                              }
                                         ?>
@@ -114,7 +114,7 @@
                                              <?php 
                                              foreach($dates_list as $dates){
                                                   if ($dates->getKeeperId()==$keeper->getUserId() && $dates->getAvailable()==true){
-                                                      ?> <option value="<?php $dates->getKeeperDate() ?>">  <?php echo $dates->getKeeperDate().'<br>'; 
+                                                      ?> <option type="date" value="<?php echo $dates->getKeeperDate() ?>">  <?php echo $dates->getKeeperDate().'<br>'; 
                                                   } 
                                              }
                                         ?>
@@ -129,14 +129,14 @@
                                                        <?php 
                                                        foreach($pets_list as $pets){
                                                             if ($pets->getPetType()==$keeper->getPetType()){
-                                                                ?> <option value="<?php  ?>">  <?php echo $pets->getName().'<br>'; 
+                                                                ?> <option value="<?php  echo $pets->getId() ?>">  <?php echo $pets->getName().'<br>'; 
                                                             } 
                                                        }
                                         ?>
                                         </select>
                                         <br>
                                         <br>
-                                        <button type="submit" class="btn" value="<?php $keeper->getUserId(); ?> " name="id_keeper" style="background-color: #FFEC00; color: #000000" >Reservar💰</button></td>
+                                        <button type="submit" class="btn" value="<?php echo $keeper->getUserId(); ?> " name="id_keeper" style="background-color: #FFEC00; color: #000000" >Reservar💰</button></td>
                                    </tr>
                               </tbody> 
                               
