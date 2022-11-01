@@ -63,13 +63,16 @@
                          <h2 class="mb-4">Lista de cuidadores</h2>
                          <form action="<?php echo FRONT_ROOT."Owner/FilterKeepers"?>" method="post">
 
-                         <a>Desde:</a> <input maxlength="20" type="date" name="search" placeholder="fecha de inicio">
-                         <a>Hasta:</a> <input maxlength="20" type="date" name="search" placeholder="fecha de fin">
+                         <a>Desde:</a> <input maxlength="20" type="date" name="beginning" placeholder="fecha de inicio">
+                         <a>Hasta:</a> <input maxlength="20" type="date" name="end" placeholder="fecha de fin">
                             <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Search🔎</button>
                          </form>
-                         <form action="<?php echo FRONT_ROOT."Owner/ShowViewReservation"?>" method="post">
+                         <form action="<?php echo FRONT_ROOT."Owner/NewBooking"?>" method="post">
                          <?php 
-                         foreach($keeper_list as $keeper){ 
+                         foreach($keeper_list as $keeper){ //filtrar keepers si está en la lista de dates
+
+                              if($keeper->VeryfyKeeper($dates_list)){
+                                   $selectdates=array();
                          ?> 
                               <table class="table bg-light-alpha">
                               <thead>
@@ -77,7 +80,7 @@
                                    <th>Tamaño de mascota que cuida</th>
                                    <th>Fechas Disponibles</th>
                                    <th>Precio por Día</th>
-                                   <th></th> 
+                                   <th>Reservar</th> 
                               </thead>
                               <tbody> 
                                    <tr>
@@ -93,15 +96,47 @@
                                                   }
                                              }
                                         ?></td>
-                                        <td><?php 
+                                        <td>Fecha de Inicio: <br>
+                                        <select name="first_date" id="lang"> 
+                                                       
+                                             <?php 
                                              foreach($dates_list as $dates){
                                                   if ($dates->getKeeperId()==$keeper->getUserId() && $dates->getAvailable()==true){
-                                                       echo $dates->getKeeperDate().'<br>';
-                                                  }
+                                                      ?> <option type="date" value="<?php $dates->getKeeperDate() ?>">  <?php echo $dates->getKeeperDate().'<br>'; 
+                                                  } 
                                              }
-                                        ?></td>
+                                        ?>
+                                        </select>
+                                             
+
+                                        <br> Fecha de Final: <br>
+                                        <select name="end_date" id="lang"> 
+                                             <?php 
+                                             foreach($dates_list as $dates){
+                                                  if ($dates->getKeeperId()==$keeper->getUserId() && $dates->getAvailable()==true){
+                                                      ?> <option value="<?php $dates->getKeeperDate() ?>">  <?php echo $dates->getKeeperDate().'<br>'; 
+                                                  } 
+                                             }
+                                        ?>
+                                        </select>
+                                   
+                                   </td>
                                         <td><?php echo "$".$keeper->getPrice() ?></td>
-                                        <td><button type="submit" class="btn" value="<?php $keeper->getUserId(); ?>" style="background-color: #FFEC00; color: #000000" >Reservar💰</button></td>
+                                        <td>
+                                         Seleccione su mascota: <br>
+                                        <select name="id_mascot" id="lang"> 
+                                                       
+                                                       <?php 
+                                                       foreach($pets_list as $pets){
+                                                            if ($pets->getPetType()==$keeper->getPetType()){
+                                                                ?> <option value="<?php  ?>">  <?php echo $pets->getName().'<br>'; 
+                                                            } 
+                                                       }
+                                        ?>
+                                        </select>
+                                        <br>
+                                        <br>
+                                        <button type="submit" class="btn" value="<?php $keeper->getUserId(); ?> " name="id_keeper" style="background-color: #FFEC00; color: #000000" >Reservar💰</button></td>
                                    </tr>
                               </tbody> 
                               
@@ -110,7 +145,7 @@
                               
                                         </form>
                        <?php
-                       }}}
+                    }}}}
                ?>
           </div>
      </section>

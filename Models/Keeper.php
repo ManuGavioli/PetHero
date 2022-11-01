@@ -62,5 +62,16 @@
         public function isKeeperOrOwner(){
             return 1;
         }
+
+        public function VeryfyKeeper($availableDates){
+            foreach($availableDates as $dates){
+                if($dates->getKeeperId()==$this->getUserId()){
+                    if($dates->getAvailable()==true){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 ?>

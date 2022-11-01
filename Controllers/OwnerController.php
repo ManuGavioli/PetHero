@@ -127,12 +127,15 @@ class OwnerController{
     public function FilterKeepers($beginning, $end){
         //funcion que devuelva una lista de keepers filtrada
         $dates_list=$this->DataDates->GetFiltersDates($beginning, $end); 
+        $keeper_list=$this->DataKeepers->GetAll();
+        $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         require_once(VIEWS_PATH."home.php");
     }
 
-    public function ShowReservationView(/*$id_keeper*/){
+    /*public function ShowReservationView(){
+        var_dump($selectdates);
         //$keeperreservation=$this->DataKeepers->KeeperForId($id_keeper); funcion que devuelva un keeper especifico 
-        require_once(VIEWS_PATH."reservation-confirm.php");
+        //require_once(VIEWS_PATH."reservation-confirm.php");
         //require_once(VIEWS_PATH."reservation-confirm.php"); mascotas listado segun lo que cuida el keeper, tamaño y con boton para asignar mascota a la reserva 
         /* una vez selecciona la mascota, se crea la reserva, se lo redirige al home con mensaje de reserva creada con exito y la reserva se guarda
         cuando el keeper inicie sesion ve la reserva la acepta y al aceptarla, se genera el cupon de pago que se va  aguaradr en la reserva, el owner inicia sesion
@@ -143,14 +146,48 @@ class OwnerController{
 
         */
 
-    }
+   // }
 
-    public function NewBooking($id_mascot, $id_keeper, $first_date, $end_date){
-        $bookininProgres=new Booking;
-        //$bookininProgres->set();
-        //$bookininProgres->set();
-        //$bookininProgres->set();
-        //$bookininProgres->set();
+    public function NewBooking($first_date, $end_date, $id_mascot, $id_keeper){
+
+
+        if($first_date > $end_date){
+            echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
+            require_once(VIEWS_PATH."keeper-content.php");
+        }else{
+
+            $first_date = strtotime($first_date);
+            $end_date = strtotime($end_date);
+
+            $day = 86400; //24 horas * 60 minutos x hora * 60 segundos x minuto (24*60*60)=86400 
+            $dates = array();
+            for($i = $first_date; $i <= $end_date; $i += $day){
+                $dateToAdd = date("Y-m-d", $i);
+                array_push($dates,$dateToAdd);
+            }
+            
+            if($this->DataDates->DatesAvailability($dates, $id_keeper){
+                $bookininProgres=new Booking;
+                $bookininProgres->setPetId($id_mascot);
+                $bookininProgres->setStartDate($first_date);
+                $bookininProgres->setFinalDate($end_date);
+                $bookininProgres->setKeeperId($id_keeper);
+                $bookininProgres->setTotalValues(count($dates)* $this->DataKeepers->getKeeper($id_keeper)->getPrice());
+            
+                //falta hacer el bookingdao   
+            
+                header('location:'.FRONT_ROOT.'User/Home');
+            }else{
+                echo "<script> confirm('El rango de fechas seleccionado no es valido');</script>";
+                require_once(VIEWS_PATH."home.php");
+            }
+        }
+
+        
+        
+
+    
+    
         /* se crea una nueva reserva se guarad y se redirije al home al owner, va a tener una pestaña mas con una solapa que dice reservas y le van a aparecer las reservas, pendiente o a pagar o confirmada*/ 
         /*el keeper al cancelar la reserva la elimina directamente*/
         /*el keeper al entrar a su home va a a ver la reserva pendiente y la va  aconfirmar y se cambia el confirmar a true y se espera a que el owner pague el 50 % */

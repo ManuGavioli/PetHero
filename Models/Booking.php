@@ -5,11 +5,11 @@ namespace Models;
 class Booking{
     private $keeperId;
     private $idBooking;
-    private $amountPaid;
+    private $amountPaid=0;
     private $totalValue;
     private $startDate;
     private $finalDate;
-    private $confirmed;
+    private $confirmed=false;
     private $petId;
 
 
