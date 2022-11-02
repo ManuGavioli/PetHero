@@ -187,6 +187,17 @@ class OwnerController{
                 require_once(VIEWS_PATH."home.php");
             }
         }
+    }
+
+        public function ShowListReservas(){
+        Validation::ValidUser();
+        //PASAR lista de pets
+        $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
+        $Booking_list=$this->DataBookings->GetAllforOwner($petsofowner);
+        $keeper_list=$this->DataKeepers->GetAll();
+        
+        require_once(VIEWS_PATH."owner-reservations.php");
+        }
 
         
         
@@ -200,10 +211,6 @@ class OwnerController{
         /*listo terminaria el proceso por ahora ya que luego tenemos que ver la finalizacion de la estadia  */
 
     }
-
-
-
-}
 
 
 

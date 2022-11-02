@@ -4,6 +4,7 @@ namespace DAO;
     use DAO\IBookingDAODB as IBookingDAODB;
     use \Exception as Exception;
     use Models\Booking as Booking;   
+    use Models\Pet as Pet;
     use DAO\Connection as Connection;
 
 class BookingDAODB implements IBookingDAODB{
@@ -85,10 +86,23 @@ class BookingDAODB implements IBookingDAODB{
 
     function GetAllforKeeper($id){
         $allBookings=$this->GetAll();
-        $Booking_owner=array();
+        $Booking_keeper=array();
         foreach ($allBookings as $Bookings){
             if($Bookings->getKeeperId()==$id){
-                array_push($Booking_owner, $Bookings);
+                array_push($Booking_keeper, $Bookings);
+            }
+        }
+        return $Booking_owner;
+    }
+
+    function GetAllforOwner($pets){
+        $allBookings=$this->GetAll();
+        $Booking_owner=array();
+        foreach ($allBookings as $Bookings){
+            foreach($pets as $pet){
+                if($Bookings->getPetId()==$pet->getId()){
+                    array_push($Booking_owner, $Bookings);
+                }
             }
         }
         return $Booking_owner;
