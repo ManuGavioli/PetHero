@@ -67,10 +67,10 @@
                          <a>Hasta:</a> <input maxlength="20" type="date" name="end" placeholder="fecha de fin">
                             <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Search🔎</button>
                          </form>
-                         <form action="<?php echo FRONT_ROOT."Owner/NewBooking"?>" method="post">
                          <?php 
                          foreach($keeper_list as $keeper){ //filtrar keepers si está en la lista de dates
-
+                             ?> <form action="<?php echo FRONT_ROOT."Owner/NewBooking"?>" method="post">
+                         <?php
                               if($keeper->VeryfyKeeper($dates_list)){
                                    $selectdates=array();
                          ?> 
