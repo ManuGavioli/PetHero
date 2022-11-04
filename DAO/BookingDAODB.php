@@ -14,7 +14,7 @@ class BookingDAODB implements IBookingDAODB{
 
     
 
-    function GetAll(){
+    public function GetAll(){
         try
         {
             $BookingList = array();
@@ -51,7 +51,7 @@ class BookingDAODB implements IBookingDAODB{
 
 
 
-    function Add(Booking $newBooking){
+    public function Add(Booking $newBooking){
         try
             {
                 $query = "INSERT INTO ".$this->tableName." (keeperId, amountPaid, totalValue, startDate, finalDate, petId) VALUES ( :keeperId, :amountPaid, :totalValue, :startDate, :finalDate, :petId);";
@@ -78,13 +78,13 @@ class BookingDAODB implements IBookingDAODB{
 
 
 
-    function Remove($id){
+    public function Remove($id){
         
 
 
     }
 
-    function GetAllforKeeper($id){
+    public function GetAllforKeeper($id){
         $allBookings=$this->GetAll();
         $Booking_keeper=array();
         foreach ($allBookings as $Bookings){
@@ -92,10 +92,10 @@ class BookingDAODB implements IBookingDAODB{
                 array_push($Booking_keeper, $Bookings);
             }
         }
-        return $Booking_owner;
+        return $Booking_keeper; // estaba puesto para que retornara esto: "$Booking_owner;". Creo que esta mal por eso lo cambio a $Booking_keeper
     }
 
-    function GetAllforOwner($pets){
+    public function GetAllforOwner($pets){
         $allBookings=$this->GetAll();
         $Booking_owner=array();
         foreach ($allBookings as $Bookings){

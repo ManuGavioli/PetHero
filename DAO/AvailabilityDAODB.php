@@ -47,8 +47,8 @@ class AvailabilityDAODB implements IAvailabilityDAO{
             $allDates = $this->GetAll();// cada elemento del array que se guarda en $allDates es un Availability
             $keeper_dates = array();
             foreach ($allDates as $dates){
-                if($dates['keeperId'] == $id){
-                    array_push($keeper_dates, $dates['keeperDate']);
+                if($dates->getKeeperId() == $id){
+                    array_push($keeper_dates, $dates->getKeeperDate());
                 }
             }
             return $keeper_dates;
@@ -152,7 +152,7 @@ class AvailabilityDAODB implements IAvailabilityDAO{
         foreach($allDates as $dates){
             foreach($dates_list as $list){
                 if($dates->getKeeperDate()==$list && $dates->getKeeperId()==$keeper_id){
-                    if($date->getAvailable()==true){
+                    if($dates->getAvailable()==true){
 
                     }else{
                         return false;

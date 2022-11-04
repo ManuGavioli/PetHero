@@ -2,24 +2,26 @@
 
 namespace Controllers;
 
-use Models\Owner as Owner;
-use Models\Pet as Pet;
-use Models\Availability as Availability;
+//use Models\Owner as Owner;
+//use Models\Pet as Pet;
+//use Models\Availability as Availability;
 //use DAO\KeeperDAO as KeeperDAO;
-use DAO\KeeperDAODB as KeeperDAODB;
-use Models\Keeper as Keeper;
+//use Models\Keeper as Keeper;
 //use DAO\OwnerDAO as OwnerDAO; Persistencia en JSON
+
+use DAO\KeeperDAODB as KeeperDAODB;
 use DAO\OwnerDAODB as OwnerDAODB;
 use DAO\PetDAODB as PetDAODB;
 use Helper\Validation as Validation;
-
 use DAO\AvailabilityDAODB as AvailabilityDAODB;
+use DAO\BookingDAODB as Booking;
 
 class UserController{
     private $DataOwners;
     private $DataKeepers;
     private $DataDates;
     private $DataPets;
+    private $DataBookings;
 
     public function __construct(){
         //$this->DataOwners=new OwnerDAO;
@@ -28,6 +30,7 @@ class UserController{
         $this->DataKeepers=new KeeperDAODB;
         $this->DataDates = new AvailabilityDAODB;
         $this->DataPets=new PetDAODB();
+        $this->DataBookings=new Booking;
     }
 
 
@@ -72,8 +75,11 @@ class UserController{
         Validation::ValidUser();
 
         $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
+        $pets_listAll=$this->DataPets->GetAll();
         $keeper_list=$this->DataKeepers->GetAll();
         $dates_list=$this->DataDates->GetAll();
+        $booking_list = $this->DataBookings->GetAll();
+        $owner_list = $this->DataOwners->GetAll();
         require_once(VIEWS_PATH.'home.php');
     }
 
