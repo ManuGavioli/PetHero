@@ -10,51 +10,48 @@
                <h2 class="mb-4">Listado de reservas</h2>
                <table class="table bg-light-alpha">
                     <form action="<?php echo FRONT_ROOT.''?>" method="post" class="bg-light-alpha p-5">     
-                      
-                    <?php
-                    /*
-                    <thead>
-                         <th>Id</th>
-                         <th>Name</th>
-                         <th>Description</th>
-                         <th>Email</th>
-                         <th>Phone</th>
-                         <th></th>
-                    </thead>
-                    */
-                    ?>
+                    
+                         <thead>
+                              <th>Nombre y apellido</th>
+                              <th>Nombre de la mascota</th>
+                              <th>Descripcion</th>
+                              <th>Email</th>
+                              <th>Telefono</th>
+                              <th>Fecha Inicio</th>
+                              <th>Fecha Final</th>
+                              <th>Cobro Total</th>
+                         </thead>
+                    
+                         <tbody>
+                              <?php
+                                   foreach($booking_list as $booking)    // completar con todas las reservas que figuren y sean pasadas 
+                                   {
+                                        ?>
+                                             <tr>
+                                                  <td><?php echo $booking->get(); ?></td>  
+                                                  <td><?php echo $booking->get(); ?></td>
+                                                  <td><?php echo $booking->get(); ?></td>
+                                                  <td><?php echo $booking->get(); ?></td>
+                                                  <td><?php echo $booking->get(); ?></td>
+                                                  <td>
+                                                  <button type="submit" class="btn" name="action" value="<?php echo $booking->getId(); ?>,Approve" style="background-color: #48c; color: #fff" >Aceptar</button>
+                                                  <button type="submit" class="btn" name="action" value="<?php echo $booking->getId(); ?>,Reject" style="background-color: #48c; color: #fff" >Rechazar</button> 
+                                                  </td>                                                                                                                                                                 
+                                             </tr>
+                                             
+                                        <?php
+                                   }
+                              ?>
 
-                    <tbody>
-                         <?php
-                              /*foreach($booking_list as $booking)                       // completar con todas las reservas que figuren y sean pasadas 
-                              {
-                                   ?>
-                                        <tr>
-                                             <td><?php echo $booking->get(); ?></td>  
-                                             <td><?php echo $booking->get(); ?></td>
-                                             <td><?php echo $booking->get(); ?></td>
-                                             <td><?php echo $booking->get(); ?></td>
-                                             <td><?php echo $booking->get(); ?></td>
-                                             <td>
-                                             <button type="submit" class="btn" name="action" value="<?php echo $booking->getId(); ?>,Approve" style="background-color: #48c; color: #fff" >Aceptar</button>
-                                             <button type="submit" class="btn" name="action" value="<?php echo $booking->getId(); ?>,Reject" style="background-color: #48c; color: #fff" >Rechazar</button> 
-                                             </td>                                                                                                                                                                 
-                                        </tr>
-                                        
-                                   <?php
-                              }*/
+                         </tbody>
+
+                         <?php 
+                              ?>     
+                                   <h1 style="margin: auto; padding:30px;"> --No hay reservas cargadas aún, cuando disponga de nuevas reservas figurarán en este sector. Utilize la barra de navegación en la esquina superior derecha para navegar en la aplicación-- </h1>
+                              <?php     
                          ?>
 
-                    </tbody>
-
-                    <?php 
-                         ?>     
-                              <h1 style="margin: auto; padding:30px;"> --No hay reservas cargadas aún, cuando disponga de nuevas reservas figurarán en este sector. Utilize la barra de navegación en la esquina superior derecha para navegar en la aplicación-- </h1>
-                         <?php     
-                    ?>
-
                     </form>
-               
                </table>
                <?php
                }else{
@@ -63,13 +60,13 @@
                          <h2 class="mb-4">Lista de cuidadores</h2>
                          <form action="<?php echo FRONT_ROOT."Owner/FilterKeepers"?>" method="post">
 
-                         <a>Desde:</a> <input maxlength="20" type="date" name="beginning" placeholder="fecha de inicio">
-                         <a>Hasta:</a> <input maxlength="20" type="date" name="end" placeholder="fecha de fin">
-                            <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Search🔎</button>
+                              <a>Desde:</a> <input maxlength="20" type="date" name="beginning" placeholder="fecha de inicio">
+                              <a>Hasta:</a> <input maxlength="20" type="date" name="end" placeholder="fecha de fin">
+                              <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Search🔎</button>
                          </form>
                          <?php 
                          foreach($keeper_list as $keeper){ //filtrar keepers si está en la lista de dates
-                             ?> <form action="<?php echo FRONT_ROOT."Owner/NewBooking"?>" method="post">
+                         ?> <form action="<?php echo FRONT_ROOT."Owner/NewBooking"?>" method="post">
                          <?php
                               if($keeper->VeryfyKeeper($dates_list)){
                                    $selectdates=array();
@@ -143,7 +140,7 @@
 
                               </table>
                               
-                                        </form>
+                              </form>
                        <?php
                     }}}}
                ?>
