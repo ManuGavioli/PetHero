@@ -11,5 +11,7 @@
         function Remove($id);
         function GetAllforKeeper($id);
         function GetAllforOwner($pets);
+        function ApproveBooking($id);
+        function RejectBooking($id);
     }
 ?>

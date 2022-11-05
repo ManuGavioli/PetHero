@@ -6,53 +6,54 @@
           <div class="container">
                <?php
                if($_SESSION['loggedUser']->isKeeperOrOwner() == 1){
+                    if($booking_list != null){
+                         foreach($booking_list as $booking)    // completar con todas las reservas que figuren y sean pasadas 
+                         {
+                              if($booking->getConfirmed() == 0){
                ?>  
-               <h2 class="mb-4">Listado de reservas</h2>
-               <table class="table bg-light-alpha">
-                    <form action="<?php echo FRONT_ROOT.''?>" method="post" class="bg-light-alpha p-5">     
-                    
-                         <thead>
-                              <th>Nombre y apellido</th>
-                              <th>Nombre de la mascota</th>
-                              <th>Descripcion</th>
-                              <th>Email</th>
-                              <th>Telefono</th>
-                              <th>Fecha Inicio</th>
-                              <th>Fecha Final</th>
-                              <th>Cobro Total</th>
-                         </thead>
-                    
-                         <tbody>
-                              <?php
-                                   foreach($booking_list as $booking)    // completar con todas las reservas que figuren y sean pasadas 
-                                   {
-                                        ?>
-                                             <tr>
-                                                  <td><?php echo $booking->get(); ?></td>  
-                                                  <td><?php echo $booking->get(); ?></td>
-                                                  <td><?php echo $booking->get(); ?></td>
-                                                  <td><?php echo $booking->get(); ?></td>
-                                                  <td><?php echo $booking->get(); ?></td>
-                                                  <td>
-                                                  <button type="submit" class="btn" name="action" value="<?php echo $booking->getId(); ?>,Approve" style="background-color: #48c; color: #fff" >Aceptar</button>
-                                                  <button type="submit" class="btn" name="action" value="<?php echo $booking->getId(); ?>,Reject" style="background-color: #48c; color: #fff" >Rechazar</button> 
-                                                  </td>                                                                                                                                                                 
-                                             </tr>
+                                   <h2 class="mb-4">Listado de reservas</h2>
+                                   <table class="table bg-light-alpha">
+                                             <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">     
                                              
-                                        <?php
-                                   }
-                              ?>
-
-                         </tbody>
-
-                         <?php 
-                              ?>     
-                                   <h1 style="margin: auto; padding:30px;"> --No hay reservas cargadas aún, cuando disponga de nuevas reservas figurarán en este sector. Utilize la barra de navegación en la esquina superior derecha para navegar en la aplicación-- </h1>
-                              <?php     
+                                                  <thead>
+                                                       <th>Nombre y apellido</th>
+                                                       <th>Nombre de la mascota</th>
+                                                       <th>Descripcion</th>
+                                                       <th>Email</th>
+                                                       <th>Telefono</th>
+                                                       <th>Fecha Inicio</th>
+                                                       <th>Fecha Final</th>
+                                                       <th></th>
+                                                  </thead>
+                                             
+                                                  <tbody>
+                                                       <tr>
+                                                            <td><?php echo ucfirst($booking->getPetId()->getMyowner()->getFirstName())." ".ucfirst($booking->getPetId()->getMyowner()->getLastName()); ?></td>  
+                                                            <td><?php echo ucfirst($booking->getPetId()->getName()); ?></td>
+                                                            <td><?php echo $booking->getPetId()->getObservations(); ?></td>
+                                                            <td><?php echo $booking->getPetId()->getMyowner()->getEmail(); ?></td>
+                                                            <td><?php echo $booking->getPetId()->getMyowner()->getPhoneNumber(); ?></td>
+                                                            <td><?php echo $booking->getStartDate(); ?></td>
+                                                            <td><?php echo $booking->getFinalDate(); ?></td>
+                                                            <td>
+                                                            <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Approve" style="background-color: #48c; color: #fff" >Aceptar</button>
+                                                            <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Reject" style="background-color: #48c; color: #fff" >Rechazar</button> 
+                                                            </td>                                                                                                                                                                
+                                                       </tr>
+                              <?php
+                              }
+                         }    
                          ?>
-
-                    </form>
-               </table>
+                                                  </tbody>
+                                             </form>
+                    <?php
+                    }else{
+                         ?>     
+                              <h1 style="margin: auto; padding:30px;"> --No hay reservas cargadas aún, cuando disponga de nuevas reservas figurarán en este sector. Utilize la barra de navegación en la esquina superior derecha para navegar en la aplicación-- </h1>
+                         <?php
+                    }
+                    ?>
+                                   </table>
                <?php
                }else{
                     if($_SESSION['loggedUser']->isKeeperOrOwner() == 0){

@@ -6,6 +6,8 @@ namespace DAO;
     use Models\Booking as Booking;   
     use Models\Pet as Pet;
     use DAO\Connection as Connection;
+    use Models\Keeper as Keeper;
+    use Models\Owner as Owner;
 
 class BookingDAODB implements IBookingDAODB{
 
@@ -19,7 +21,7 @@ class BookingDAODB implements IBookingDAODB{
         {
             $BookingList = array();
 
-            $query = "SELECT * FROM ".$this->tableName;
+            $query = "SELECT * FROM ".$this->tableName." INNER JOIN keepers on bookings.keeperId = keepers.user_id INNER JOIN pets on bookings.petId = pets.id_pet INNER JOIN owners on pets.id_owner = owners.user_id;";
 
             $this->connection = Connection::GetInstance();
 
@@ -28,18 +30,50 @@ class BookingDAODB implements IBookingDAODB{
             foreach ($resultSet as $Booking)
             {                
                         $BookingNew=new Booking();
-                        $BookingNew->setKeeperId($Booking['keeperId']);
+
+                        $newKeeper = new Keeper;
+                        $newKeeper->setUserId($Booking["keeperId"]);
+                        $newKeeper->setFirstName($Booking["firstName"]);
+                        $newKeeper->setLastName($Booking["lastName"]);
+                        $newKeeper->setDni($Booking["dni"]);
+                        $newKeeper->setEmail($Booking["email"]);
+                        $newKeeper->setPassword($Booking["pass"]);
+                        $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
+                        $newKeeper->setPetType($Booking["petType"]);
+                        $newKeeper->setPrice($Booking["price"]);
+                        $BookingNew->setKeeperId($newKeeper);
+
+                        $newOwner = new Owner;
+                        $newOwner->setUserId($Booking['id_owner']);
+                        $newOwner->setFirstName($Booking['firstName']);
+                        $newOwner->setLastName($Booking['lastName']);
+                        $newOwner->setDni($Booking['dni']);
+                        $newOwner->setEmail($Booking['email']);
+                        $newOwner->setPassword($Booking['pass']);
+                        $newOwner->setPhoneNumber($Booking['phoneNumber']);
+
+                        $newPet = new Pet;
+                        $newPet->setId($Booking['petId']);
+                        $newPet->setName($Booking['name_pet']);
+                        $newPet->setPhoto($Booking['photo']);
+                        $newPet->setPetType($Booking['petType']);
+                        $newPet->setRaze($Booking['raze']);
+                        $newPet->setSize($Booking['size']);
+                        $newPet->setVaccinationPhoto($Booking['vaccinationPhoto']);
+                        $newPet->setObservations($Booking['observations']);
+                        $newPet->setVideo($Booking['video']);
+                        $newPet->setMyowner($newOwner);
+                        $BookingNew->setPetId($newPet);
+                        
+                        $BookingNew->setAmountPaid($Booking['amountPaid']); // es un objeto coupon?
+
                         $BookingNew->setIdBooking($Booking['idBooking']);
-                        $BookingNew->setAmountPaid($Booking['amountPaid']);
-                        $BookingNew->setTotalValue($Booking['totalValue']);
                         $BookingNew->setStartDate($Booking['startDate']);
                         $BookingNew->setFinalDate($Booking['finalDate']);
                         $BookingNew->setConfirmed($Booking['confirmed']);
-                        $BookingNew->setPetId($Booking['petId']);
 
-                array_push($BookingList, $BookingNew);
+                        array_push($BookingList,$BookingNew);
             }
-
             return $BookingList;
         }
         catch(Exception $ex)
@@ -92,20 +126,119 @@ class BookingDAODB implements IBookingDAODB{
                 array_push($Booking_keeper, $Bookings);
             }
         }
-        return $Booking_keeper; // estaba puesto para que retornara esto: "$Booking_owner;". Creo que esta mal por eso lo cambio a $Booking_keeper
+        return $Booking_keeper;
     }
 
     public function GetAllforOwner($pets){
         $allBookings=$this->GetAll();
         $Booking_owner=array();
-        foreach ($allBookings as $Bookings){
+        foreach ($allBookings as $Bookings){ 
             foreach($pets as $pet){
-                if($Bookings->getPetId()==$pet->getId()){
+                if($Bookings->getPetId()->getId() == $pet->getId()){
                     array_push($Booking_owner, $Bookings);
                 }
             }
         }
         return $Booking_owner;
+    }
+
+    public function GetOneBooking($id){
+        try
+        {
+            $BookingList = array();
+
+            $query = "SELECT * FROM ".$this->tableName." INNER JOIN keepers on bookings.keeperId = keepers.user_id INNER JOIN pets on bookings.petId = pets.id_pet INNER JOIN owners on pets.id_owner = owners.user_id
+            WHERE idBooking = ".$id;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+                           
+            foreach ($resultSet as $Booking)
+            {                
+                        $BookingNew=new Booking();
+
+                        $newKeeper = new Keeper;
+                        $newKeeper->setUserId($Booking["keeperId"]);
+                        $newKeeper->setFirstName($Booking["firstName"]);
+                        $newKeeper->setLastName($Booking["lastName"]);
+                        $newKeeper->setDni($Booking["dni"]);
+                        $newKeeper->setEmail($Booking["email"]);
+                        $newKeeper->setPassword($Booking["pass"]);
+                        $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
+                        $newKeeper->setPetType($Booking["petType"]);
+                        $newKeeper->setPrice($Booking["price"]);
+                        $BookingNew->setKeeperId($newKeeper);
+
+                        $newOwner = new Owner;
+                        $newOwner->setUserId($Booking['id_owner']);
+                        $newOwner->setFirstName($Booking['firstName']);
+                        $newOwner->setLastName($Booking['lastName']);
+                        $newOwner->setDni($Booking['dni']);
+                        $newOwner->setEmail($Booking['email']);
+                        $newOwner->setPassword($Booking['pass']);
+                        $newOwner->setPhoneNumber($Booking['phoneNumber']);
+
+                        $newPet = new Pet;
+                        $newPet->setId($Booking['petId']);
+                        $newPet->setName($Booking['name_pet']);
+                        $newPet->setPhoto($Booking['photo']);
+                        $newPet->setPetType($Booking['petType']);
+                        $newPet->setRaze($Booking['raze']);
+                        $newPet->setSize($Booking['size']);
+                        $newPet->setVaccinationPhoto($Booking['vaccinationPhoto']);
+                        $newPet->setObservations($Booking['observations']);
+                        $newPet->setVideo($Booking['video']);
+                        $newPet->setMyowner($newOwner);
+                        $BookingNew->setPetId($newPet);
+                        
+                        $BookingNew->setAmountPaid($Booking['amountPaid']); // es un objeto coupon?
+
+                        $BookingNew->setIdBooking($Booking['idBooking']);
+                        $BookingNew->setStartDate($Booking['startDate']);
+                        $BookingNew->setFinalDate($Booking['finalDate']);
+                        $BookingNew->setConfirmed($Booking['confirmed']);
+
+                        array_push($BookingList,$BookingNew);
+            }
+            
+            return $BookingList[0];
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+
+    }
+
+    public function ApproveBooking ($Booking){
+        try{
+            $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed
+            WHERE idBooking = ".$Booking->getIdBooking();
+
+            $parameters["confirmed"] = 1;
+            
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
+    public function RejectBooking ($Booking){
+        try{
+            $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed
+            WHERE idBooking = ".$Booking->getIdBooking();
+
+            $parameters["confirmed"] = 2;
+            
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            
+        }catch(Exception $ex){
+            throw $ex;
+        }
     }
 
 }

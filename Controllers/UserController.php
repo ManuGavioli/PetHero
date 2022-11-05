@@ -40,6 +40,7 @@ class UserController{
         if($keeper != null){
             if($keeper->getPassword() == $password){
                 $_SESSION["loggedUser"] = $keeper; 
+                $booking_list = $this->DataBookings->GetAll();
                 require_once(VIEWS_PATH."home.php"); 
             }else{
                 echo "<script> confirm('Contraseña incorrecta... vuelva a intentar');</script>";
@@ -79,7 +80,6 @@ class UserController{
         $keeper_list=$this->DataKeepers->GetAll();
         $dates_list=$this->DataDates->GetAll();
         $booking_list = $this->DataBookings->GetAll();
-        $owner_list = $this->DataOwners->GetAll();
         require_once(VIEWS_PATH.'home.php');
     }
 

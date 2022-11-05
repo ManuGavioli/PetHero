@@ -5,6 +5,10 @@ namespace DAO;
     use \Exception as Exception;
     use DAO\Connection as Connection;
     use Models\Availability as Availability;
+    use Models\Keeper as Keeper;
+    use Models\Pet as Pet;
+    use Models\Owner as Owner;
+    use Models\Booking as Booking;
 
 class AvailabilityDAODB implements IAvailabilityDAO{
 
@@ -161,6 +165,20 @@ class AvailabilityDAODB implements IAvailabilityDAO{
             }
         }
         return true;
+    }
+
+    public function CancelAvailability(Booking $Booking){ // el foreach lo hace la consulta en la base de datos
+        try{
+            $query = "UPDATE ".$this->tableName." SET available = :available WHERE keeperId = ".$Booking->getKeeperId()->getUserId()." AND keeperDate BETWEEN "."'".$Booking->getStartDate()."'"." AND "."'".$Booking->getFinalDate()."'";
+
+            $parameters["available"] = false;
+            
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            
+        }catch(Exception $ex){
+            throw $ex;
+        }
     }
 
 }

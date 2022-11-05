@@ -4,20 +4,23 @@
     //use DAO\KeeperDAO as KeeperDAO;
 
     use DAO\AvailabilityDAODB as AvailabilityDAODB;
-use DAO\KeeperDAO;
-use DAO\KeeperDAODB as KeeperDAODB;
+    use DAO\BookingDAODB as BookingDAODB;
+    use DAO\KeeperDAODB as KeeperDAODB;
     use Models\Keeper as Keeper;
     use Helper\Validation as Validation;
+    use Models\Booking as Booking;
 
     class KeeperController{
         private $KeeperDAO;
         private $AvailablilityDAO;
+        private $BookingDAO;
         
 
         public function __construct(){
             //$this->KeeperDAO = new KeeperDAO;
             $this->KeeperDAO = new KeeperDAODB;
             $this->AvailablilityDAO = new AvailabilityDAODB;
+            $this->BookingDAO = new BookingDAODB;
         }
 
         public function RegisterNewKeeper(){
@@ -29,14 +32,20 @@ use DAO\KeeperDAODB as KeeperDAODB;
             require_once(VIEWS_PATH."keeper-content.php");
         }
         
-        public function MyProfile(){ //ya adaptado a BDD
+        public function MyProfile(){
             Validation::ValidUser();
             $_SESSION['loggedUser'] = $this->KeeperDAO->getKeeper($_SESSION['loggedUser']->getUserId());
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
             require_once(VIEWS_PATH."user-profile.php");
         }
 
-        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number){ // ya adaptado a BDD
+        public function MyBookings(){
+            Validation::ValidUser();
+            $booking_list = $this->BookingDAO->GetAll();
+            require_once(VIEWS_PATH."keeper-bookings.php");
+        }
+
+        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number){
             
 
             $this->KeeperDAO->GetAll(); 
@@ -62,7 +71,7 @@ use DAO\KeeperDAODB as KeeperDAODB;
             } 
         }
 
-        public function AddContent($first_date, $end_date, $price, $pet_type){ // ya adaptado a BDD
+        public function AddContent($first_date, $end_date, $price, $pet_type){
             Validation::ValidUser();
             if($first_date > $end_date){
                 echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
@@ -118,6 +127,21 @@ use DAO\KeeperDAODB as KeeperDAODB;
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
 
             require_once(VIEWS_PATH."user-profile.php");
+        }
+
+        public function Action($action){
+            $actionSepared = explode(",",$action);
+            $Booking = new Booking;
+            $Booking = $this->BookingDAO->GetOneBooking($action[0]);
+            
+            if($actionSepared[1] == "Approve"){
+                $this->AvailablilityDAO->CancelAvailability($Booking);
+                $this->BookingDAO->ApproveBooking($Booking);
+                header('Location: http://localhost/TpFinal_PetHero/User/Home');
+            }else{
+                $this->BookingDAO->RejectBooking($Booking);
+                header('Location: http://localhost/TpFinal_PetHero/User/Home');
+            }
         }
 
     }

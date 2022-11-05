@@ -2,8 +2,9 @@ CREATE DATABASE IF NOT EXISTS TpFinal_PetHeroDB;
 
 USE TpFinal_PetHeroDB;
 
-DROP TABLE IF EXISTS Availability;
+DROP TABLE IF EXISTS AvailabilityDate;
 DROP TABLE IF EXISTS Bookings;
+DROP TABLE IF EXISTS Coupon;
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Pets;
 DROP TABLE IF EXISTS Owners;
@@ -66,20 +67,27 @@ CREATE TABLE Reviews
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE Coupon 
+(
+	idCoupon int(11) NOT NULL AUTO_INCREMENT,
+	paidAlready float(10) DEFAULT NULL,
+	totalPay float(10) DEFAULT NULL,
+	PRIMARY KEY(idCoupon)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE Bookings 
 (
     keeperId int(11) NOT NULL,
     idBooking int(11) NOT NULL AUTO_INCREMENT,
-    amountPaid float(10) DEFAULT NULL,
-    totalValue float(10) DEFAULT NULL,
+    amountPaid int(11) NOT NULL,
     startDate date DEFAULT NULL,
     finalDate date DEFAULT NULL,
-    confirmed boolean DEFAULT FALSE,
+    confirmed tinyint DEFAULT 0,
     petId int(11) NOT NULL,
     PRIMARY KEY(idBooking),
+    CONSTRAINT fk_booking_coupon FOREIGN KEY (amountPaid) REFERENCES Coupon (idCoupon) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT fk_booking_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT fk_booking_petId FOREIGN KEY (petId) REFERENCES pets (id_pet) ON DELETE NO ACTION ON UPDATE NO ACTION
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE AvailabilityDate 
