@@ -156,7 +156,7 @@ class OwnerController{
 
         if($first_date > $end_date){
             echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
-            require_once(VIEWS_PATH."keeper-content.php");
+            $this->ShowHome();
         }else{
 
             $first_date2 = strtotime($first_date);
@@ -175,16 +175,16 @@ class OwnerController{
                 $bookininProgres->setStartDate($first_date);
                 $bookininProgres->setFinalDate($end_date);
                 $bookininProgres->setKeeperId($id_keeper);
-                $bookininProgres->setTotalValue(count($dates)* $this->DataKeepers->getKeeper($id_keeper)->getPrice());
+                // la vamos a usar coupon $bookininProgres->setTotalValue(count($dates)* $this->DataKeepers->getKeeper($id_keeper)->getPrice());
             
                 //falta hacer el bookingdao   
                 $this->DataBookings->Add($bookininProgres);
                 
                 echo "<script> confirm('Reserva Creada con exito!! Una vez confirmada por el Keeper sera notificado');</script>";
-                header('location:'.FRONT_ROOT.'User/Home');
+                $this->ShowHome();
             }else{
                 echo "<script> confirm('El rango de fechas seleccionado no es valido');</script>";
-                require_once(VIEWS_PATH."home.php");
+                $this->ShowHome();
             }
         }
     }
@@ -197,6 +197,15 @@ class OwnerController{
         $keeper_list=$this->DataKeepers->GetAll();
         
         require_once(VIEWS_PATH."owner-reservations.php");
+        }
+
+        public function ShowHome(){
+            Validation::ValidUser();
+    
+            $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
+            $keeper_list=$this->DataKeepers->GetAll();
+            $dates_list=$this->DataDates->GetAll();
+            require_once(VIEWS_PATH.'home.php');
         }
 
         

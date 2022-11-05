@@ -65,7 +65,7 @@ class BookingDAODB implements IBookingDAODB{
                         $newPet->setMyowner($newOwner);
                         $BookingNew->setPetId($newPet);
                         
-                        $BookingNew->setAmountPaid($Booking['amountPaid']); // es un objeto coupon?
+                      //  $BookingNew->setAmountPaid($Booking['amountPaid']); // es un objeto coupon?
 
                         $BookingNew->setIdBooking($Booking['idBooking']);
                         $BookingNew->setStartDate($Booking['startDate']);
@@ -88,12 +88,10 @@ class BookingDAODB implements IBookingDAODB{
     public function Add(Booking $newBooking){
         try
             {
-                $query = "INSERT INTO ".$this->tableName." (keeperId, amountPaid, totalValue, startDate, finalDate, petId) VALUES ( :keeperId, :amountPaid, :totalValue, :startDate, :finalDate, :petId);";
+                $query = "INSERT INTO ".$this->tableName." (keeperId, startDate, finalDate, petId) VALUES ( :keeperId, :startDate, :finalDate, :petId);";
 
 
                 $parameters['keeperId']=$newBooking->getKeeperId();
-                $parameters['amountPaid']=$newBooking->getAmountPaid();
-                $parameters['totalValue']=$newBooking->getTotalValue();
                 $parameters['startDate']=$newBooking->getStartDate();
                 $parameters['finalDate']=$newBooking->getFinalDate();
                 $parameters['petId']=$newBooking->getPetId();
@@ -192,7 +190,7 @@ class BookingDAODB implements IBookingDAODB{
                         $newPet->setMyowner($newOwner);
                         $BookingNew->setPetId($newPet);
                         
-                        $BookingNew->setAmountPaid($Booking['amountPaid']); // es un objeto coupon?
+                        //$BookingNew->setAmountPaid($Booking['amountPaid']); // es un objeto coupon?
 
                         $BookingNew->setIdBooking($Booking['idBooking']);
                         $BookingNew->setStartDate($Booking['startDate']);
@@ -213,8 +211,7 @@ class BookingDAODB implements IBookingDAODB{
 
     public function ApproveBooking ($Booking){
         try{
-            $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed
-            WHERE idBooking = ".$Booking->getIdBooking();
+            $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed WHERE idBooking = ".$Booking->getIdBooking();
 
             $parameters["confirmed"] = 1;
             
@@ -228,8 +225,7 @@ class BookingDAODB implements IBookingDAODB{
 
     public function RejectBooking ($Booking){
         try{
-            $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed
-            WHERE idBooking = ".$Booking->getIdBooking();
+            $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed WHERE idBooking = ".$Booking->getIdBooking();
 
             $parameters["confirmed"] = 2;
             

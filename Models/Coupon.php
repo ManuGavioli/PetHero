@@ -7,6 +7,7 @@ class Coupon{
     private $idCoupon;
     private $paidAlready;
     private $fullPayment;
+    private $BookingId;
 
 }
 

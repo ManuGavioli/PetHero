@@ -171,7 +171,7 @@ class AvailabilityDAODB implements IAvailabilityDAO{
         try{
             $query = "UPDATE ".$this->tableName." SET available = :available WHERE keeperId = ".$Booking->getKeeperId()->getUserId()." AND keeperDate BETWEEN "."'".$Booking->getStartDate()."'"." AND "."'".$Booking->getFinalDate()."'";
 
-            $parameters["available"] = false;
+            $parameters["available"] = 0;
             
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters);

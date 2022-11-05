@@ -5,7 +5,6 @@ namespace Models;
 class Booking{
     private $keeperId;
     private $idBooking;
-    private $amountPaid;
     private $startDate;
     private $finalDate;
     private $confirmed=false;

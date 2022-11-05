@@ -4,6 +4,7 @@ namespace DAO;
     use DAO\IPetDAO as IPetDAO;
     use \Exception as Exception;
     use Models\Pet as Pet;   
+    use Models\Owner as Owner; 
     use DAO\Connection as Connection;
 
 class PetDAODB implements IPetDAO{
@@ -18,7 +19,7 @@ class PetDAODB implements IPetDAO{
         {
             $petList = array();
 
-            $query = "SELECT * FROM ".$this->tableName;
+            $query = "SELECT * FROM ".$this->tableName." inner join Owners on Owners.user_id= ".$this->tableName.".id_owner";
 
             $this->connection = Connection::GetInstance();
 
@@ -36,7 +37,17 @@ class PetDAODB implements IPetDAO{
                         $petNew->setVaccinationPhoto($Pet['vaccinationPhoto']);
                         $petNew->setObservations($Pet['observations']);
                         $petNew->setVideo($Pet['video']);
-                        $petNew->setMyOwner($Pet['id_owner']);
+
+                    $ownerNew=new Owner();
+                    $ownerNew->setUserId($Pet['user_id']);
+                    $ownerNew->setFirstName($Pet['firstName']);
+                    $ownerNew->setLastName($Pet['lastName']);
+                    $ownerNew->setDni($Pet['dni']);
+                    $ownerNew->setEmail($Pet['email']);
+                    $ownerNew->setPassword($Pet['pass']);
+                    $ownerNew->setPhoneNumber($Pet['phoneNumber']);
+
+                    $petNew->setMyOwner($ownerNew);
 
                 array_push($petList, $petNew);
             }
@@ -91,7 +102,7 @@ class PetDAODB implements IPetDAO{
         $allpets=$this->GetAll();
         $pet_owner=array();
         foreach ($allpets as $pets){
-            if($pets->getMyOwner()==$id){
+            if($pets->getMyOwner()->getUserId()==$id){
                 array_push($pet_owner, $pets);
             }
         }

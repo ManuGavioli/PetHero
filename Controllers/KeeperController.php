@@ -104,7 +104,7 @@
             $_SESSION['loggedUser']->setPetType($pet_type);
             $this->KeeperDAO->EditPetType($_SESSION['loggedUser']->getUserId(),$pet_type);
             echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
-            require_once(VIEWS_PATH."home.php");
+            header('Location: http://localhost/TpFinal_PetHero/User/Home');
         }
 
         public function Edit($user_id){  // hay que cambiar esta redireccion por un header en el "user-profile"
@@ -143,6 +143,7 @@
                 header('Location: http://localhost/TpFinal_PetHero/User/Home');
             }
         }
+
 
     }
 ?>     

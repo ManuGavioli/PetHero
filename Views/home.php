@@ -6,13 +6,14 @@
           <div class="container">
                <?php
                if($_SESSION['loggedUser']->isKeeperOrOwner() == 1){
-                    if($booking_list != null){
-                         foreach($booking_list as $booking)    // completar con todas las reservas que figuren y sean pasadas 
-                         {
-                              if($booking->getConfirmed() == 0){
-               ?>  
+                    if($booking_list != null){?>  
+                        
+               
                                    <h2 class="mb-4">Listado de reservas</h2>
                                    <table class="table bg-light-alpha">
+                                   <?php foreach($booking_list as $booking)    // completar con todas las reservas que figuren y sean pasadas 
+                         {
+                              if($booking->getConfirmed() == 0){ ?>
                                              <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">     
                                              
                                                   <thead>
