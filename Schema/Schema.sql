@@ -67,27 +67,31 @@ CREATE TABLE Reviews
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE Coupon 
-(
-	idCoupon int(11) NOT NULL AUTO_INCREMENT,
-	paidAlready float(10) DEFAULT NULL,
-	totalPay float(10) DEFAULT NULL,
-	PRIMARY KEY(idCoupon)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE Bookings 
 (
     keeperId int(11) NOT NULL,
     idBooking int(11) NOT NULL AUTO_INCREMENT,
-    amountPaid int(11) NOT NULL,
+    
     startDate date DEFAULT NULL,
     finalDate date DEFAULT NULL,
     confirmed tinyint DEFAULT 0,
     petId int(11) NOT NULL,
     PRIMARY KEY(idBooking),
-    CONSTRAINT fk_booking_coupon FOREIGN KEY (amountPaid) REFERENCES Coupon (idCoupon) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    
     CONSTRAINT fk_booking_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT fk_booking_petId FOREIGN KEY (petId) REFERENCES pets (id_pet) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Coupon 
+(
+	idCoupon int(11) NOT NULL AUTO_INCREMENT,
+	paidAlready float(10) DEFAULT NULL,
+	totalPay float(10) DEFAULT NULL,
+    BookingId int(11) NOT NULL,
+	PRIMARY KEY(idCoupon),
+    CONSTRAINT fk_booking_coupon FOREIGN KEY (BookingId) REFERENCES Bookings (idBooking) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE AvailabilityDate 
