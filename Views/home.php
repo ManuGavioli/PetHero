@@ -6,7 +6,7 @@
           <div class="container">
                <?php
                if($_SESSION['loggedUser']->isKeeperOrOwner() == 1){
-                    if($booking_list != null){?>  
+                    if(empty($booking_list)){?>  
                         
                
                                    <h2 class="mb-4">Listado de reservas</h2>
