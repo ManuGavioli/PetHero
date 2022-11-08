@@ -62,8 +62,9 @@
                          <h2 class="mb-4">Lista de cuidadores</h2>
                          <form action="<?php echo FRONT_ROOT."Owner/FilterKeepers"?>" method="post">
 
-                              <a>Desde:</a> <input maxlength="20" type="date" name="beginning" placeholder="fecha de inicio">
-                              <a>Hasta:</a> <input maxlength="20" type="date" name="end" placeholder="fecha de fin">
+                              <a>Desde:</a> <input maxlength="20" type="date" name="beginning" placeholder="fecha de inicio" required min=<?php $hoy=date("Y-m-d"); echo $hoy;?>>
+                              <a>Hasta:</a> <input maxlength="20" type="date" name="end" placeholder="fecha de fin" required min=<?php $hoy=date("Y-m-d"); echo $hoy;?>>
+                              
                               <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Search🔎</button>
                          </form>
                          <?php 
@@ -128,7 +129,15 @@
                                                        <?php 
                                                        foreach($pets_list as $pets){
                                                             if ($pets->getPetType()==$keeper->getPetType()){
-                                                                ?> <option value="<?php  echo $pets->getId() ?>">  <?php echo $pets->getName().'<br>'; 
+                                                                 $in=1;
+                                                                 foreach($booking_list as $bookingsPETS){
+                                                                      if($pets->getId()==$bookingsPETS->getPetId()->getId()){
+                                                                         $in=0;
+                                                                      }
+                                                                 }
+                                                                 if($in==1){
+                                                                 ?> <option value="<?php  echo $pets->getId() ?>">  <?php echo $pets->getName().'<br>'; 
+                                                                 }
                                                             } 
                                                        }
                                         ?>

@@ -201,8 +201,10 @@ class OwnerController{
             Validation::ValidUser();
     
             $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
-            $keeper_list=$this->DataKeepers->GetAll();
-            $dates_list=$this->DataDates->GetAll();
+        $pets_listAll=$this->DataPets->GetAll();
+        $keeper_list=$this->DataKeepers->GetAll();
+        $dates_list=$this->DataDates->GetAll();
+        $booking_list = $this->DataBookings->GetAll();
             require_once(VIEWS_PATH.'home.php');
         }
 
