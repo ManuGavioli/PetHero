@@ -35,12 +35,13 @@
                               ?></td>
                               
                               <td><?php  
-                              if(!isset($coupon)){
-                                   echo 0;
-                         }else
-                         {
-                              echo $bookings->getTotalValue();
-                         }
+                              $date1 = new DateTime($bookings->getStartDate());
+                              $date2 = new DateTime($bookings->getFinalDate());
+                              $diff = $date1->diff($date2);
+                              // will output 2 days
+                              $Total= ($diff->days+1)*$bookings->getKeeperId()->getPrice();
+                              echo $Total;
+                         
                                 ?></td>
                               <td><?php  if($bookings->getConfirmed()==0){
                                 echo "El Cuidador no acepto la Reserva aun";

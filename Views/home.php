@@ -67,6 +67,7 @@
                               
                               <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Search🔎</button>
                          </form>
+                         <br>
                          <?php 
                          foreach($keeper_list as $keeper){ //filtrar keepers si está en la lista de dates
                          ?> <form action="<?php echo FRONT_ROOT."Owner/NewBooking"?>" method="post">
