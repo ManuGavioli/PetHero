@@ -19,22 +19,35 @@
                     </thead>
                     <tbody> 
                          <tr>
-                              <td><?php  foreach($keeper_list as $keeper){
-                                        if($keeper->getUserId()==$bookings->getKeeperId()){
-                                            echo $keeper->getFirstName();
-                                        }
-                              }  ?></td>
-                              <td><?php  echo "desde ".$bookings->getStartDate()." hasta ".$bookings->getFinalDate() ?></td>
-                              <td><?php  foreach($petsofowner as $pet){
-                                        if($pet->getId()==$bookings->getPetId()){
-                                            echo $pet->getName();
-                                        }
-                              }  ?></td>
-                              <td><?php  echo $bookings->getAmountPaid();  ?></td>
-                              <td><?php  echo $bookings->getTotalValue();  ?></td>
-                              <td><?php  if($bookings->getConfirmed()==false){
+                              <td><?php
+                                            echo $bookings->getKeeperId()->getFirstName()." ".$bookings->getKeeperId()->getLastName();
+                               ?></td>
+                              <td><?php  echo "desde ".$bookings->getStartDate()." hasta ".$bookings->getFinalDate(); ?></td>
+                              <td><?php 
+                                            echo $bookings->getPetId()->getName();
+                                ?></td>
+                              <td><?php  if(!isset($coupon)){
+                                        echo 0;
+                              }else
+                              {
+                                   echo $bookings->getAmountPaid();  
+                              }
+                              ?></td>
+                              
+                              <td><?php  
+                              if(!isset($coupon)){
+                                   echo 0;
+                         }else
+                         {
+                              echo $bookings->getTotalValue();
+                         }
+                                ?></td>
+                              <td><?php  if($bookings->getConfirmed()==0){
                                 echo "El Cuidador no acepto la Reserva aun";
-                              }else{
+                              }else if($bookings->getConfirmed()==2){
+                                   echo "Reserva Rechazada";
+                              }
+                              else if($bookings->getConfirmed()==1){
                                 ?>  <form action="<?php echo FRONT_ROOT."Owner/PayBooking"?>" method="post">
                                         <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Pagar 50%💰</button>
                                     </form><?php

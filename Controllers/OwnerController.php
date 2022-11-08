@@ -194,8 +194,6 @@ class OwnerController{
         //PASAR lista de pets
         $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         $Booking_list=$this->DataBookings->GetAllforOwner($petsofowner);
-        $keeper_list=$this->DataKeepers->GetAll();
-        
         require_once(VIEWS_PATH."owner-reservations.php");
         }
 
