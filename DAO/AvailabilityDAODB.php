@@ -157,7 +157,7 @@ class AvailabilityDAODB implements IAvailabilityDAO{
             foreach($dates_list as $list){
                 if($dates->getKeeperDate()==$list && $dates->getKeeperId()==$keeper_id){
                     if($dates->getAvailable()==true){
-
+                        
                     }else{
                         return false;
                     }

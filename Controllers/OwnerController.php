@@ -169,7 +169,7 @@ class OwnerController{
                 array_push($dates,$dateToAdd);
             }
             
-            if($this->DataDates->DatesAvailability($dates, $id_keeper)){
+            if($this->DataDates->DatesAvailability($dates, $id_keeper)==true){
                 $bookininProgres=new Booking;
                 $bookininProgres->setPetId($id_mascot);
                 $bookininProgres->setStartDate($first_date);
