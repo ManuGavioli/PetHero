@@ -147,7 +147,12 @@
             if($actionSepared[1] == "Approve"){
                 $this->AvailablilityDAO->CancelAvailability($Booking);
                 $this->BookingDAO->ApproveBooking($Booking);
-                $precioTotal = $_SESSION['loggedUser']->getPrice() * count($this->AvailablilityDAO->GetAll());
+
+                $date1 = date_create($Booking->getStartDate());
+                $date2 = date_create($Booking->getFinalDate());
+                $diff = $date1->diff($date2);
+
+                $precioTotal = $_SESSION['loggedUser']->getPrice() * ($diff->days+1);
                 $this->CouponDAO->Add_Coupon($precioTotal,$Booking->getIdBooking());
                 $this->ShowHome();
             }else{

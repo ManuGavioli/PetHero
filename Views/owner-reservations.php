@@ -35,8 +35,8 @@
                               ?></td>
                               
                               <td><?php  
-                              $date1 = new DateTime($bookings->getStartDate());
-                              $date2 = new DateTime($bookings->getFinalDate());
+                              $date1 = date_create($bookings->getStartDate());
+                              $date2 = date_create($bookings->getFinalDate());
                               $diff = $date1->diff($date2);
                               // will output 2 days
                               $Total= ($diff->days+1)*$bookings->getKeeperId()->getPrice();
