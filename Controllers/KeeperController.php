@@ -37,7 +37,7 @@
             if($booking != null){
                 echo "<script> confirm('Si ya dispone de una reserva no puede editar los atributos de cuidador!');</script>";
                 $booking_list = $this->BookingDAO->GetAll();
-                require_once(VIEWS_PATH."home.php");
+                $this->ShowHome();
             }else{
                 require_once(VIEWS_PATH."keeper-content.php");
             }
@@ -149,12 +149,22 @@
                 $this->BookingDAO->ApproveBooking($Booking);
                 $precioTotal = $_SESSION['loggedUser']->getPrice() * count($this->AvailablilityDAO->GetAll());
                 $this->CouponDAO->Add_Coupon($precioTotal,$Booking->getIdBooking());
-                header('Location: http://localhost/TpFinal_PetHero/User/Home');
+                $this->ShowHome();
             }else{
                 $this->BookingDAO->RejectBooking($Booking);
-                header('Location: http://localhost/TpFinal_PetHero/User/Home');
+                $this->ShowHome();
             }
         }
+
+        public function ShowHome(){
+            Validation::ValidUser();
+
+            $booking_list = $this->BookingDAO->BookingsConfirmationPendient($_SESSION['loggedUser']->getUserId());
+            $coupon_list = $this->CouponDAO->GetAll();
+            $dates_list=$this->AvailablilityDAO->GetAll();
+            require_once(VIEWS_PATH.'home.php');
+        }
+        
 
 
     }

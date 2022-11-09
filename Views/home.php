@@ -11,7 +11,7 @@
                               <table class="table bg-light-alpha">
                               <?php foreach($booking_list as $booking)
                          {
-                              if($booking->getConfirmed() == 0){ ?>
+                             ?>
                                         <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">     
                                              
                                              <thead class="navbar-dark bg-dark" style="color: #fff;">
@@ -40,7 +40,7 @@
                                                        </td>                                                                                                                                                                
                                                   </tr>
                               <?php
-                              }
+                              
                          }    
                     ?>
                                              </tbody>
@@ -130,7 +130,7 @@
                                                             if ($pets->getPetType()==$keeper->getPetType()){
                                                                  $in=1;
                                                                  foreach($booking_list as $bookingsPETS){
-                                                                      if($pets->getId()==$bookingsPETS->getPetId()->getId()){
+                                                                      if($pets->getId()==$bookingsPETS->getPetId()->getId() and $bookingsPETS->getConfirmed()!=2){
                                                                          $in=0;
                                                                       }
                                                                  }

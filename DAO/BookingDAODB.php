@@ -314,6 +314,18 @@ class BookingDAODB implements IBookingDAODB{
         }
     }
 
+    public function BookingsConfirmationPendient($id){
+        $booking_list=array();
+        if($this->GetOneBooking($id)!=null){
+            foreach ($this->GetOneBooking($id) as $bookings){
+                if($bookings->getConfirmed()==0){
+                    array_push($booking_list, $bookings);
+                }
+            }
+        }
+        return $booking_list;
+    }
+
 }
 
 

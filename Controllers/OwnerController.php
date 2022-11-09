@@ -100,7 +100,7 @@ class OwnerController{
         //no hay mas lista de pets en owner
        //$_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
 
-        header("location:".FRONT_ROOT."Owner/ShowListPetView");
+        $this->ShowListPetView();
     }
 
     public function MyProfile(){
@@ -124,7 +124,7 @@ class OwnerController{
         $_SESSION['loggedUser']->setPhoneNumber($phonenumber);
         $this->DataOwners->EditUser($_SESSION['loggedUser']);
         echo "<script> confirm('Información actualizada con éxito!');</script>";
-        header("location:".FRONT_ROOT."Owner/MyProfile");
+        $this->MyProfile();
     }
 
     public function FilterKeepers($beginning, $end){
@@ -200,7 +200,7 @@ class OwnerController{
         public function ShowHome(){
             Validation::ValidUser();
     
-            $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
+        $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         $pets_listAll=$this->DataPets->GetAll();
         $keeper_list=$this->DataKeepers->GetAll();
         $dates_list=$this->DataDates->GetAll();

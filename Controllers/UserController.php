@@ -40,8 +40,7 @@ class UserController{
         if($keeper != null){
             if($keeper->getPassword() == $password){
                 $_SESSION["loggedUser"] = $keeper; 
-                $booking_list = $this->DataBookings->GetAll();
-                require_once(VIEWS_PATH."home.php"); 
+                header('location:'.FRONT_ROOT.'Keeper/ShowHome');
             }else{
                 echo "<script> confirm('Contraseña incorrecta... vuelva a intentar');</script>";
                 require_once(VIEWS_PATH."login.php");
@@ -51,8 +50,7 @@ class UserController{
             if($owner != null){
                 if($owner->getPassword() == $password){
                     $_SESSION["loggedUser"] = $owner;
-                    
-                    $this->Home();
+                    header('location:'.FRONT_ROOT.'Owner/ShowHome');
                 }else{
                     echo "<script> confirm('Contraseña incorrecta... vuelva a intentar');</script>";
                     require_once(VIEWS_PATH."login.php");
@@ -68,17 +66,6 @@ class UserController{
         session_destroy();
 
         require_once(VIEWS_PATH.'login.php');
-    }
-
-    public function Home(){
-        Validation::ValidUser();
-
-        $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
-        $pets_listAll=$this->DataPets->GetAll();
-        $keeper_list=$this->DataKeepers->GetAll();
-        $dates_list=$this->DataDates->GetAll();
-        $booking_list = $this->DataBookings->GetAll();
-        require_once(VIEWS_PATH.'home.php');
     }
 
 
