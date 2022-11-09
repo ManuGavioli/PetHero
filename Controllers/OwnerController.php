@@ -130,9 +130,12 @@ class OwnerController{
     public function FilterKeepers($beginning, $end){
         //funcion que devuelva una lista de keepers filtrada
         $dates_list=$this->DataDates->GetFiltersDates($beginning, $end); 
-        $keeper_list=$this->DataKeepers->GetAll();
         $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
-        require_once(VIEWS_PATH."home.php");
+        $pets_listAll=$this->DataPets->GetAll();
+        $keeper_list=$this->DataKeepers->GetAll();
+        $booking_list = $this->DataBookings->GetAll();
+        
+            require_once(VIEWS_PATH.'home.php');
     }
 
     /*public function ShowReservationView(){
