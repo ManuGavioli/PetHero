@@ -76,7 +76,7 @@ class PetDAODB implements IPetDAO{
                 $parameters['vaccinationPhoto']=$newPet->getVaccinationPhoto();
                 $parameters['observations']=$newPet->getObservations();
                 $parameters['video']=$newPet->getVideo();
-                $parameters['id_owner']=$newPet->getMyOwner();
+                $parameters['id_owner']=$newPet->getMyOwner()->getUserId();
 
                 $this->connection = Connection::GetInstance();
 

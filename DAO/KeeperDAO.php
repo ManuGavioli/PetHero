@@ -158,6 +158,7 @@
                 }
             }
         }
+        function getKeeper($id){}
 
     }
 ?>

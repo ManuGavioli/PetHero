@@ -92,8 +92,8 @@ class OwnerController{
         $video=substr($video, 32);
 
         $petNew->setVideo($video);
-        //agrego solo el id
-        $petNew->setMyowner($_SESSION['loggedUser']->getUserId());
+        //agrego solo el id //pasar el owner completo 
+        $petNew->setMyowner($_SESSION['loggedUser']);
 
         $this->DataPets->AddPet($petNew);
 
