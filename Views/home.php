@@ -6,47 +6,45 @@
           <div class="container">
                <?php
                if($_SESSION['loggedUser']->isKeeperOrOwner() == 1){
-                    if(empty($booking_list)){?>  
-                        
-               
-                                   <h2 class="mb-4">Listado de reservas</h2>
-                                   <table class="table bg-light-alpha">
-                                   <?php foreach($booking_list as $booking)    // completar con todas las reservas que figuren y sean pasadas 
+                    if(!empty($booking_list)){?>  
+                              <h2 class="mb-4">Listado de reservas</h2>
+                              <table class="table bg-light-alpha">
+                              <?php foreach($booking_list as $booking)
                          {
                               if($booking->getConfirmed() == 0){ ?>
-                                             <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">     
+                                        <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">     
                                              
-                                                  <thead>
-                                                       <th>Nombre y apellido</th>
-                                                       <th>Nombre de la mascota</th>
-                                                       <th>Descripcion</th>
-                                                       <th>Email</th>
-                                                       <th>Telefono</th>
-                                                       <th>Fecha Inicio</th>
-                                                       <th>Fecha Final</th>
-                                                       <th></th>
-                                                  </thead>
+                                             <thead>
+                                                  <th>Nombre y apellido</th>
+                                                  <th>Nombre de la mascota</th>
+                                                  <th>Descripcion</th>
+                                                  <th>Email</th>
+                                                  <th>Telefono</th>
+                                                  <th>Fecha Inicio</th>
+                                                  <th>Fecha Final</th>
+                                                  <th></th>
+                                             </thead>
                                              
-                                                  <tbody>
-                                                       <tr>
-                                                            <td><?php echo ucfirst($booking->getPetId()->getMyowner()->getFirstName())." ".ucfirst($booking->getPetId()->getMyowner()->getLastName()); ?></td>  
-                                                            <td><?php echo ucfirst($booking->getPetId()->getName()); ?></td>
-                                                            <td><?php echo $booking->getPetId()->getObservations(); ?></td>
-                                                            <td><?php echo $booking->getPetId()->getMyowner()->getEmail(); ?></td>
-                                                            <td><?php echo $booking->getPetId()->getMyowner()->getPhoneNumber(); ?></td>
-                                                            <td><?php echo $booking->getStartDate(); ?></td>
-                                                            <td><?php echo $booking->getFinalDate(); ?></td>
-                                                            <td>
-                                                            <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Approve" style="background-color: #48c; color: #fff" >Aceptar</button>
-                                                            <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Reject" style="background-color: #48c; color: #fff" >Rechazar</button> 
-                                                            </td>                                                                                                                                                                
-                                                       </tr>
+                                             <tbody>
+                                                  <tr>
+                                                       <td><?php echo ucfirst($booking->getPetId()->getMyowner()->getFirstName())." ".ucfirst($booking->getPetId()->getMyowner()->getLastName()); ?></td>  
+                                                       <td><?php echo ucfirst($booking->getPetId()->getName()); ?></td>
+                                                       <td><?php echo $booking->getPetId()->getObservations(); ?></td>
+                                                       <td><?php echo $booking->getPetId()->getMyowner()->getEmail(); ?></td>
+                                                       <td><?php echo $booking->getPetId()->getMyowner()->getPhoneNumber(); ?></td>
+                                                       <td><?php echo $booking->getStartDate(); ?></td>
+                                                       <td><?php echo $booking->getFinalDate(); ?></td>
+                                                       <td>
+                                                       <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Approve" style="background-color: #48c; color: #fff" >Aceptar</button>
+                                                       <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Reject" style="background-color: #48c; color: #fff" >Rechazar</button> 
+                                                       </td>                                                                                                                                                                
+                                                  </tr>
                               <?php
                               }
                          }    
-                         ?>
-                                                  </tbody>
-                                             </form>
+                    ?>
+                                             </tbody>
+                                        </form>
                     <?php
                     }else{
                          ?>     

@@ -10,7 +10,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Fecha de inicio</label>
-                                   <input type="date" name="first_date" class="form-control" required>
+                                   <input type="date" name="first_date" class="form-control" min=<?php $hoy=date("Y-m-d"); echo $hoy;?> required>
                               </div>
                         </div>
                         <div class="col-lg-4">

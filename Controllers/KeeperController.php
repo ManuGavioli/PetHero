@@ -29,7 +29,14 @@
         
         public function EditKeeperContent(){
             Validation::ValidUser();
-            require_once(VIEWS_PATH."keeper-content.php");
+            $booking = $this->BookingDAO->GetOneBooking($_SESSION['loggedUser']->getUserId());
+            if($booking != null){
+                echo "<script> confirm('Si ya dispone de una reserva no puede editar los atributos de cuidador!');</script>";
+                $booking_list = $this->BookingDAO->GetAll();
+                require_once(VIEWS_PATH."home.php");
+            }else{
+                require_once(VIEWS_PATH."keeper-content.php");
+            }
         }
         
         public function MyProfile(){
@@ -77,7 +84,6 @@
                 echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
                 require_once(VIEWS_PATH."keeper-content.php");
             }else{
-
                 $first_date = strtotime($first_date);
                 $end_date = strtotime($end_date);
 
@@ -93,18 +99,18 @@
                 foreach($dates as $date){
                     $this->AvailablilityDAO->Add_AvailavilityDate($date, $_SESSION['loggedUser']->getUserId());
                 }
+            
+                if($price <= 0){
+                    echo "<script> confirm('Ingreso un valor invalido como precio por estadia... Vuelva a intentar');</script>";
+                }else{
+                    $_SESSION['loggedUser']->setPrice($price);
+                    $this->KeeperDAO->EditPrice($_SESSION['loggedUser']->getUserId(),$price);
+                }
+                $_SESSION['loggedUser']->setPetType($pet_type);
+                $this->KeeperDAO->EditPetType($_SESSION['loggedUser']->getUserId(),$pet_type);
+                echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
             }
-            if($price <= 0){
-                echo "<script> confirm('Ingreso un valor invalido como precio por estadia... Vuelva a intentar');</script>";
-                require_once(VIEWS_PATH."keeper-content.php");
-            }else{
-                $_SESSION['loggedUser']->setPrice($price);
-                $this->KeeperDAO->EditPrice($_SESSION['loggedUser']->getUserId(),$price);
-            }
-            $_SESSION['loggedUser']->setPetType($pet_type);
-            $this->KeeperDAO->EditPetType($_SESSION['loggedUser']->getUserId(),$pet_type);
-            echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
-            header('Location: http://localhost/TpFinal_PetHero/User/Home');
+            require_once(VIEWS_PATH."keeper-content.php");
         }
 
         public function Edit($user_id){  // hay que cambiar esta redireccion por un header en el "user-profile"
