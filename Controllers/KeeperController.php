@@ -3,17 +3,20 @@
 
     //use DAO\KeeperDAO as KeeperDAO;
 
+    use Helper\Validation as Validation;
     use DAO\AvailabilityDAODB as AvailabilityDAODB;
     use DAO\BookingDAODB as BookingDAODB;
+    use DAO\CouponDAODB as CouponDAODB;
     use DAO\KeeperDAODB as KeeperDAODB;
     use Models\Keeper as Keeper;
-    use Helper\Validation as Validation;
     use Models\Booking as Booking;
+
 
     class KeeperController{
         private $KeeperDAO;
         private $AvailablilityDAO;
         private $BookingDAO;
+        private $CouponDAO;
         
 
         public function __construct(){
@@ -21,6 +24,7 @@
             $this->KeeperDAO = new KeeperDAODB;
             $this->AvailablilityDAO = new AvailabilityDAODB;
             $this->BookingDAO = new BookingDAODB;
+            $this->CouponDAO = new CouponDAODB;
         }
 
         public function RegisterNewKeeper(){
@@ -48,7 +52,8 @@
 
         public function MyBookings(){
             Validation::ValidUser();
-            $booking_list = $this->BookingDAO->GetAll();
+            $booking_list = $this->BookingDAO->GetOneBooking($_SESSION['loggedUser']->getUserId());
+            $coupon_list = $this->CouponDAO->GetAll();
             require_once(VIEWS_PATH."keeper-bookings.php");
         }
 
@@ -99,7 +104,6 @@
                 foreach($dates as $date){
                     $this->AvailablilityDAO->Add_AvailavilityDate($date, $_SESSION['loggedUser']->getUserId());
                 }
-            
                 if($price <= 0){
                     echo "<script> confirm('Ingreso un valor invalido como precio por estadia... Vuelva a intentar');</script>";
                 }else{
@@ -138,11 +142,13 @@
         public function Action($action){
             $actionSepared = explode(",",$action);
             $Booking = new Booking;
-            $Booking = $this->BookingDAO->GetOneBooking($action[0]);
+            $Booking = $this->BookingDAO->GetOnlyOneBooking($action[0]);
             
             if($actionSepared[1] == "Approve"){
                 $this->AvailablilityDAO->CancelAvailability($Booking);
                 $this->BookingDAO->ApproveBooking($Booking);
+                $precioTotal = $_SESSION['loggedUser']->getPrice() * count($this->AvailablilityDAO->GetAll());
+                $this->CouponDAO->Add_Coupon($precioTotal,$Booking->getIdBooking());
                 header('Location: http://localhost/TpFinal_PetHero/User/Home');
             }else{
                 $this->BookingDAO->RejectBooking($Booking);

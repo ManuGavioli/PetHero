@@ -42,18 +42,18 @@ CREATE TABLE Owners
 
 CREATE TABLE Pets 
 (
-         id_pet int(11) NOT NULL AUTO_INCREMENT,
-         name_pet varchar(30) DEFAULT NULL,
-         photo varchar(999) DEFAULT NULL,
-         petType varchar(20) DEFAULT NULL,
-         raze varchar(20) DEFAULT NULL,
-         size float(10) DEFAULT NULL,
-         vaccinationPhoto varchar(999) DEFAULT NULL,
-         observations varchar(280) DEFAULT NULL,
-         video varchar(999) DEFAULT NULL,
-         id_owner int(11) NOT NULL,
-         PRIMARY KEY (id_pet),
-         CONSTRAINT fk_pet_ownerId FOREIGN KEY (id_owner) REFERENCES owners (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION
+        id_pet int(11) NOT NULL AUTO_INCREMENT,
+        name_pet varchar(30) DEFAULT NULL,
+        photo varchar(999) DEFAULT NULL,
+        petType varchar(20) DEFAULT NULL,
+        raze varchar(20) DEFAULT NULL,
+        size float(10) DEFAULT NULL,
+        vaccinationPhoto varchar(999) DEFAULT NULL,
+        observations varchar(280) DEFAULT NULL,
+        video varchar(999) DEFAULT NULL,
+        id_owner int(11) NOT NULL,
+        PRIMARY KEY (id_pet),
+        CONSTRAINT fk_pet_ownerId FOREIGN KEY (id_owner) REFERENCES owners (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -73,17 +73,17 @@ CREATE TABLE Reviews
 
 CREATE TABLE Bookings 
 (
-    keeperId int(11) NOT NULL,
-    idBooking int(11) NOT NULL AUTO_INCREMENT,
+        keeperId int(11) NOT NULL,
+        idBooking int(11) NOT NULL AUTO_INCREMENT,
     
-    startDate date DEFAULT NULL,
-    finalDate date DEFAULT NULL,
-    confirmed tinyint DEFAULT 0,
-    petId int(11) NOT NULL,
-    PRIMARY KEY(idBooking),
+        startDate date DEFAULT NULL,
+        finalDate date DEFAULT NULL,
+        confirmed tinyint DEFAULT 0,
+        petId int(11) NOT NULL,
+        PRIMARY KEY(idBooking),
     
-    CONSTRAINT fk_booking_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT fk_booking_petId FOREIGN KEY (petId) REFERENCES pets (id_pet) ON DELETE NO ACTION ON UPDATE NO ACTION
+        CONSTRAINT fk_booking_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+        CONSTRAINT fk_booking_petId FOREIGN KEY (petId) REFERENCES pets (id_pet) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE Coupon 
@@ -91,9 +91,9 @@ CREATE TABLE Coupon
 	idCoupon int(11) NOT NULL AUTO_INCREMENT,
 	paidAlready float(10) DEFAULT NULL,
 	totalPay float(10) DEFAULT NULL,
-    BookingId int(11) NOT NULL,
+        BookingId int(11) NOT NULL,
 	PRIMARY KEY(idCoupon),
-    CONSTRAINT fk_booking_coupon FOREIGN KEY (BookingId) REFERENCES Bookings (idBooking) ON DELETE NO ACTION ON UPDATE NO ACTION
+        CONSTRAINT fk_booking_coupon FOREIGN KEY (BookingId) REFERENCES Bookings (idBooking) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE AvailabilityDate 

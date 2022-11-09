@@ -8,16 +8,22 @@
         <div class="container">
             <h2 class="mb-4">Mis Reservas</h2>
             <?php
-            foreach($booking_list as $booking){
+            if(!empty($booking_list)){
+                foreach($booking_list as $booking){
+                    if($booking->getConfirmed() != 0){
             ?>
                 <table class="table bg-light-alpha">  
                     <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">             
-                        <thead>
+                        <thead class="navbar-dark bg-dark" style="color: #fff;">
                             <th>Dueño</th>
                             <th>Estadia</th>
                             <th>Mascota</th>
-                            <th>Monto Pagado</th>
-                            <th>Total</th>
+                            <?php
+                            if($booking->getConfirmed() != 2){?>
+                                <th>Monto Pagado</th>
+                                <th>Total</th>
+                            <?php   
+                            }?>
                             <th>Estado de la Reserva</th>
                         </thead>
                 
@@ -26,8 +32,12 @@
                             <td><?php echo ucfirst($booking->getPetId()->getMyowner()->getFirstName())." ".ucfirst($booking->getPetId()->getMyowner()->getLastName()); ?></td>
                             <td><?php echo "Desde el ".$booking->getStartDate()." hasta el ".$booking->getFinalDate(); ?></td>
                             <td><?php echo ucfirst($booking->getPetId()->getName()); ?></td>
-                            <td><?php //aca va el objeto Coupon->getPaidAlready ?></td>    
-                            <td><?php //aca va el objeto Coupon->getFullPayment ?></td>
+                            <?php foreach($coupon_list as $coupon){
+                                if($coupon->getBookingId() == $booking->getIdBooking()){
+                                    ?><td><?php echo $coupon->getPaidAlready(); ?></td><?php
+                                    ?><td><?php echo $coupon->getFullPayment(); ?></td><?php
+                                }
+                            } ?>
                             <td><?php 
                                 if($booking->getConfirmed() == 1){
                                     echo "Reserva confirmada - pago pendiente";
@@ -40,19 +50,21 @@
                                         }
                                     }
                                 }
-                            ?></td>
-                            <?php 
-                            if($booking->getConfirmed() == 2){  //agregar opcion de borrar reserva ?>        
-                            <td><?php echo "Reserva Cancelada"; ?></td>   
-                            <?php 
+                            if($booking->getConfirmed() == 2){  //agregar opcion de borrar reserva        
+                                echo "Reserva Cancelada"; ?>   
+                            <?php
                             }
-                            ?>
+                            ?></td>
                         </tr>
                     </tbody>
                 </table> 
             </form>
-            <?php  
-            } 
+            <?php
+                    }
+                } 
+            }else{
+                ?><h1 style="margin: auto; padding:30px;"> --No hay reservas accionadas aun, cuando disponga de las mismas, figurarán en este sector. Utilize la barra de navegación en la esquina superior derecha para navegar en la aplicación-- </h1><?php
+            }
             ?>
         </div>
 </main>

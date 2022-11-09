@@ -14,7 +14,7 @@
                               if($booking->getConfirmed() == 0){ ?>
                                         <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">     
                                              
-                                             <thead>
+                                             <thead class="navbar-dark bg-dark" style="color: #fff;">
                                                   <th>Nombre y apellido</th>
                                                   <th>Nombre de la mascota</th>
                                                   <th>Descripcion</th>
@@ -35,8 +35,8 @@
                                                        <td><?php echo $booking->getStartDate(); ?></td>
                                                        <td><?php echo $booking->getFinalDate(); ?></td>
                                                        <td>
-                                                       <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Approve" style="background-color: #48c; color: #fff" >Aceptar</button>
-                                                       <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Reject" style="background-color: #48c; color: #fff" >Rechazar</button> 
+                                                       <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Approve" style="background-color: green; color: #fff;margin: 5px" >Aceptar</button>
+                                                       <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Reject" style="background-color: #991919; color: #fff" >Rechazar</button> 
                                                        </td>                                                                                                                                                                
                                                   </tr>
                               <?php
