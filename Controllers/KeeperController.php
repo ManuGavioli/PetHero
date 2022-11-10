@@ -34,7 +34,6 @@
         public function EditKeeperContent(){
             Validation::ValidUser();
             
-            $this->isNotAvailable($_SESSION['loggedUser']->getUserId());
             if($this->isNotAvailable($_SESSION['loggedUser']->getUserId())){    
                 echo "<script> confirm('Si ya dispone de una reserva no puede editar los atributos de cuidador!');</script>";
                 $booking_list = $this->BookingDAO->GetAll();
@@ -176,10 +175,13 @@
 
         private function isNotAvailable($keeperID){   // retorna 1 si en la lista de availableDates hay fechas en true y 0 si estan todas ocupadas
             $dates = $this->AvailablilityDAO->IfExistReturnDates($keeperID);
+            $booking_list = $this->BookingDAO->GetAllforKeeper($keeperID);
             $validation=0;
-            foreach ($dates as $date){
-                if($date->getAvailable() == 1){
-                    $validation = 1;
+            if($dates != null && $booking_list != null){
+                foreach ($dates as $date){
+                    if($date->getAvailable() == 1){
+                        $validation = 1;
+                    }
                 }
             }
             return $validation;
