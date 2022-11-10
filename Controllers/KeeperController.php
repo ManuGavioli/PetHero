@@ -33,12 +33,14 @@
         
         public function EditKeeperContent(){
             Validation::ValidUser();
-            $booking = $this->BookingDAO->GetOneBooking($_SESSION['loggedUser']->getUserId());
-            if($booking != null){
+            
+            $this->isNotAvailable($_SESSION['loggedUser']->getUserId());
+            if($this->isNotAvailable($_SESSION['loggedUser']->getUserId())){    
                 echo "<script> confirm('Si ya dispone de una reserva no puede editar los atributos de cuidador!');</script>";
                 $booking_list = $this->BookingDAO->GetAll();
                 $this->ShowHome();
             }else{
+                $dates_list=$this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
                 require_once(VIEWS_PATH."keeper-content.php");
             }
         }
@@ -87,6 +89,7 @@
             Validation::ValidUser();
             if($first_date > $end_date){
                 echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
+                $dates_list=$this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
                 require_once(VIEWS_PATH."keeper-content.php");
             }else{
                 $first_date = strtotime($first_date);
@@ -114,6 +117,7 @@
                 $this->KeeperDAO->EditPetType($_SESSION['loggedUser']->getUserId(),$pet_type);
                 echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
             }
+            $dates_list=$this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
             require_once(VIEWS_PATH."keeper-content.php");
         }
 
@@ -168,6 +172,17 @@
             $coupon_list = $this->CouponDAO->GetAll();
             $dates_list=$this->AvailablilityDAO->GetAll();
             require_once(VIEWS_PATH.'home.php');
+        }
+
+        private function isNotAvailable($keeperID){   // retorna 1 si en la lista de availableDates hay fechas en true y 0 si estan todas ocupadas
+            $dates = $this->AvailablilityDAO->IfExistReturnDates($keeperID);
+            $validation=0;
+            foreach ($dates as $date){
+                if($date->getAvailable() == 1){
+                    $validation = 1;
+                }
+            }
+            return $validation;
         }
         
 
