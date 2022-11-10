@@ -7,6 +7,7 @@
         //private $reviews;   lista de reviews: desc, fecha, id, puntuacion
         private $petType;
         private $price;
+        private $BankKeeper;
         //private $availableDates;  lista de fechas_disponibles: dia, disponible, id_keeper (probablemente tabla intermedia)
         
         /*public function getBookings()
@@ -72,6 +73,23 @@
                 }
             }
             return false;
+        }
+
+        /**
+         * Get the value of BankKeeper
+         */
+        public function getBankKeeper()
+        {
+                return $this->BankKeeper;
+        }
+
+        /**
+         * Set the value of BankKeeper
+         */
+        public function setBankKeeper($BankKeeper)
+        {
+                $this->BankKeeper = $BankKeeper;
+
         }
     }
 ?>

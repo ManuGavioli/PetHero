@@ -3,25 +3,25 @@
 namespace Models;
 
 class Bank{
-    private $keeperBank;
+    private $IdBank;
     private $cbu;
     private $alias;
     private $total;
 
     /**
-     * Get the value of keeperBank
+     * Get the value of IdBank
      */
-    public function getKeeperBank()
+    public function getIdBank()
     {
-        return $this->keeperBank;
+        return $this->IdBank;
     }
 
     /**
-     * Set the value of keeperBank
+     * Set the value of IdBank
      */
-    public function setKeeperBank($keeperBank)
+    public function setIdBank($IdBank)
     {
-        $this->keeperBank = $keeperBank;
+        $this->IdBank = $IdBank;
 
     }
 
