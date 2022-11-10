@@ -10,7 +10,13 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Fecha de inicio</label>
-                                   <input type="date" name="first_date" class="form-control" min=<?php $hoy=date("Y-m-d"); echo $hoy;?> required>
+                                   <input type="date" name="first_date" class="form-control" min=<?php if($dates_list == null){
+                                        $hoy=date("Y-m-d");
+                                        }else{
+                                             $hoy =$dates_list[count($dates_list)-1]->getKeeperDate();
+                                             $hoy=date("Y-m-d",strtotime($hoy."+ 1 days"));
+                                        } 
+                                        echo $hoy;?> required>
                               </div>
                         </div>
                         <div class="col-lg-4">

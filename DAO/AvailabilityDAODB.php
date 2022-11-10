@@ -181,6 +181,37 @@ class AvailabilityDAODB implements IAvailabilityDAO{
         }
     }
 
+    public function IfExistReturnDates($id){
+        try{
+
+            $query = "SELECT * FROM ".$this->tableName." WHERE keeperId = ".$id;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+            
+            $availability_list = array();
+            
+            if($resultSet != null){
+                foreach ($resultSet as $avDate)
+                {                
+                    $NewAvDate = new Availability;
+                    $NewAvDate->setAvailabilityId($avDate['availabilityId']);
+                    $NewAvDate->setKeeperId($avDate['keeperId']);
+                    $NewAvDate->setKeeperDate($avDate['keeperDate']);
+                    $NewAvDate->setAvailable($avDate['available']);
+
+                    array_push($availability_list,$NewAvDate);
+                }
+                return $availability_list;
+            }else{
+                return null;
+            }
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
 }
 
 
