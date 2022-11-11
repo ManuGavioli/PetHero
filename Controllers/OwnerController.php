@@ -139,7 +139,7 @@ class OwnerController{
         $keeper_list=$this->DataKeepers->GetAll();
         $booking_list = $this->DataBookings->GetAll();
         
-            require_once(VIEWS_PATH.'home.php');
+        require_once(VIEWS_PATH.'home.php');
     }
 
     /*public function ShowReservationView(){
@@ -215,8 +215,19 @@ class OwnerController{
             require_once(VIEWS_PATH.'home.php');
         }
 
-        public function PayBooking(){
+        public function PayBooking($voucher, $idbooking){
             //ultimo requisito de la logica
+
+            //busco el keeper
+
+            //le agrego la plata en su banco
+
+            //busco el cupon por el id de reserva
+
+            //le cargor el comprobante 
+
+            //cambia el estado de la reserva a super confirmada
+
             $this->ShowHome();
         }
 

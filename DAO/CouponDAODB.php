@@ -58,5 +58,18 @@
             }
         }
 
+        public function Modify($idBooking, $mount){
+            try{ 
+                $query = "UPDATE ". $this->tableName . " paidAlready= paidAlready+".$mount." where BookingId=".$idBooking.";"; 
+    
+                    $this->connection = Connection::GetInstance();
+    
+                    $this->connection->ExecuteNonQuery($query); 
+    
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
     }
 ?>

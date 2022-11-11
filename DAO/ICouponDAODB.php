@@ -3,6 +3,6 @@
 
     interface ICouponDAODB
     {
-        
+        public function Modify($idBooking, $mount);
     }
 ?>

@@ -104,10 +104,10 @@ class BankDAODB implements IBankDAO{
         return $Bank_keeper;
     }
 
-    function ModifyTotal($mount){
+    function ModifyTotal($mount, $idKeeper){
         try
             {
-                $query = "UPDATE ".$this->tableName." SET total=total+".$mount;
+                $query = "UPDATE ".$this->tableName." SET total=total+".$mount."INNER JOIN Keepers k on k.BankKeeper   = IdBank  WHERE k.user_id =".$idKeeper.";";
 
                 $this->connection = Connection::GetInstance();
 

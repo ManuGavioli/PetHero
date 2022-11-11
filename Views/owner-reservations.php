@@ -69,19 +69,21 @@
                                                                            <form action="<?php echo FRONT_ROOT."Owner/PayBooking"?>" method="post">
                                                                             <div class="col-lg-4">
                
-                                                                                <label for="">CBU:</label>
+                                                                                <label for="">CBU: <?php  echo $bookings->getKeeperId()->getBankKeeper()->getCbu(); ?></label>
                                                                                 <br>
-                                                                                <label for="">ALIAS:</label>
+                                                                                <label for="">ALIAS: <?php  echo $bookings->getKeeperId()->getBankKeeper()->getAlias(); ?></label>
+                                                                                <br>
+                                                                                <label for="">Debe transferir: <?php echo $Total/2; ?></label>
                                                                            </div>
                                                                            
                                                                                 <div class="form-group">
                                                                                      <h3>Numero del Comprobante:</h3>
-                                                                                     <input maxlength="10" type="number" name="dni" class="form-control" required>
+                                                                                     <input maxlength="10" type="number" name="voucher" class="form-control" required>
                                                                                 </div>
                                                                             
                                                                       </div>
                                                             <div class="modal-footer">
-                                                                 <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #48c; color: #fff" >Realizar Pago💰</button>
+                                                                 <button type="submit" name="idbooking" value="<?php echo $bookings->getIdBooking(); ?>" class="btn btn-primary btn-lg btn-block" style="background-color: #48c; color: #fff" >Realizar Pago💰</button>
                                                             </div>
                                                             </form>
                                                        </div>
