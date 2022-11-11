@@ -34,7 +34,7 @@
 
                     <tbody>
                         <?php
-                        if($_SESSION['loggedUser']->isKeeperOrOwner()== 1){ 
+                        if($_SESSION['loggedUser']->isKeeperOrOwner()== 1){
                         ?>   
                         <tr>
                             <td><?php echo $_SESSION['loggedUser']->getUserId(); ?></td>  
@@ -82,6 +82,7 @@
                             ?></td>                                                                                                                                                          
                         </tr>
                         <?php
+                        
                         }else{
                         ?>
                         <tr>
@@ -98,8 +99,52 @@
                     </tbody>
                     <td>
                         <button type="submit" class="btn" name="user_id" value="<?php echo $_SESSION['loggedUser']->getUserId();?>" style="background-color: #48c; color: #fff" >Editar Usuario</button> 
-                    </td> 
+                    </td>
+                    <?php
+                    if($_SESSION['loggedUser']->isKeeperOrOwner()== 1){
+                    ?> 
+                    <?php
+                    }
+                    ?>
+                    
                 </form>
+                <td>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Editar Banco
+                    </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Editar Datos Bancarios</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="<?php echo FRONT_ROOT."Keeper/EditBank"?>" method="post">  
+                                                <div class="col-lg-4">
+                                                    <label>CBU:
+                                                        <input type="number" name="cbu" class="form-control" required>
+                                                    </label>
+                                                    <br>
+                                                    <label>ALIAS:
+                                                        <input type="text" name="alias" class="form-control" required>
+                                                    </label>
+                                                    <br>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" name="idBank" value="<?php echo $_SESSION['loggedUser']->getBankKeeper(); ?>" class="btn btn-primary btn-lg btn-block" style="background-color: #48c; color: #fff" >Editar</button>
+                                        </div>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div> 
+                        </td>
             </table>
         </div>
     </section>

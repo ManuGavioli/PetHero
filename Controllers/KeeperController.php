@@ -51,6 +51,7 @@
         public function MyProfile(){
             Validation::ValidUser();
             $_SESSION['loggedUser'] = $this->KeeperDAO->getKeeper($_SESSION['loggedUser']->getUserId());
+            //hacer la vista modal del banco con la variable BankKeeper del keeper para encontrar cual corresponda dentro de la tabla de banks
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
             require_once(VIEWS_PATH."user-profile.php");
         }
@@ -62,9 +63,8 @@
             require_once(VIEWS_PATH."keeper-bookings.php");
         }
 
-        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number){
+        public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number, $cbu, $alias){
             
-
             $this->KeeperDAO->GetAll(); 
 
             if($this->KeeperDAO->SearchEmail($email) == null){
@@ -77,7 +77,18 @@
                 $Keeper->setPassword($passw);
                 $Keeper->setPhoneNumber($phone_number);
 
+                $Bank = new Bank;
+                $Bank->setCbu($cbu);
+                $Bank->setAlias($alias);
+                $Bank->setTotal(0);
+                $this->BankDAO->Add($Bank);
+                
+                $KeeperBank = $this->BankDAO->GetforCbu($cbu);
+
+                $Keeper->setBankKeeper($KeeperBank);
+
                 $this->KeeperDAO->Add_Keeper($Keeper);
+
                 echo "<script> confirm('Cuenta creada con exito!');</script>";
                 require_once(VIEWS_PATH."login.php");
             }else{
@@ -189,6 +200,13 @@
                 }
             }
             return $validation;
+        }
+
+        public function EditBank($cbu, $alias,$idBank){
+            $this->BankDAO->EditBank($cbu,$alias,$idBank);
+            echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
+            $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
+            require_once(VIEWS_PATH."user-profile.php");
         }
         
 

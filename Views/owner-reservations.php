@@ -65,7 +65,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                                  </button>
                                                        </div>
-                                                                       <div class="modal-body">
+                                                                      <div class="modal-body">
                                                                            <form action="<?php echo FRONT_ROOT."Owner/PayBooking"?>" method="post">
                                                                             <div class="col-lg-4">
                
@@ -80,7 +80,6 @@
                                                                                      <h3>Numero del Comprobante:</h3>
                                                                                      <input maxlength="10" type="number" name="voucher" class="form-control" required>
                                                                                 </div>
-                                                                            
                                                                       </div>
                                                             <div class="modal-footer">
                                                                  <button type="submit" name="idbooking" value="<?php echo $bookings->getIdBooking(); ?>" class="btn btn-primary btn-lg btn-block" style="background-color: #48c; color: #fff" >Realizar Pago💰</button>
@@ -89,7 +88,7 @@
                                                        </div>
                                                   </div>
                                              </div>
-                              </div>
+                                        </div>
                                     <?php
                               }?></td>
 

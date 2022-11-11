@@ -6,8 +6,6 @@
     {
         function GetAll();
         function Add(Bank $newBank);
-        function Remove($id);
-        function GetforKeeper($id);
         function ModifyTotal($mount, $idBooking);
     }
 ?>

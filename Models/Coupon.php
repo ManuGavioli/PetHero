@@ -5,8 +5,10 @@ namespace Models;
 class Coupon{
 
     private $idCoupon;
-    private $paidAlready;  //cantidad pagada hasta el momento
-    private $fullPayment;  //cantidad total a pagar
+    private $paidAlready;       //cantidad pagada hasta el momento
+    private $fullPayment;       //cantidad total a pagar
+    private $voucherNumInic;    //nro del comprobante 
+    //private $voucherNumFinal;
     private $BookingId;    
 
 

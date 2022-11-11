@@ -10,16 +10,15 @@ namespace DAO;
 class BankDAODB implements IBankDAO{
 
     private $connection;
-    private $tableName = "Bank";
+    private $tableName = "Banks";
 
-    
 
-    public function GetAll(){}
-       /* try
+    public function GetAll(){
+        try
         {
             $BankList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." INNER JOIN keepers on Banks.keeperId = keepers.user_id;";
+            $query = "SELECT * FROM ".$this->tableName;
 
             $this->connection = Connection::GetInstance();
 
@@ -27,29 +26,14 @@ class BankDAODB implements IBankDAO{
             
             foreach ($resultSet as $Bank)
             {                
-                        $BankNew=new Bank();
+                $BankNew=new Bank();
 
-                        
-                        $newKeeper = new Keeper;
-                        $newKeeper->setUserId($Bank["keeperBank"]);
-                        $newKeeper->setFirstName($Bank["firstName"]);
-                        $newKeeper->setLastName($Bank["lastName"]);
-                        $newKeeper->setDni($Bank["dni"]);
-                        $newKeeper->setEmail($Bank["email"]);
-                        $newKeeper->setPassword($Bank["pass"]);
-                        $newKeeper->setPhoneNumber($Bank["phoneNumber"]);
-                        $newKeeper->setPetType($Bank["petType"]);
-                        $newKeeper->setPrice($Bank["price"]);
-                        $BankNew->setkeeperBank($newKeeper);
+                $BankNew->setIdBank($Bank['IdBank']);
+                $BankNew->setCbu($Bank['cbu']);
+                $BankNew->setAlias($Bank['alias']);
+                $BankNew->setTotal($Bank['total']);
 
-                       
-                      //  $BankNew->setAmountPaid($Bank['amountPaid']); // es un objeto coupon?
-
-                        $BankNew->setCbu($Bank['cbu']);
-                        $BankNew->setAlias($Bank['alias']);
-                        $BankNew->setTotal($Bank['total']);
-
-                        array_push($BankList,$BankNew);
+                array_push($BankList,$BankNew);
             }
             return $BankList;
         }
@@ -58,17 +42,14 @@ class BankDAODB implements IBankDAO{
             throw $ex;
         }
 
-    }*/
-
+    }
 
 
     public function Add(Bank $newBank){
         try
             {
-                $query = "INSERT INTO ".$this->tableName." (keeperBank, cbu, alias, total) VALUES ( :keeperBank, :cbu, :alias, :total);";
+                $query = "INSERT INTO ".$this->tableName." (cbu, alias, total) VALUES (:cbu, :alias, :total);";
 
-
-                $parameters['keeperBank']=$newBank->getKeeperBank();
                 $parameters['cbu']=$newBank->getCbu();
                 $parameters['alias']=$newBank->getAlias();
                 $parameters['total']=$newBank->getTotal();
@@ -86,38 +67,52 @@ class BankDAODB implements IBankDAO{
     }
 
 
-
-    public function Remove($id){
-        
-
-
-    }
-
-    public function GetforKeeper($id){
-        $allBanks=$this->GetAll();
-        $Bank_keeper;
+    public function GetforCbu($cbu){
+        $allBanks = $this->GetAll();
         foreach ($allBanks as $Banks){
-            if($Banks->getKeeperId()==$id){
+            if($Banks->getCbu() == $cbu){
                 $Bank_keeper=$Banks;
+            }else{
+                $Bank_keeper = null;
             }
         }
         return $Bank_keeper;
     }
+    
 
-    function ModifyTotal($mount, $idKeeper){
+    public function ModifyTotal($mount, $idKeeper){
         try
-            {
-                $query = "UPDATE ".$this->tableName." SET total=total+".$mount."INNER JOIN Keepers k on k.BankKeeper   = IdBank  WHERE k.user_id =".$idKeeper.";";
+        {
+            $query = "UPDATE ".$this->tableName." SET total=total+".$mount."INNER JOIN Keepers k on k.BankKeeper   = IdBank  WHERE k.user_id =".$idKeeper.";";
 
-                $this->connection = Connection::GetInstance();
+            $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query);
+            $this->connection->ExecuteNonQuery($query);
                 
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+    public function EditBank($cbu,$alias,$idBank){
+        try
+        {
+            $query = "UPDATE ".$this->tableName." SET cbu = :cbu, alias = :alias WHERE IdBank = ".$idBank;
+
+            $parameters['cbu'] = $cbu;
+            $parameters['alias'] = $alias;
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query,$parameters);
+                
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
     }
 
     

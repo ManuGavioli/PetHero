@@ -14,7 +14,7 @@
         public function Add_Keeper(Keeper $newKeeper)
         {
             try{
-                $query = " INSERT INTO ". $this->tableName . " (firstName, lastName, dni, email, pass, phoneNumber, petType, price ) VALUES (:firstName, :lastName, :dni, :email, :pass, :phoneNumber, :petType, :price );";
+                $query = "INSERT INTO ". $this->tableName . " (firstName, lastName, dni, email, pass, phoneNumber, petType, price, BankKeeper ) VALUES (:firstName, :lastName, :dni, :email, :pass, :phoneNumber, :petType, :price, :BankKeeper );";
 
                 $parameters["firstName"] = $newKeeper->getFirstName();
                 $parameters["lastName"] = $newKeeper->getLastName();
@@ -60,16 +60,9 @@
                     $keeper->setPhoneNumber($row["phoneNumber"]);
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
-                    // AGREGO EL BANK
+                    // AGREGO EL BANK id
 
-                    $bank = new Bank;
-                    $bank->setIdBank($row["IdBank"]);
-                    $bank->setCbu($row["cbu"]);
-                    $bank->setAlias($row["alias"]);
-                    $bank->setTotal($row["total"]);
-
-                    $keeper->setBankKeeper($bank);
-
+                    $keeper->setBankKeeper($row["BankKeeper"]);
 
                     array_push($keeperList, $keeper);
                 }
@@ -119,16 +112,7 @@
                     $keeper->setPhoneNumber($row["phoneNumber"]);
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
-
-                     // AGREGO EL BANK
-
-                     
-                     $bank->setIdBank($row["IdBank"]);
-                     $bank->setCbu($row["cbu"]);
-                     $bank->setAlias($row["alias"]);
-                     $bank->setTotal($row["total"]);
-                     
-                     $keeper->setBankKeeper($bank);
+                    $keeper->setBankKeeper($row["BankKeeper"]);
                 }else{
                     $keeper = null;
                 }
@@ -183,14 +167,7 @@
                     $keeper->setPhoneNumber($row["phoneNumber"]);
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
-
-                    $bank = new Bank;
-                    $bank->setIdBank($row["IdBank"]);
-                    $bank->setCbu($row["cbu"]);
-                    $bank->setAlias($row["alias"]);
-                    $bank->setTotal($row["total"]);
-
-                    $keeper->setBankKeeper($bank);
+                    $keeper->setBankKeeper($row["BankKeeper"]);
                 }else{
                     $keeper = null;
                 }

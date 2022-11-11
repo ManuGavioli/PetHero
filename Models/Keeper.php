@@ -75,21 +75,14 @@
             return false;
         }
 
-        /**
-         * Get the value of BankKeeper
-         */
         public function getBankKeeper()
         {
                 return $this->BankKeeper;
         }
 
-        /**
-         * Set the value of BankKeeper
-         */
         public function setBankKeeper($BankKeeper)
         {
                 $this->BankKeeper = $BankKeeper;
-
         }
     }
 ?>

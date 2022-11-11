@@ -22,7 +22,7 @@ class BookingDAODB implements IBookingDAODB{
         {
             $BookingList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." INNER JOIN keepers on bookings.keeperId = keepers.user_id INNER JOIN pets on bookings.petId = pets.id_pet INNER JOIN owners on pets.id_owner = owners.user_id;";
+            $query = "SELECT * FROM ".$this->tableName." INNER JOIN keepers on bookings.keeperId = keepers.user_id INNER JOIN pets on bookings.petId = pets.id_pet INNER JOIN owners on pets.id_owner = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper;";
 
             $this->connection = Connection::GetInstance();
 
@@ -31,6 +31,12 @@ class BookingDAODB implements IBookingDAODB{
             foreach ($resultSet as $Booking)
             {                
                         $BookingNew=new Booking();
+                        
+                        $newBank = new Bank;
+                        $newBank->setIdBank($Booking['IdBank']);
+                        $newBank->setCbu($Booking['cbu']);
+                        $newBank->setAlias($Booking['alias']);
+                        $newBank->setTotal($Booking['total']);
 
                         $newKeeper = new Keeper;
                         $newKeeper->setUserId($Booking["keeperId"]);
@@ -42,17 +48,8 @@ class BookingDAODB implements IBookingDAODB{
                         $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
                         $newKeeper->setPetType($Booking["petType"]);
                         $newKeeper->setPrice($Booking["price"]);
-                       
-
-                        $bank = new Bank;
-                $bank->setIdBank($row["IdBank"]);
-                $bank->setCbu($row["cbu"]);
-                $bank->setAlias($row["alias"]);
-                $bank->setTotal($row["total"]);
-
-                $newKeeper->setBankKeeper($bank);
-
-                $BookingNew->setKeeperId($newKeeper);
+                        $newKeeper->setBankKeeper($newBank);
+                        $BookingNew->setKeeperId($newKeeper);
 
                         $newOwner = new Owner;
                         $newOwner->setUserId($Booking['id_owner']);
@@ -179,16 +176,9 @@ class BookingDAODB implements IBookingDAODB{
                     $newKeeper->setPetType($Booking["petType"]);
                     $newKeeper->setPrice($Booking["price"]);
                     
+                    $newKeeper->setBankKeeper($Booking["BankKeeper"]);
 
-                    $bank = new Bank;
-                $bank->setIdBank($row["IdBank"]);
-                $bank->setCbu($row["cbu"]);
-                $bank->setAlias($row["alias"]);
-                $bank->setTotal($row["total"]);
-
-                $newKeeper->setBankKeeper($bank);
-
-                $BookingNew->setKeeperId($newKeeper);
+                    $BookingNew->setKeeperId($newKeeper);
 
                     $newOwner = new Owner;
                     $newOwner->setUserId($Booking['id_owner']);
@@ -262,13 +252,7 @@ class BookingDAODB implements IBookingDAODB{
                 $newKeeper->setPetType($Booking["petType"]);
                 $newKeeper->setPrice($Booking["price"]);
 
-                $bank = new Bank;
-                $bank->setIdBank($row["IdBank"]);
-                $bank->setCbu($row["cbu"]);
-                $bank->setAlias($row["alias"]);
-                $bank->setTotal($row["total"]);
-
-                $newKeeper->setBankKeeper($bank);
+                $newKeeper->setBankKeeper($Booking["BankKeeper"]);
 
                 $BookingNew->setKeeperId($newKeeper);
 
