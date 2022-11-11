@@ -40,6 +40,13 @@
                                    <input type="number" name="phone_number" class="form-control" required>
                               </div>
                         </div>
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Datos Bancarios</label>
+                                   <input type="number" name="cbu" class="form-control" placeholder="ingrese su cbu para recibir pagos" required>
+                                   <input type="number" name="alias" class="form-control" placeholder="ingrese su alias para recibir pagos" required>
+                              </div>
+                        </div>
                         <button type="submit" class="btn btn-dark ml-auto d-block">Registrarse en el sistema</button>
                     </div>
                </form>

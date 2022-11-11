@@ -6,6 +6,7 @@ use Models\Owner as Owner;
 use Models\Pet as Pet;
 use Models\Keeper as Keeper;
 use Models\Booking as Booking;
+use Models\Bank as Bank;
 use Models\Availability as Availability;
 //use DAO\OwnerDAO as OwnerDAO; Persistencia en JSON
 use DAO\OwnerDAODB as OwnerDAODB;
@@ -16,12 +17,14 @@ use DAO\KeeperDAODB as KeeperDAODB;
 use Helper\Validation as Validation;
 use DAO\AvailabilityDAODB as AvailabilityDAODB;
 use DAO\BookingDAODB as BookingDAODB;
+use DAO\BankDAODB as BankDAODB;
 
 class OwnerController{
     private $DataOwners;
     private $DataPets;
     private $DataKeepers;
     private $DataBookings;
+    private $DataBank;
 
     function __construct(){
         //$this->DataOwners=new OwnerDAO();
@@ -32,6 +35,7 @@ class OwnerController{
         $this->DataKeepers=new KeeperDAODB;
         $this->DataDates = new AvailabilityDAODB;
         $this->DataBookings = new BookingDAODB;
+        $this->DataBanks = new BankDAODB;
     }
 
     function ShowRegisterView(){
@@ -209,6 +213,11 @@ class OwnerController{
         $dates_list=$this->DataDates->GetAll();
         $booking_list = $this->DataBookings->GetAll();
             require_once(VIEWS_PATH.'home.php');
+        }
+
+        public function PayBooking(){
+            //ultimo requisito de la logica
+            $this->ShowHome();
         }
 
         

@@ -8,6 +8,7 @@ namespace DAO;
     use DAO\Connection as Connection;
     use Models\Keeper as Keeper;
     use Models\Owner as Owner;
+    use Models\Bank as Bank;
 
 class BookingDAODB implements IBookingDAODB{
 
@@ -41,7 +42,17 @@ class BookingDAODB implements IBookingDAODB{
                         $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
                         $newKeeper->setPetType($Booking["petType"]);
                         $newKeeper->setPrice($Booking["price"]);
-                        $BookingNew->setKeeperId($newKeeper);
+                       
+
+                        $bank = new Bank;
+                $bank->setIdBank($row["IdBank"]);
+                $bank->setCbu($row["cbu"]);
+                $bank->setAlias($row["alias"]);
+                $bank->setTotal($row["total"]);
+
+                $newKeeper->setBankKeeper($bank);
+
+                $BookingNew->setKeeperId($newKeeper);
 
                         $newOwner = new Owner;
                         $newOwner->setUserId($Booking['id_owner']);
@@ -167,7 +178,17 @@ class BookingDAODB implements IBookingDAODB{
                     $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
                     $newKeeper->setPetType($Booking["petType"]);
                     $newKeeper->setPrice($Booking["price"]);
-                    $BookingNew->setKeeperId($newKeeper);
+                    
+
+                    $bank = new Bank;
+                $bank->setIdBank($row["IdBank"]);
+                $bank->setCbu($row["cbu"]);
+                $bank->setAlias($row["alias"]);
+                $bank->setTotal($row["total"]);
+
+                $newKeeper->setBankKeeper($bank);
+
+                $BookingNew->setKeeperId($newKeeper);
 
                     $newOwner = new Owner;
                     $newOwner->setUserId($Booking['id_owner']);
@@ -240,7 +261,18 @@ class BookingDAODB implements IBookingDAODB{
                 $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
                 $newKeeper->setPetType($Booking["petType"]);
                 $newKeeper->setPrice($Booking["price"]);
+
+                $bank = new Bank;
+                $bank->setIdBank($row["IdBank"]);
+                $bank->setCbu($row["cbu"]);
+                $bank->setAlias($row["alias"]);
+                $bank->setTotal($row["total"]);
+
+                $newKeeper->setBankKeeper($bank);
+
                 $BookingNew->setKeeperId($newKeeper);
+
+                
 
                 $newOwner = new Owner;
                 $newOwner->setUserId($Booking['id_owner']);

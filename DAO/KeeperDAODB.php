@@ -4,6 +4,7 @@
     use Exception as Exception;
     use Models\Keeper as Keeper;
     use DAO\Connection as Connection;
+    use Models\Bank as Bank;
 
     class KeeperDAODB implements IKeeperDAO{
 
@@ -26,6 +27,7 @@
 
                 $parameters["petType"] = $newKeeper->getPetType();
                 $parameters["price"] = $newKeeper->getPrice();
+                $parameters["BankKeeper"] = $newKeeper->getBankKeeper()->getIdBank();
 
                 $this->connection = Connection::GetInstance();
 
@@ -58,6 +60,15 @@
                     $keeper->setPhoneNumber($row["phoneNumber"]);
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
+                    // AGREGO EL BANK
+
+                    $bank = new Bank;
+                    $bank->setIdBank($row["IdBank"]);
+                    $bank->setCbu($row["cbu"]);
+                    $bank->setAlias($row["alias"]);
+                    $bank->setTotal($row["total"]);
+
+                    $keeper->setBankKeeper($bank);
 
 
                     array_push($keeperList, $keeper);
@@ -94,6 +105,7 @@
                 $result = $this->connection->Execute($query,$parameters);
 
                 $keeper = new Keeper;
+                $bank = new Bank;
 
                 if(isset($result[0])){
                     $row = $result[0];
@@ -107,6 +119,16 @@
                     $keeper->setPhoneNumber($row["phoneNumber"]);
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
+
+                     // AGREGO EL BANK
+
+                     
+                     $bank->setIdBank($row["IdBank"]);
+                     $bank->setCbu($row["cbu"]);
+                     $bank->setAlias($row["alias"]);
+                     $bank->setTotal($row["total"]);
+                     
+                     $keeper->setBankKeeper($bank);
                 }else{
                     $keeper = null;
                 }
@@ -161,6 +183,14 @@
                     $keeper->setPhoneNumber($row["phoneNumber"]);
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
+
+                    $bank = new Bank;
+                    $bank->setIdBank($row["IdBank"]);
+                    $bank->setCbu($row["cbu"]);
+                    $bank->setAlias($row["alias"]);
+                    $bank->setTotal($row["total"]);
+
+                    $keeper->setBankKeeper($bank);
                 }else{
                     $keeper = null;
                 }

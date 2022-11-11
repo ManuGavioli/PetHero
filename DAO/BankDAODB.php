@@ -4,17 +4,18 @@ namespace DAO;
     use \Exception as Exception;
     use Models\Bank as Bank;   
     use DAO\Connection as Connection;
+    use DAO\IBankDAO as IBankDAO;
     use Models\Keeper as Keeper;
 
-class BankDAODB implements IBankDAODB{
+class BankDAODB implements IBankDAO{
 
     private $connection;
     private $tableName = "Bank";
 
     
 
-    public function GetAll(){
-        try
+    public function GetAll(){}
+       /* try
         {
             $BankList = array();
 
@@ -29,11 +30,6 @@ class BankDAODB implements IBankDAODB{
                         $BankNew=new Bank();
 
                         
-                        private $cbu;
-                        private $alias;
-                        private $total;
-                        
-
                         $newKeeper = new Keeper;
                         $newKeeper->setUserId($Bank["keeperBank"]);
                         $newKeeper->setFirstName($Bank["firstName"]);
@@ -62,7 +58,7 @@ class BankDAODB implements IBankDAODB{
             throw $ex;
         }
 
-    }
+    }*/
 
 
 

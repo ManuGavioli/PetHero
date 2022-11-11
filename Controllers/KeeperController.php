@@ -8,8 +8,10 @@
     use DAO\BookingDAODB as BookingDAODB;
     use DAO\CouponDAODB as CouponDAODB;
     use DAO\KeeperDAODB as KeeperDAODB;
+    use DAO\BankDAODB as BankDAODB;
     use Models\Keeper as Keeper;
     use Models\Booking as Booking;
+    use Models\Bank as Bank;
 
 
     class KeeperController{
@@ -17,6 +19,7 @@
         private $AvailablilityDAO;
         private $BookingDAO;
         private $CouponDAO;
+        private $BankDAO;
         
 
         public function __construct(){
@@ -25,6 +28,7 @@
             $this->AvailablilityDAO = new AvailabilityDAODB;
             $this->BookingDAO = new BookingDAODB;
             $this->CouponDAO = new CouponDAODB;
+            $this->BankDAO = new BankDAODB;
         }
 
         public function RegisterNewKeeper(){

@@ -49,9 +49,46 @@
                                    echo "Reserva Rechazada";
                               }
                               else if($bookings->getConfirmed()==1){
-                                ?>  <form action="<?php echo FRONT_ROOT."Owner/PayBooking"?>" method="post">
-                                        <button type="submit" class="btn" style="background-color: #48c; color: #fff" >Pagar 50%💰</button>
-                                    </form><?php
+                                ?>  
+                                              <!-- Button trigger modal -->
+                                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                  Pagar 50%💰
+                                                  </button>
+
+                                             <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                       <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Datos para el Pago</h5>
+                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                                 </button>
+                                                       </div>
+                                                                       <div class="modal-body">
+                                                                           <form action="<?php echo FRONT_ROOT."Owner/PayBooking"?>" method="post">
+                                                                            <div class="col-lg-4">
+               
+                                                                                <label for="">CBU:</label>
+                                                                                <br>
+                                                                                <label for="">ALIAS:</label>
+                                                                           </div>
+                                                                           
+                                                                                <div class="form-group">
+                                                                                     <h3>Numero del Comprobante:</h3>
+                                                                                     <input maxlength="10" type="number" name="dni" class="form-control" required>
+                                                                                </div>
+                                                                            
+                                                                      </div>
+                                                            <div class="modal-footer">
+                                                                 <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #48c; color: #fff" >Realizar Pago💰</button>
+                                                            </div>
+                                                            </form>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                              </div>
+                                    <?php
                               }?></td>
 
                          </tr>

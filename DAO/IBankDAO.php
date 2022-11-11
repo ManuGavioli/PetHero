@@ -1,12 +1,11 @@
-<?php
-    namespace DAO;
+<?php namespace DAO;
 
-    use Models\Bank as Booking;
+    use Models\Bank as Bank;
 
-    interface IBookingDAODB
+    interface IBankDAO
     {
-        function GetAll(){}
-        function Add(Bank $newBooking);
+        function GetAll();
+        function Add(Bank $newBank);
         function Remove($id);
         function GetforKeeper($id);
         function ModifyTotal($mount);
