@@ -10,7 +10,16 @@ DROP TABLE IF EXISTS Bookings;
 DROP TABLE IF EXISTS Pets;
 DROP TABLE IF EXISTS Owners;
 DROP TABLE IF EXISTS Keepers;
+DROP TABLE IF EXISTS Bank;
 
+CREATE TABLE Banks 
+(
+	IdBank int(11) NOT NULL AUTO_INCREMENT,
+	cbu int(20) NOT NULL UNIQUE, 
+	alias varchar(50) UNIQUE,
+	total float(10) DEFAULT 0,
+        PRIMARY KEY(IdBank)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE Keepers 
 (
@@ -23,7 +32,9 @@ CREATE TABLE Keepers
         phoneNumber varchar(15) DEFAULT NULL,
         petType varchar(20) DEFAULT NULL,
         price float(10) DEFAULT NULL, 
-        PRIMARY KEY(user_id)
+        BankKeeper int(11) NOT NULL,
+        PRIMARY KEY(user_id),
+        CONSTRAINT fk_idbank FOREIGN KEY (BankKeeper) REFERENCES Banks (IdBank) ON DELETE NO ACTION ON UPDATE NO ACTION
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -105,3 +116,4 @@ CREATE TABLE AvailabilityDate
         PRIMARY KEY(availabilityId),
 	CONSTRAINT fk_availability_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
