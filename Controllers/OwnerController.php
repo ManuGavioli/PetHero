@@ -232,7 +232,7 @@ class OwnerController{
             //cambia el estado de la reserva a super confirmada
             $this->DataBookings->ConfirmationBooking($bookingselect);
 
-            $this->ShowHome();
+            $this->ShowListReservas();
         }
 
         
