@@ -51,6 +51,23 @@ class Coupon{
     {
         $this->BookingId = $BookingId;
     }
+
+    /**
+     * Get the value of voucherNumInic
+     */
+    public function getVoucherNumInic()
+    {
+        return $this->voucherNumInic;
+    }
+
+    /**
+     * Set the value of voucherNumInic
+     */
+    public function setVoucherNumInic($voucherNumInic)
+    {
+        $this->voucherNumInic = $voucherNumInic;
+
+    }
 }
 
 

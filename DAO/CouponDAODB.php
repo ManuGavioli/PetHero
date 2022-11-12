@@ -58,9 +58,9 @@
             }
         }
 
-        public function Modify($idBooking, $mount){
+        public function Modify($idBooking, $mount, $voucher){
             try{ 
-                $query = "UPDATE ". $this->tableName . " paidAlready= paidAlready+".$mount." where BookingId=".$idBooking.";"; 
+                $query = "UPDATE ". $this->tableName . " SET paidAlready=paidAlready+".$mount." , VoucherCode=".$voucher." where BookingId=".$idBooking.";"; 
     
                     $this->connection = Connection::GetInstance();
     
@@ -71,5 +71,42 @@
             }
         }
 
+        public function GetOnlyOneCoupon($id){ //retorna cuando la id del booking es la pasada por parametro
+            try
+            {
+                $BookingList = array();
+    
+                $query = "SELECT * FROM ".$this->tableName." c"." INNER JOIN Bookings b on b.idBooking = c.BookingId WHERE b.idBooking = ".$id;
+    
+                $this->connection = Connection::GetInstance();
+    
+                $resultSet = $this->connection->Execute($query);
+    
+                if($resultSet != null){
+                    $coupon=$resultSet[0];  
+
+                    $couponNew=new Coupon;
+
+                    $couponNew->setIdCoupon($coupon['idCoupon']);
+                    $couponNew->setPaidAlready($coupon['paidAlready']);
+                    $couponNew->setFullPayment($coupon['totalPay']);
+                    $couponNew->setVoucherNumInic($coupon['VoucherCode']);
+                    $couponNew->setBookingId($coupon['BookingId']);
+    
+                    
+                    return $couponNew;
+                }else{
+                    return null;
+                }
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+    
+
+
+
     }
+}
 ?>

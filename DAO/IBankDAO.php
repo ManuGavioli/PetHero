@@ -6,6 +6,6 @@
     {
         function GetAll();
         function Add(Bank $newBank);
-        function ModifyTotal($mount, $idBooking);
+        function ModifyTotal($mount, $idBank);
     }
 ?>

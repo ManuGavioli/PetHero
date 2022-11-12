@@ -18,6 +18,7 @@ use Helper\Validation as Validation;
 use DAO\AvailabilityDAODB as AvailabilityDAODB;
 use DAO\BookingDAODB as BookingDAODB;
 use DAO\BankDAODB as BankDAODB;
+use DAO\CouponDAODB as CouponDAODB;
 
 class OwnerController{
     private $DataOwners;
@@ -25,6 +26,7 @@ class OwnerController{
     private $DataKeepers;
     private $DataBookings;
     private $DataBank;
+    private $DataCoupon;
 
     function __construct(){
         //$this->DataOwners=new OwnerDAO();
@@ -36,6 +38,7 @@ class OwnerController{
         $this->DataDates = new AvailabilityDAODB;
         $this->DataBookings = new BookingDAODB;
         $this->DataBanks = new BankDAODB;
+        $this->DataCoupon = new CouponDAODB;
     }
 
     function ShowRegisterView(){
@@ -201,6 +204,8 @@ class OwnerController{
         //PASAR lista de pets
         $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         $Booking_list=$this->DataBookings->GetAllforOwner($petsofowner);
+        //aca va un get for bookings, pero estaba cansado si me acuerdo lo hago 
+        $coupons_list=$this->DataCoupon->GetAll();
         require_once(VIEWS_PATH."owner-reservations.php");
         }
 
@@ -219,14 +224,13 @@ class OwnerController{
             //ultimo requisito de la logica
 
             //busco el keeper
-
+            $bookingselect= $this->DataBookings->GetOnlyOneBooking($idbooking);
+            $couponselect= $this->DataCoupon->GetOnlyOneCoupon($idbooking);
+            $this->DataCoupon->Modify($idbooking, $couponselect->getFullPayment()/2, $voucher);
             //le agrego la plata en su banco
-
-            //busco el cupon por el id de reserva
-
-            //le cargor el comprobante 
-
+            $this->DataBanks->ModifyTotal($couponselect->getFullPayment()/2, $bookingselect->getKeeperId()->getBankKeeper());
             //cambia el estado de la reserva a super confirmada
+            $this->DataBookings->ConfirmationBooking($bookingselect);
 
             $this->ShowHome();
         }

@@ -26,12 +26,12 @@
                               <td><?php 
                                             echo $bookings->getPetId()->getName();
                                 ?></td>
-                              <td><?php  if(!isset($coupon)){
-                                        echo 0;
-                              }else
-                              {
-                                   echo $bookings->getAmountPaid();  
+                              <td><?php foreach($coupons_list as $coupons){
+                                   if($coupons->getBookingId()==$bookings->getIdBooking()){
+                                        echo $coupons->getPaidAlready();  
+                                   }
                               }
+                                  
                               ?></td>
                               
                               <td><?php  
@@ -47,6 +47,8 @@
                                 echo "El Cuidador no acepto la Reserva aun";
                               }else if($bookings->getConfirmed()==2){
                                    echo "Reserva Rechazada";
+                              }else if($bookings->getConfirmed()==3){
+                                   echo "Su Reserva ya esta confirmada";
                               }
                               else if($bookings->getConfirmed()==1){
                                 ?>  
