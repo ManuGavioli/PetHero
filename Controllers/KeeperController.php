@@ -30,39 +30,8 @@
             $this->CouponDAO = new CouponDAODB;
             $this->BankDAO = new BankDAODB;
         }
-
-        public function RegisterNewKeeper(){
-            require_once(VIEWS_PATH."keeper-register.php");
-        }
         
-        public function EditKeeperContent(){
-            Validation::ValidUser();
-            
-            if($this->isNotAvailable($_SESSION['loggedUser']->getUserId())){    
-                echo "<script> confirm('Si ya dispone de una reserva no puede editar los atributos de cuidador!');</script>";
-                $booking_list = $this->BookingDAO->GetAll();
-                $this->ShowHome();
-            }else{
-                $dates_list=$this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
-                require_once(VIEWS_PATH."keeper-content.php");
-            }
-        }
         
-        public function MyProfile(){
-            Validation::ValidUser();
-            $_SESSION['loggedUser'] = $this->KeeperDAO->getKeeper($_SESSION['loggedUser']->getUserId());
-            //hacer la vista modal del banco con la variable BankKeeper del keeper para encontrar cual corresponda dentro de la tabla de banks
-            $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
-            require_once(VIEWS_PATH."user-profile.php");
-        }
-
-        public function MyBookings(){
-            Validation::ValidUser();
-            $booking_list = $this->BookingDAO->GetOneBooking($_SESSION['loggedUser']->getUserId());
-            $coupon_list = $this->CouponDAO->GetAll();
-            require_once(VIEWS_PATH."keeper-bookings.php");
-        }
-
         public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number, $cbu, $alias){
             
             $this->KeeperDAO->GetAll(); 
@@ -97,6 +66,56 @@
                 require_once(VIEWS_PATH."keeper-register.php");
 
             } 
+        }
+        
+        public function Edit($user_id){  // hay que cambiar esta redireccion por un header en el "user-profile"
+            Validation::ValidUser();
+            require_once(VIEWS_PATH."keeper-edit.php");
+        }
+
+        public function EditAux($first_name, $last_name, $dni, $email, $passw, $phone_number){
+            Validation::ValidUser();
+            $_SESSION['loggedUser']->setFirstName($first_name);
+            $_SESSION['loggedUser']->setLastName($last_name);
+            $_SESSION['loggedUser']->setDni($dni);
+            $_SESSION['loggedUser']->setEmail($email);
+            $_SESSION['loggedUser']->setPassword($passw);
+            $_SESSION['loggedUser']->setPhoneNumber($phone_number);
+            $this->KeeperDAO->EditUser($_SESSION['loggedUser']);
+
+            echo "<script> confirm('Información actualizada con éxito!');</script>";
+
+            $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
+
+            require_once(VIEWS_PATH."user-profile.php");
+        }
+        
+        public function RegisterNewKeeper(){
+            require_once(VIEWS_PATH."keeper-register.php");
+        }
+        
+
+
+        
+        
+        public function EditKeeperContent(){
+            Validation::ValidUser();
+            
+            if($this->isNotAvailable($_SESSION['loggedUser']->getUserId())){    
+                echo "<script> confirm('Si ya dispone de una reserva no puede editar los atributos de cuidador!');</script>";
+                $booking_list = $this->BookingDAO->GetAll();
+                $this->ShowHome();
+            }else{
+                $dates_list=$this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
+                require_once(VIEWS_PATH."keeper-content.php");
+            }
+        }
+        
+        public function MyProfile(){
+            Validation::ValidUser();
+            $_SESSION['loggedUser'] = $this->KeeperDAO->getKeeper($_SESSION['loggedUser']->getUserId());
+            $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
+            require_once(VIEWS_PATH."user-profile.php");
         }
 
         public function AddContent($first_date, $end_date, $price, $pet_type){
@@ -133,28 +152,6 @@
             }
             $dates_list=$this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
             require_once(VIEWS_PATH."keeper-content.php");
-        }
-
-        public function Edit($user_id){  // hay que cambiar esta redireccion por un header en el "user-profile"
-            Validation::ValidUser();
-            require_once(VIEWS_PATH."keeper-edit.php");
-        }
-
-        public function EditAux($first_name, $last_name, $dni, $email, $passw, $phone_number){
-            Validation::ValidUser();
-            $_SESSION['loggedUser']->setFirstName($first_name);
-            $_SESSION['loggedUser']->setLastName($last_name);
-            $_SESSION['loggedUser']->setDni($dni);
-            $_SESSION['loggedUser']->setEmail($email);
-            $_SESSION['loggedUser']->setPassword($passw);
-            $_SESSION['loggedUser']->setPhoneNumber($phone_number);
-            $this->KeeperDAO->EditUser($_SESSION['loggedUser']);
-
-            echo "<script> confirm('Información actualizada con éxito!');</script>";
-
-            $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
-
-            require_once(VIEWS_PATH."user-profile.php");
         }
 
         public function Action($action){
@@ -201,15 +198,6 @@
             }
             return $validation;
         }
-
-        public function EditBank($cbu, $alias,$idBank){
-            $this->BankDAO->EditBank($cbu,$alias,$idBank);
-            echo "<script> confirm('Información guardada en su cuenta con éxito!');</script>";
-            $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
-            require_once(VIEWS_PATH."user-profile.php");
-        }
-        
-
 
     }
 ?>     

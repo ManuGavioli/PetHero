@@ -68,7 +68,7 @@
                                                                  </button>
                                                        </div>
                                                                       <div class="modal-body">
-                                                                           <form action="<?php echo FRONT_ROOT."Owner/PayBooking"?>" method="post">
+                                                                           <form action="<?php echo FRONT_ROOT."Booking/PayBooking"?>" method="post">
                                                                             <div class="col-lg-4">
                
                                                                                 <label for="">CBU: <?php  echo $bookings->getKeeperId()->getBankKeeper()->getCbu(); ?></label>
