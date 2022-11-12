@@ -5,7 +5,7 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Registro de My New Pet</h2>
-               <form action="<?php echo FRONT_ROOT.'Owner/AddPet'?>" method="post" class="bg-light-alpha p-5">
+               <form action="<?php echo FRONT_ROOT.'Pet/AddPet'?>" method="post" class="bg-light-alpha p-5">
                
                
                <div class="col-lg-4">

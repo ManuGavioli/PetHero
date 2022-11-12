@@ -8,7 +8,7 @@
      <ul class="navbar-nav ml-auto">
              
                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/MyBookings'?>">MIS RESERVAS</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Booking/MyBookings'?>">MIS RESERVAS</a>
                </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/EditKeeperContent'?>">EDITAR CUIDADOR</a>
@@ -28,13 +28,13 @@
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowAddPetView'?>">AGREGAR NUEVA MASCOTA</a>
                </li>
                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowListPetView'?>">VER MIS MASCOTAS</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Pet/ShowListPetView'?>">VER MIS MASCOTAS</a>
                </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/MyProfile'?>">MI PERFIL</a>
                </li>
                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowListReservas'?>">RESERVAS</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Booking/ShowListReservas'?>">RESERVAS</a>
                </li>    
                <li class="nav-item">
                     <a class="nav-link" href="<?php //echo FRONT_ROOT.'Owner/ShowListPetView'?>"><!--GENERAR RESEÑA--></a>

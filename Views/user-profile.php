@@ -125,7 +125,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="<?php echo FRONT_ROOT."Keeper/EditBank"?>" method="post">  
+                                            <form action="<?php echo FRONT_ROOT."Bank/EditBank"?>" method="post">  
                                                 <div class="col-lg-4">
                                                     <label>CBU:
                                                         <input type="number" name="cbu" class="form-control" required>

@@ -25,7 +25,7 @@ class OwnerController{
     private $DataPets;
     private $DataKeepers;
     private $DataBookings;
-    private $DataBank;
+    private $DataBanks;
     private $DataCoupon;
 
     function __construct(){
@@ -43,15 +43,6 @@ class OwnerController{
 
     function ShowRegisterView(){
         require_once(VIEWS_PATH."owner-register.php");
-    }
-
-    function ShowListPetView(){
-        Validation::ValidUser();
-
-        //PASAR lista de pets
-        $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
-        
-        require_once(VIEWS_PATH."pet-list.php");
     }
 
     function ShowAddPetView(){
@@ -79,35 +70,6 @@ class OwnerController{
                 require_once(VIEWS_PATH."owner-register.php");
 
             } 
-    }
-
-    function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
-
-        Validation::ValidUser();
-
-        $petNew=new Pet();
-        $petNew->setName($name);
-        $petNew->setPhoto($photo);
-        $petNew->setPetType($petType);
-        $petNew->setRaze($raze);
-        $petNew->setSize($size);
-        $petNew->setVaccinationPhoto($vaccinationPhoto);
-        $petNew->setObservations($observations);
-
-        //convertir la url de un video para luego poder incrustarlo automaticamente en la vista 
-
-        $video=substr($video, 32);
-
-        $petNew->setVideo($video);
-        //agrego solo el id //pasar el owner completo 
-        $petNew->setMyowner($_SESSION['loggedUser']);
-
-        $this->DataPets->AddPet($petNew);
-
-        //no hay mas lista de pets en owner
-       //$_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
-
-        $this->ShowListPetView();
     }
 
     public function MyProfile(){
@@ -199,18 +161,8 @@ class OwnerController{
         }
     }
 
-        public function ShowListReservas(){
+    public function ShowHome(){
         Validation::ValidUser();
-        //PASAR lista de pets
-        $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
-        $Booking_list=$this->DataBookings->GetAllforOwner($petsofowner);
-        //aca va un get for bookings, pero estaba cansado si me acuerdo lo hago 
-        $coupons_list=$this->DataCoupon->GetAll();
-        require_once(VIEWS_PATH."owner-reservations.php");
-        }
-
-        public function ShowHome(){
-            Validation::ValidUser();
     
         $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         $pets_listAll=$this->DataPets->GetAll();
@@ -218,22 +170,7 @@ class OwnerController{
         $dates_list=$this->DataDates->GetAll();
         $booking_list = $this->DataBookings->GetAll();
             require_once(VIEWS_PATH.'home.php');
-        }
-
-        public function PayBooking($voucher, $idbooking){
-            //ultimo requisito de la logica
-
-            //busco el keeper
-            $bookingselect= $this->DataBookings->GetOnlyOneBooking($idbooking);
-            $couponselect= $this->DataCoupon->GetOnlyOneCoupon($idbooking);
-            $this->DataCoupon->Modify($idbooking, $couponselect->getFullPayment()/2, $voucher);
-            //le agrego la plata en su banco
-            $this->DataBanks->ModifyTotal($couponselect->getFullPayment()/2, $bookingselect->getKeeperId()->getBankKeeper());
-            //cambia el estado de la reserva a super confirmada
-            $this->DataBookings->ConfirmationBooking($bookingselect);
-
-            $this->ShowListReservas();
-        }
+    }
 
         
         
