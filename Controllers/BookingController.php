@@ -6,6 +6,8 @@
     use DAO\CouponDAODB as CouponDAODB;
     use DAO\PetDAODB as PetDAODB;
     use DAO\BankDAODB as BankDAODB;
+    use DAO\AvailabilityDAODB as AvailabilityDAODB;
+    use Models\Booking as Booking;
 
     class BookingController
     {   
@@ -13,12 +15,16 @@
         private $CouponDAO;
         private $DataPets;
         private $BankDAO;
+        private $AvailablilityDAO;
+        private $KeeperController;
 
         public function __construct(){
             $this->BookingDAO = new BookingDAODB;
             $this->CouponDAO = new CouponDAODB;
             $this->DataPets=new PetDAODB;
             $this->BankDAO = new BankDAODB;
+            $this->AvailablilityDAO = new AvailabilityDAODB;
+            $this->KeeperController = new KeeperController;
         }
 
         public function MyBookings(){
@@ -52,5 +58,29 @@
 
             $this->ShowListReservas();
         }
+
+        public function Action($action){
+            $actionSepared = explode(",",$action);
+            $Booking = new Booking;
+            $Booking = $this->BookingDAO->GetOnlyOneBooking($action[0]);
+            
+            if($actionSepared[1] == "Approve"){
+                $this->AvailablilityDAO->CancelAvailability($Booking);
+                $this->BookingDAO->ApproveBooking($Booking);
+
+                $date1 = date_create($Booking->getStartDate());
+                $date2 = date_create($Booking->getFinalDate());
+                $diff = $date1->diff($date2);
+
+                $precioTotal = $_SESSION['loggedUser']->getPrice() * ($diff->days+1);
+                $this->CouponDAO->Add_Coupon($precioTotal,$Booking->getIdBooking());
+                $this->KeeperController->ShowHome();
+            }else{
+                $this->BookingDAO->RejectBooking($Booking);
+                $this->KeeperController->ShowHome();
+            }
+        }
+
+        
     }
 ?>

@@ -12,7 +12,7 @@
                               <?php foreach($booking_list as $booking)
                          {
                              ?>
-                                        <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">     
+                                        <form action="<?php echo FRONT_ROOT.'Booking/Action'?>" method="post" class="bg-light-alpha p-5">     
                                              
                                              <thead class="navbar-dark bg-dark" style="color: #fff;">
                                                   <th>Nombre y apellido</th>
