@@ -103,6 +103,7 @@ CREATE TABLE Coupon
 	paidAlready float(10) DEFAULT NULL,
 	totalPay float(10) DEFAULT NULL,
         BookingId int(11) NOT NULL,
+        VoucherCode int(11) UNIQUE,
 	PRIMARY KEY(idCoupon),
         CONSTRAINT fk_booking_coupon FOREIGN KEY (BookingId) REFERENCES Bookings (idBooking) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
