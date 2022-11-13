@@ -120,6 +120,11 @@
                 }
             }
         }
+
+        public function DeleteBooking($id_booking){
+            $this->BookingDAO->Remove($id_booking);
+            $this->KeeperController->ShowHome();
+        }
         
     }
 ?>
