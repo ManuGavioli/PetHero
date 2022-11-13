@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS Banks;
 CREATE TABLE Banks 
 (
 	IdBank int(11) NOT NULL AUTO_INCREMENT,
-	cbu int(20) NOT NULL UNIQUE, 
+	cbu bigint(20) NOT NULL UNIQUE, 
 	alias varchar(50) UNIQUE,
 	total float(10) DEFAULT 0,
         PRIMARY KEY(IdBank)

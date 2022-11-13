@@ -17,6 +17,7 @@
         private $BankDAO;
         private $AvailablilityDAO;
         private $KeeperController;
+        private $OwnerController;
 
         public function __construct(){
             $this->BookingDAO = new BookingDAODB;
@@ -25,6 +26,7 @@
             $this->BankDAO = new BankDAODB;
             $this->AvailablilityDAO = new AvailabilityDAODB;
             $this->KeeperController = new KeeperController;
+            $this->OwnerController = new OwnerController;
         }
 
         public function MyBookings(){
@@ -81,6 +83,43 @@
             }
         }
 
+        public function NewBooking($first_date, $end_date, $id_mascot, $id_keeper){
+
+
+            if($first_date > $end_date){
+                echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
+                $this->OwnerController->ShowHome();
+            }else{
+    
+                $first_date2 = strtotime($first_date);
+                $end_date2 = strtotime($end_date);
+    
+                $day = 86400; //24 horas * 60 minutos x hora * 60 segundos x minuto (24*60*60)=86400 
+                $dates = array();
+                for($i = $first_date2; $i <= $end_date2; $i += $day){
+                    $dateToAdd = date("Y-m-d", $i);
+                    array_push($dates,$dateToAdd);
+                }
+                
+                if($this->AvailablilityDAO->DatesAvailability($dates, $id_keeper)==true){
+                    $bookininProgres=new Booking;
+                    $bookininProgres->setPetId($id_mascot);
+                    $bookininProgres->setStartDate($first_date);
+                    $bookininProgres->setFinalDate($end_date);
+                    $bookininProgres->setKeeperId($id_keeper);
+                    // la vamos a usar coupon $bookininProgres->setTotalValue(count($dates)* $this->DataKeepers->getKeeper($id_keeper)->getPrice());
+                
+                    //falta hacer el bookingdao   
+                    $this->BookingDAO->Add($bookininProgres);
+                    
+                    echo "<script> confirm('Reserva Creada con exito!! Una vez confirmada por el Keeper sera notificado');</script>";
+                    $this->OwnerController->ShowHome();
+                }else{
+                    echo "<script> confirm('El rango de fechas seleccionado no es valido');</script>";
+                    $this->OwnerController->ShowHome();
+                }
+            }
+        }
         
     }
 ?>
