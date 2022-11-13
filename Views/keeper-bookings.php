@@ -13,7 +13,7 @@
                     if($booking->getConfirmed() != 0){
             ?>
                 <table class="table bg-light-alpha">  
-                    <form action="<?php echo FRONT_ROOT.'Keeper/Action'?>" method="post" class="bg-light-alpha p-5">             
+                    <form action="<?php echo FRONT_ROOT.''?>" method="post" class="bg-light-alpha p-5">             
                         <thead class="navbar-dark bg-dark" style="color: #fff;">
                             <th>Dueño</th>
                             <th>Estadia</th>
