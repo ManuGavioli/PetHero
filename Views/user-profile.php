@@ -8,7 +8,7 @@
                
             <table class="table bg-light-alpha">
                 <form action="<?php if($_SESSION['loggedUser']->isKeeperOrOwner()== 1){$controller="Keeper";}else{if($_SESSION['loggedUser']->isKeeperOrOwner()== 0){$controller="Owner";}} echo FRONT_ROOT.$controller."/Edit"?>" method="post" class="bg-light-alpha p-5">
-                    <thead>
+                    <thead class="navbar-dark bg-dark" style="color: #fff;">
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
@@ -81,8 +81,23 @@
                                 }
                             ?></td>                                                                                                                                                          
                         </tr>
+            </table>
+            <table class="table bg-light-alpha">
+                    <h2 class="mb-4">Mis Datos Bancarios</h2>
+                        <thead class="navbar-dark bg-dark" style="color: #fff;">
+                            <th>CBU</th>
+                            <th>Alias</th>
+                            <th>Total en la cuenta</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><?php echo $bankInfo->getCbu(); ?></td>  
+                                <td><?php echo $bankInfo->getAlias(); ?></td>
+                                <td><?php echo $bankInfo->getTotal(); ?></td>                                                                                                                                                       
+                            </tr>
+                        </tbody>
                         <?php
-                        
+            
                         }else{
                         ?>
                         <tr>

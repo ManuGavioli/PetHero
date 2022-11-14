@@ -115,6 +115,36 @@ class BankDAODB implements IBankDAO{
         }
     }
 
+    public function GetOneForId($id_bank){
+        try
+        {
+            $query = "SELECT * FROM ".$this->tableName." WHERE IdBank = ".$id_bank;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            if($resultSet != null){
+                foreach ($resultSet as $Bank)
+                {                
+                    $newBank=new Bank;
+
+                    $newBank->setIdBank ($Bank['IdBank']);
+                    $newBank->setCbu($Bank['cbu']);
+                    $newBank->setAlias($Bank['alias']);
+                    $newBank->setTotal($Bank['total']);
+                }
+                
+                return $newBank;
+            }else{
+                return null;
+            }
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
     
 
 }

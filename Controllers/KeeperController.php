@@ -86,7 +86,7 @@
             echo "<script> confirm('Información actualizada con éxito!');</script>";
 
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
-
+            $bankInfo = $this->BankDAO->GetOneForId($_SESSION['loggedUser']->getBankKeeper());
             require_once(VIEWS_PATH."user-profile.php");
         }
         
@@ -105,6 +105,7 @@
             Validation::ValidUser();
             $_SESSION['loggedUser'] = $this->KeeperDAO->getKeeper($_SESSION['loggedUser']->getUserId());
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
+            $bankInfo = $this->BankDAO->GetOneForId($_SESSION['loggedUser']->getBankKeeper());
             require_once(VIEWS_PATH."user-profile.php");
         }
         
