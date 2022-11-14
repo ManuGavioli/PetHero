@@ -49,6 +49,54 @@
                                    echo "Reserva Rechazada";
                               }else if($bookings->getConfirmed()==3){
                                    echo "Su Reserva ya esta confirmada";
+                              }else if($bookings->getConfirmed()==4){
+                                   ?>  
+                                              <!-- Button trigger modal -->
+                                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                  Realizar Review 👍👎
+                                                  </button>
+
+                                             <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                       <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Review!!</h5>
+                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                                 </button>
+                                                       </div>
+                                                                      <div class="modal-body">
+                                                                           <form action="<?php echo FRONT_ROOT."Booking/PayBooking"?>" method="post">
+                                                                            
+                                                                            
+                                                                                          <label for="message-text" class="col-form-label">Message:</label>
+                                                                                          <textarea class="form-control" id="message-text"></textarea>
+
+                                                                                         
+                                                                                          <div class="valoracion">
+                                                                                          <p class="clasificacion">
+                                                                                          <input id="radio1" type="radio" name="estrellas" value="5">
+                                                                                          <label for="radio1">★</label>
+                                                                                          <input id="radio2" type="radio" name="estrellas" value="4">
+                                                                                          <label for="radio2">★★</label>
+                                                                                          <input id="radio3" type="radio" name="estrellas" value="3">
+                                                                                          <label for="radio3">★★★</label>
+                                                                                          <input id="radio4" type="radio" name="estrellas" value="2">
+                                                                                          <label for="radio4">★★★★</label>
+                                                                                          <input id="radio5" type="radio" name="estrellas" value="1">
+                                                                                          <label for="radio5">★★★★★</label>
+                                                                                          </p>            
+                                                                      </div>
+                                                            <div class="modal-footer">
+                                                                 <button type="submit" name="idbooking" value="<?php echo $bookings->getIdBooking(); ?>" class="btn btn-primary btn-lg btn-block" style="background-color: #48c; color: #fff" > Realizar Review 🌟</button>
+                                                            </div>
+                                                            </form>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                    <?php
                               }
                               else if($bookings->getConfirmed()==1){
                                 ?>  

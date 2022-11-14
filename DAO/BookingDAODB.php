@@ -365,6 +365,17 @@ class BookingDAODB implements IBookingDAODB{
         }
     }
 
+   /* public function GetAllforOwnerFinish($pets){
+        $Booking_owner=array();
+        $allBookingsforowner=$this->GetAllforOwner($pets);
+        foreach ($allBookingsforowner as $Bookings){ 
+                    if($Bookings->getFinalDate()<date("Y-m-d")){
+                    array_push($Booking_owner, $Bookings);
+                    }      
+            }
+            return $Booking_owner;
+    }*/
+
 }
 
 

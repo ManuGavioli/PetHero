@@ -100,14 +100,13 @@
                     <td>
                         <button type="submit" class="btn" name="user_id" value="<?php echo $_SESSION['loggedUser']->getUserId();?>" style="background-color: #48c; color: #fff" >Editar Usuario</button> 
                     </td>
-                    <?php
-                    if($_SESSION['loggedUser']->isKeeperOrOwner()== 1){
-                    ?> 
-                    <?php
-                    }
-                    ?>
+                   
+                 
                     
                 </form>
+                <?php
+                    if($_SESSION['loggedUser']->isKeeperOrOwner()== 1){
+                    ?> 
                 <td>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -145,6 +144,9 @@
                                 </div>
                             </div> 
                         </td>
+                    <?php
+                    }
+                    ?>
             </table>
         </div>
     </section>
