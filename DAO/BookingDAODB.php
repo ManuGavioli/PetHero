@@ -137,7 +137,7 @@ class BookingDAODB implements IBookingDAODB{
         $allBookings=$this->GetAll();
         $Booking_keeper=array();
         foreach ($allBookings as $Bookings){
-            if($Bookings->getKeeperId()==$id){
+            if($Bookings->getKeeperId()->getUserId()==$id){
                 array_push($Booking_keeper, $Bookings);
             }
         }

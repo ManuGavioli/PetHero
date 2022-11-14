@@ -96,9 +96,19 @@
         
         public function EditKeeperContent(){
             Validation::ValidUser();
-            $dates_list=$this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
-            $minDate = date("Y-m-d");
-            require_once(VIEWS_PATH."keeper-content.php");
+            $dates_list = $this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
+            $booking_list = $this->BookingDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
+            if($booking_list == null){
+                $minDate = date("Y-m-d");
+                require_once(VIEWS_PATH."keeper-content.php");
+            }else{
+                if($this->isNotAvailable($dates_list) == 1){
+                    echo "<script> confirm('ATENCION! = las fechas libres que no fueron reservadas se pisaran!');</script>";
+                }
+                $minDate = $this->MaxDate($booking_list);
+                $minDate=date("Y-m-d",strtotime($minDate."+ 1 days"));
+                require_once(VIEWS_PATH."keeper-content.php");
+            }
         }
 
         public function MyProfile(){
@@ -167,5 +177,24 @@
             require_once(VIEWS_PATH.'home.php');
         }
 
+        private function MaxDate($booking_list){
+            $max = $booking_list[count($booking_list)-1]->getFinalDate();
+            foreach($booking_list as $booking){
+                if($max < $booking->getFinalDate()){
+                    $max = $booking->getFinalDate();
+                }
+            }
+            return $max;
+        }
+
+        private function isNotAvailable($dates_list){   // retorna 1 si en la lista de availableDates hay fechas en true y 0 si estan todas ocupadas
+            $validation=0;
+            foreach ($dates_list as $date){
+                if($date->getAvailable() == 1){
+                    $validation = 1;
+                }
+            }
+            return $validation;
+        }
     }
 ?>     
