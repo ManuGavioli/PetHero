@@ -125,6 +125,13 @@
             $this->BookingDAO->Remove($id_booking);
             $this->KeeperController->ShowHome();
         }
+
+        public function ReviewBooking($booking){
+            Validation::ValidUser();
+
+            $Booking = $this->BookingDAO->ConfirmReview($booking);
+            
+        }
         
     }
 ?>

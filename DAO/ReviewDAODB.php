@@ -37,15 +37,15 @@ class ReviewDAODB implements IReviewDAO{
                         
 
                         $keeper = new Keeper;
-                        $keeper->setUserId($row["user_id"]);
-                        $keeper->setFirstName($row["firstName"]);
-                        $keeper->setLastName($row["lastName"]);
-                        $keeper->setDni($row["dni"]);
-                        $keeper->setEmail($row["email"]);
-                        $keeper->setPassword($row["pass"]);
-                        $keeper->setPhoneNumber($row["phoneNumber"]);
-                        $keeper->setPetType($row["petType"]);
-                        $keeper->setPrice($row["price"]);
+                        $keeper->setUserId($Review["user_id"]);
+                        $keeper->setFirstName($Review["firstName"]);
+                        $keeper->setLastName($Review["lastName"]);
+                        $keeper->setDni($Review["dni"]);
+                        $keeper->setEmail($Review["email"]);
+                        $keeper->setPassword($Review["pass"]);
+                        $keeper->setPhoneNumber($Review["phoneNumber"]);
+                        $keeper->setPetType($Review["petType"]);
+                        $keeper->setPrice($Review["price"]);
 
                     $ReviewNew->setKeeperId($keeper);
 

@@ -325,6 +325,20 @@ class BookingDAODB implements IBookingDAODB{
         }
     }
 
+    public function ConfirmReview ($Booking){
+        try{
+            $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed WHERE idBooking = ".$Booking->getIdBooking();
+
+            $parameters["confirmed"] = 5;
+            
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
     public function RejectBooking ($Booking){
         try{
             $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed WHERE idBooking = ".$Booking->getIdBooking();

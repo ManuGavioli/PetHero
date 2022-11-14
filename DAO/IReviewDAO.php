@@ -3,7 +3,7 @@
 
     use Models\Review as Review;
 
-    interface IPetDAO
+    interface IReviewDAO
     {
         function GetAll();
         function AddReview(Review $newPet);

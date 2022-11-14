@@ -16,6 +16,9 @@
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/MyProfile'?>">MI PERFIL</a>
                </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Review/ShowReviewsKeeper'?>">RESEÑAS</a>
+               </li>
           <?php
           } else {
                if($_SESSION['loggedUser']->isKeeperOrOwner() == 0){

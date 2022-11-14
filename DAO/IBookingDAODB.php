@@ -13,5 +13,6 @@
         function GetAllforOwner($pets);
         function ApproveBooking($id);
         function RejectBooking($id);
+        function ConfirmReview($id);
     }
 ?>

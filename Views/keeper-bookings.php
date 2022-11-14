@@ -46,7 +46,7 @@
                                     if($booking->getConfirmed() == 3){
                                         echo "Reserva confirmada - 50% abonado";
                                     }else{
-                                        if($booking->getConfirmed() == 4){
+                                        if($booking->getConfirmed() == 4 || $booking->getConfirmed() == 5){
                                             echo "Reserva completada";
                                         }
                                     }
