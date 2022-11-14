@@ -15,6 +15,7 @@
                 <table class="table bg-light-alpha">  
                     <form action="<?php echo FRONT_ROOT.'Booking/DeleteBooking'?>" method="post" class="bg-light-alpha p-5">             
                         <thead class="navbar-dark bg-dark" style="color: #fff;">
+                            <th>ID de la reserva</th>
                             <th>Dueño</th>
                             <th>Estadia</th>
                             <th>Mascota</th>
@@ -30,6 +31,7 @@
                 
                     <tbody>
                         <tr>
+                            <td><?php echo $booking->getIdBooking(); ?></td>
                             <td><?php echo ucfirst($booking->getPetId()->getMyowner()->getFirstName())." ".ucfirst($booking->getPetId()->getMyowner()->getLastName()); ?></td>
                             <td><?php echo "Desde el ".$booking->getStartDate()." hasta el ".$booking->getFinalDate(); ?></td>
                             <td><?php echo ucfirst($booking->getPetId()->getName()); ?></td>
@@ -57,7 +59,7 @@
                             }
                             ?></td>
                             <td><?php 
-                            if($booking->getConfirmed() == 2 || $booking->getConfirmed() == 4){?>       
+                            if($booking->getConfirmed() == 2){?>       
                                 <button type="submit" class="btn" name="id_booking" value="<?php echo $booking->getIdBooking()?>" style="background-color: #991919; color: #fff" >Borrar</button>   
                             <?php
                             }

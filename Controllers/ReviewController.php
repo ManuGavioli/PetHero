@@ -23,13 +23,13 @@
 
         function ShowReviewsKeeper(){
             Validation::ValidUser();
-
+            
             $reviews_list=$this->DataReviews->GetAllforKeeper($_SESSION["loggedUser"]->getUserId());
 
             require_once(VIEWS_PATH.'keeper-reviews.php');
         }
         
-        function AddReview($description, $score, $idBooking){
+        function AddReview($desc, $score, $idBooking){
 
             Validation::ValidUser();
 
@@ -39,9 +39,9 @@
     
             $ReviewNew=new Review();
             $ReviewNew->setScore($score);
-            $ReviewNew->setDesc($description);
+            $ReviewNew->setDesc($desc);
             $ReviewNew->setReviewDate($reviewDate);
-            $ReviewNew->setKeeperId($booking->getKeeperId()->getUserId());
+            $ReviewNew->setidBooking($idBooking);
     
             $this->DataReviews->AddReview($ReviewNew);
             $this->BookingController->ReviewBooking($booking);

@@ -3,9 +3,12 @@ namespace DAO;
 
     use DAO\IReviewDAO as IReviewDAO;
     use \Exception as Exception;
-    use Models\Review as Review;   
-    use Models\Keeper as Keeper; 
+    use Models\Review as Review;  
+    use Models\Booking as Booking;
+    use Models\Owner as Owner;
+    use Models\Pet as Pet; 
     use DAO\Connection as Connection;
+
 
 class ReviewDAODB implements IReviewDAO{
 
@@ -19,7 +22,9 @@ class ReviewDAODB implements IReviewDAO{
         {
             $ReviewList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." inner join Keepers on Keepers.user_id= ".$this->tableName.".keeperId";
+            $query = "SELECT * FROM ".$this->tableName." INNER JOIN bookings ON bookings.idBooking = reviews.idBooking  
+            INNER JOIN pets ON pets.id_pet = bookings.petId
+            INNER JOIN owners ON owners.user_id = pets.id_owner";
 
             $this->connection = Connection::GetInstance();
 
@@ -28,26 +33,43 @@ class ReviewDAODB implements IReviewDAO{
             foreach ($resultSet as $Review)
             {                
 
-
-                    $ReviewNew=new Review();
+                    $ReviewNew=new Review;
                     $ReviewNew->setIdReview($Review['idReview']);
                     $ReviewNew->setDesc($Review['description']);
                     $ReviewNew->setReviewDate($Review['reviewDate']);
                     $ReviewNew->setScore ($Review['score']);
                         
+                    $Booking= new Booking;
 
-                        $keeper = new Keeper;
-                        $keeper->setUserId($Review["user_id"]);
-                        $keeper->setFirstName($Review["firstName"]);
-                        $keeper->setLastName($Review["lastName"]);
-                        $keeper->setDni($Review["dni"]);
-                        $keeper->setEmail($Review["email"]);
-                        $keeper->setPassword($Review["pass"]);
-                        $keeper->setPhoneNumber($Review["phoneNumber"]);
-                        $keeper->setPetType($Review["petType"]);
-                        $keeper->setPrice($Review["price"]);
+                    $newOwner = new Owner;
+                    $newOwner->setUserId($Review['id_owner']);
+                    $newOwner->setFirstName($Review['firstName']);
+                    $newOwner->setLastName($Review['lastName']);
+                    $newOwner->setDni($Review['dni']);
+                    $newOwner->setEmail($Review['email']);
+                    $newOwner->setPassword($Review['pass']);
+                    $newOwner->setPhoneNumber($Review['phoneNumber']);
 
-                    $ReviewNew->setKeeperId($keeper);
+                    $newPet = new Pet;
+                    $newPet->setId($Review['petId']);
+                    $newPet->setName($Review['name_pet']);
+                    $newPet->setPhoto($Review['photo']);
+                    $newPet->setPetType($Review['petType']);
+                    $newPet->setRaze($Review['raze']);
+                    $newPet->setSize($Review['size']);
+                    $newPet->setVaccinationPhoto($Review['vaccinationPhoto']);
+                    $newPet->setObservations($Review['observations']);
+                    $newPet->setVideo($Review['video']);
+                    $newPet->setMyowner($newOwner);
+                    $Booking->setPetId($newPet);
+                        
+                    $Booking->setKeeperId($Review['keeperId']);
+                    $Booking->setIdBooking($Review['idBooking']);
+                    $Booking->setStartDate($Review['startDate']);
+                    $Booking->setFinalDate($Review['finalDate']);
+                    $Booking->setConfirmed($Review['confirmed']);
+
+                    $ReviewNew->setidBooking($Booking);
 
                 array_push($ReviewList, $ReviewNew);
             }
@@ -66,10 +88,10 @@ class ReviewDAODB implements IReviewDAO{
     function AddReview(Review $newReview){
         try
             {
-                $query = "INSERT INTO ".$this->tableName." (keeperId, description, reviewDate, score) VALUES ( :keeperId, :description, :reviewDate, :score);";
+                $query = "INSERT INTO ".$this->tableName." (idBooking, description, reviewDate, score) VALUES ( :idBooking, :description, :reviewDate, :score);";
 
 
-                $parameters['keeperId']=$newReview->getKeeperId();
+                $parameters['idBooking']=$newReview->getidBooking();
                 $parameters['description']=$newReview->getDesc();
                 $parameters['reviewDate']=$newReview->getReviewDate();
                 $parameters['score']=$newReview->getScore();
@@ -87,19 +109,11 @@ class ReviewDAODB implements IReviewDAO{
             }
     }
 
-
-
-    function Remove($id){
-        
-
-
-    }
-
-    function GetAllforKeeper($id){
+    function GetAllforKeeper($id_keeper){
         $allReviews=$this->GetAll();
         $Review_Keeper=array();
         foreach ($allReviews as $Reviews){
-            if($Reviews->getKeeperId()->getUserId()==$id){
+            if($Reviews->getIdBooking()->getKeeperId()==$id_keeper){
                 array_push($Review_Keeper, $Reviews);
             }
         }

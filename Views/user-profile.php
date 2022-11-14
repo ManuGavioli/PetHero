@@ -82,7 +82,7 @@
                             ?></td>                                                                                                                                                          
                         </tr>
             </table>
-            <table class="table bg-light-alpha">
+            <table class="table bg-light-alpha" style="width: 30%;">
                     <h2 class="mb-4">Mis Datos Bancarios</h2>
                         <thead class="navbar-dark bg-dark" style="color: #fff;">
                             <th>CBU</th>

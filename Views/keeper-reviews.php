@@ -11,19 +11,23 @@
                                    <table class="table bg-light-alpha">
                
                     <thead>
+                         <th>ID de la reserva</th>
+                         <th>Usuario</th>
                          <th>Puntuación</th>
                          <th>Descripción</th>
                          <th>Fecha</th>
                     </thead>
                     <tbody> 
                          <tr>
-                              <td width='30%'><?php  if ($reviews->getScore()==1){echo '⭐';} 
+                              <td><?php  echo $reviews->getidBooking()->getIdBooking();  ?></td>
+                              <td><?php  echo $reviews->getIdBooking()->getPetId()->getMyowner()->getFirstName()." ".$reviews->getIdBooking()->getPetId()->getMyowner()->getLastName(); ?></td>
+                              <td><?php  if ($reviews->getScore()==1){echo '⭐';} 
                               else if($reviews->getScore()==2){echo '⭐⭐';}
                               else if($reviews->getScore()==3){echo '⭐⭐⭐';}
                               else if($reviews->getScore()==4){echo '⭐⭐⭐⭐';}
                               else if($reviews->getScore()==5){echo '⭐⭐⭐⭐⭐';}  ?></td>
-                              <td width='40%'><?php  echo $reviews->getDesc();  ?></td>
-                              <td width='30%'><?php  echo $reviews->getReviewDate();  ?></td>
+                              <td><?php  echo $reviews->getDesc();  ?></td>
+                              <td><?php  echo $reviews->getReviewDate();  ?></td>
                          </tr>
                     </tbody> 
                     <br>

@@ -7,7 +7,6 @@
     {
         function GetAll();
         function AddReview(Review $newPet);
-        function Remove($id);
         function GetAllforKeeper($id);
     }
 ?>

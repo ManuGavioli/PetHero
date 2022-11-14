@@ -68,20 +68,6 @@ CREATE TABLE Pets
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE Reviews
-(
-        keeperId int(11) NOT NULL,
-        idReview int(11) NOT NULL AUTO_INCREMENT,
-        description varchar(280) DEFAULT NULL,
-        reviewDate date DEFAULT NULL,
-        score int(5) DEFAULT NULL,
-        PRIMARY KEY(idReview),
-        CONSTRAINT fk_review_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 CREATE TABLE Bookings 
 (
         keeperId int(11) NOT NULL,
@@ -95,6 +81,18 @@ CREATE TABLE Bookings
     
         CONSTRAINT fk_booking_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
         CONSTRAINT fk_booking_petId FOREIGN KEY (petId) REFERENCES pets (id_pet) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Reviews
+(
+        idBooking int(11) NOT NULL,
+        idReview int(11) NOT NULL AUTO_INCREMENT,
+        description varchar(280) DEFAULT NULL,
+        reviewDate date DEFAULT NULL,
+        score int(5) DEFAULT NULL,
+        PRIMARY KEY(idReview),
+        CONSTRAINT fk_review_idBooking FOREIGN KEY (idBooking) REFERENCES bookings (idBooking) ON DELETE NO ACTION ON UPDATE NO ACTION
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE Coupon 
