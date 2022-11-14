@@ -119,7 +119,16 @@ class BookingDAODB implements IBookingDAODB{
 
 
     public function Remove($id){
-        
+        try{
+            $query = "DELETE FROM ".$this->tableName." WHERE idBooking = :idBooking";
+            $parameter["idBooking"] = $id;
+
+            $this->connection = connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query,$parameter);
+
+        }catch(Exception $ex){
+            throw $ex;
+        }
 
 
     }

@@ -13,7 +13,7 @@
                     if($booking->getConfirmed() != 0){
             ?>
                 <table class="table bg-light-alpha">  
-                    <form action="<?php echo FRONT_ROOT.''?>" method="post" class="bg-light-alpha p-5">             
+                    <form action="<?php echo FRONT_ROOT.'Booking/DeleteBooking'?>" method="post" class="bg-light-alpha p-5">             
                         <thead class="navbar-dark bg-dark" style="color: #fff;">
                             <th>Dueño</th>
                             <th>Estadia</th>
@@ -25,6 +25,7 @@
                             <?php   
                             }?>
                             <th>Estado de la Reserva</th>
+                            <th></th>
                         </thead>
                 
                     <tbody>
@@ -45,16 +46,23 @@
                                     if($booking->getConfirmed() == 3){
                                         echo "Reserva confirmada - 50% abonado";
                                     }else{
-                                        if($booking->getConfirmed() == 4){  //agregar opcion de borrar reserva
+                                        if($booking->getConfirmed() == 4){
                                             echo "Reserva completada";
                                         }
                                     }
                                 }
-                            if($booking->getConfirmed() == 2){  //agregar opcion de borrar reserva        
-                                echo "Reserva Cancelada"; ?>   
+                            if($booking->getConfirmed() == 2){       
+                                echo "Reserva Cancelada"; ?>    
                             <?php
                             }
                             ?></td>
+                            <td><?php 
+                            if($booking->getConfirmed() == 2 || $booking->getConfirmed() == 4){?>       
+                                <button type="submit" class="btn" name="id_booking" value="<?php echo $booking->getIdBooking()?>" style="background-color: #991919; color: #fff" >Borrar</button>   
+                            <?php
+                            }
+                            ?></td>
+                            
                         </tr>
                     </tbody>
                 </table> 

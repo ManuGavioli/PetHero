@@ -68,7 +68,7 @@
             } 
         }
         
-        public function Edit($user_id){  // hay que cambiar esta redireccion por un header en el "user-profile"
+        public function Edit($user_id){
             Validation::ValidUser();
             require_once(VIEWS_PATH."keeper-edit.php");
         }

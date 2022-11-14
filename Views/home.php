@@ -68,7 +68,7 @@
                          <br>
                          <?php 
                          foreach($keeper_list as $keeper){ //filtrar keepers si está en la lista de dates
-                         ?> <form action="<?php echo FRONT_ROOT."Owner/NewBooking"?>" method="post">
+                         ?> <form action="<?php echo FRONT_ROOT."Booking/NewBooking"?>" method="post">
                          <?php
                               if($keeper->VeryfyKeeper($dates_list)){
                                    $selectdates=array();
