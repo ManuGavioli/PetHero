@@ -12,6 +12,7 @@
     use Models\Keeper as Keeper;
     use Models\Booking as Booking;
     use Models\Bank as Bank;
+    use \Exception as Exception;
 
 
     class KeeperController{
@@ -34,6 +35,7 @@
         
         public function AddKeeper($first_name, $last_name, $dni, $email, $passw, $phone_number, $cbu, $alias){
             
+            try{
             $this->KeeperDAO->GetAll(); 
 
             if($this->KeeperDAO->SearchEmail($email) == null){
@@ -66,6 +68,11 @@
                 require_once(VIEWS_PATH."keeper-register.php");
 
             } 
+        }catch(Exception $ex)
+        {
+            $message='Motivo: Alias Repetido en el Sistema';
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
         
         public function Edit($user_id){
@@ -75,6 +82,8 @@
 
         public function EditAux($first_name, $last_name, $dni, $email, $passw, $phone_number){
             Validation::ValidUser();
+
+            try{
             $_SESSION['loggedUser']->setFirstName($first_name);
             $_SESSION['loggedUser']->setLastName($last_name);
             $_SESSION['loggedUser']->setDni($dni);
@@ -88,6 +97,10 @@
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
             $bankInfo = $this->BankDAO->GetOneForId($_SESSION['loggedUser']->getBankKeeper());
             require_once(VIEWS_PATH."user-profile.php");
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
         
         public function RegisterNewKeeper(){
@@ -96,6 +109,8 @@
         
         public function EditKeeperContent(){
             Validation::ValidUser();
+
+            try{
             $dates_list = $this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
             $booking_list = $this->BookingDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
             if($booking_list == null){
@@ -109,18 +124,28 @@
                 $minDate=date("Y-m-d",strtotime($minDate."+ 1 days"));
                 require_once(VIEWS_PATH."keeper-content.php");
             }
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         public function MyProfile(){
             Validation::ValidUser();
+            try{
             $_SESSION['loggedUser'] = $this->KeeperDAO->getKeeper($_SESSION['loggedUser']->getUserId());
             $availableDatesFromKeeper=$this->AvailablilityDAO->GetAllforKeeper($_SESSION['loggedUser']->getUserId());
             $bankInfo = $this->BankDAO->GetOneForId($_SESSION['loggedUser']->getBankKeeper());
             require_once(VIEWS_PATH."user-profile.php");
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
         
         public function AddContent($first_date, $end_date, $price, $pet_type){
             Validation::ValidUser();
+            try{
             if($first_date > $end_date){
                 echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
                 $dates_list=$this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
@@ -139,9 +164,17 @@
             $dates_list = $this->AvailablilityDAO->IfExistReturnDates($_SESSION['loggedUser']->getUserId());
             $minDate = date("Y-m-d");
             require_once(VIEWS_PATH."keeper-content.php");
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
         
         private function CountDates($first_date, $end_date){
+
+            Validation::ValidUser();
+
+            try{
             $first_date = strtotime($first_date);
             $end_date = strtotime($end_date);
 
@@ -157,27 +190,43 @@
             foreach($dates as $date){
                 $this->AvailablilityDAO->Add_AvailavilityDate($date, $_SESSION['loggedUser']->getUserId());
             }
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         private function ControllAndSetPrice($price){
+            Validation::ValidUser();
+            try{
             if($price <= 0){
                 echo "<script> confirm('Ingreso un valor invalido como precio por estadia... Vuelva a intentar');</script>";
             }else{
                 $_SESSION['loggedUser']->setPrice($price);
                 $this->KeeperDAO->EditPrice($_SESSION['loggedUser']->getUserId(),$price);
             }
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         public function ShowHome(){
             Validation::ValidUser();
 
+            try{
             $booking_list = $this->BookingDAO->BookingsConfirmationPendient($_SESSION['loggedUser']->getUserId());
             $coupon_list = $this->CouponDAO->GetAll();
             $dates_list=$this->AvailablilityDAO->GetAll();
             require_once(VIEWS_PATH.'home.php');
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         private function MaxDate($booking_list){
+            Validation::ValidUser();
             $max = $booking_list[count($booking_list)-1]->getFinalDate();
             foreach($booking_list as $booking){
                 if($max < $booking->getFinalDate()){
@@ -187,7 +236,9 @@
             return $max;
         }
 
-        private function isNotAvailable($dates_list){   // retorna 1 si en la lista de availableDates hay fechas en true y 0 si estan todas ocupadas
+        private function isNotAvailable($dates_list){  // retorna 1 si en la lista de availableDates hay fechas en true y 0 si estan todas ocupadas
+            Validation::ValidUser();
+            
             $validation=0;
             foreach ($dates_list as $date){
                 if($date->getAvailable() == 1){

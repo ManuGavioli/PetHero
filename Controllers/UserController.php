@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers;
+use \Exception as Exception;
 
 //use Models\Owner as Owner;
 //use Models\Pet as Pet;
@@ -35,7 +36,7 @@ class UserController{
 
 
     public function LogIn($email, $password){
-
+    try {
         $keeper = $this->DataKeepers->SearchEmail($email);
         if($keeper != null){
             if($keeper->getPassword() == $password){
@@ -60,6 +61,10 @@ class UserController{
                 require_once(VIEWS_PATH."login.php");
             }
         }
+    } catch(Exception $ex)
+    {
+        require_once(VIEWS_PATH."error-page.php");
+    }
     }
 
     public function Logout(){

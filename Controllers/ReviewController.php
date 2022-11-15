@@ -7,6 +7,7 @@
     use Models\Keeper as Keeper;
     use Helper\Validation as Validation;
     use Controllers\BookingController as BookingController;
+    use \Exception as Exception;
 
     class ReviewController
     {
@@ -23,16 +24,21 @@
 
         function ShowReviewsKeeper(){
             Validation::ValidUser();
-            
+            try{
             $reviews_list=$this->DataReviews->GetAllforKeeper($_SESSION["loggedUser"]->getUserId());
 
             require_once(VIEWS_PATH.'keeper-reviews.php');
+            }catch(Exception $ex)
+            {
+                require_once(VIEWS_PATH."error-page.php");
+            }
         }
         
         function AddReview($desc, $score, $idBooking){
 
             Validation::ValidUser();
 
+            try{
             $booking=$this->DataBookings->GetOnlyOneBooking($idBooking);
 
             $reviewDate=date("Y-m-d");
@@ -47,6 +53,10 @@
             $this->BookingController->ReviewBooking($booking);
             
             $this->BookingController->ShowListReservas();
+            }catch(Exception $ex)
+            {
+                require_once(VIEWS_PATH."error-page.php");
+            }
         }
 
     }

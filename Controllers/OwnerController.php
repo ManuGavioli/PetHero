@@ -20,6 +20,7 @@ use DAO\BookingDAODB as BookingDAODB;
 use DAO\BankDAODB as BankDAODB;
 use DAO\CouponDAODB as CouponDAODB;
 use DAO\ReviewDAODB as ReviewDAODB;
+use \Exception as Exception;
 
 class OwnerController{
     private $DataOwners;
@@ -54,8 +55,8 @@ class OwnerController{
     }
 
     function AddOwner($firstname, $lasName, $dni, $email, $password, $phonenumber){
-
         
+        try{
             if($this->DataOwners->SearchEmail($email) == null){
                 $ownerNew=new Owner();
                 $ownerNew->setFirstName($firstname);
@@ -73,12 +74,21 @@ class OwnerController{
                 require_once(VIEWS_PATH."owner-register.php");
 
             } 
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
     }
 
     public function MyProfile(){
         Validation::ValidUser();
+        try{
         $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         require_once(VIEWS_PATH."user-profile.php");
+    }catch(Exception $ex)
+    {
+        require_once(VIEWS_PATH."error-page.php");
+    }
     }
 
     public function Edit($user_id){
@@ -88,6 +98,8 @@ class OwnerController{
 
     public function EditAux($firstname, $lasName, $dni, $email, $password, $phonenumber){
         Validation::ValidUser();
+
+        try{
         $_SESSION['loggedUser']->setFirstName($firstname);
         $_SESSION['loggedUser']->setLastName($lasName);
         $_SESSION['loggedUser']->setDni($dni);
@@ -97,10 +109,16 @@ class OwnerController{
         $this->DataOwners->EditUser($_SESSION['loggedUser']);
         echo "<script> confirm('Información actualizada con éxito!');</script>";
         $this->MyProfile();
+    }catch(Exception $ex)
+    {
+        require_once(VIEWS_PATH."error-page.php");
+    }
     }
 
     public function FilterKeepers($beginning, $end){
         //funcion que devuelva una lista de keepers filtrada
+        Validation::ValidUser();
+        try{
         $dates_list=$this->DataDates->GetFiltersDates($beginning, $end); 
         $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         $pets_listAll=$this->DataPets->GetAll();
@@ -108,6 +126,10 @@ class OwnerController{
         $booking_list = $this->DataBookings->GetAll();
         
         require_once(VIEWS_PATH.'home.php');
+    }catch(Exception $ex)
+    {
+        require_once(VIEWS_PATH."error-page.php");
+    }
     }
 
     /*public function ShowReservationView(){
@@ -128,7 +150,8 @@ class OwnerController{
 
     public function ShowHome(){
         Validation::ValidUser();
-    
+        
+        try{
         $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
         $pets_listAll=$this->DataPets->GetAll();
         $keeper_list=$this->DataKeepers->GetAll();
@@ -136,6 +159,10 @@ class OwnerController{
         $booking_list = $this->DataBookings->GetAll();
         $reviews_list=$this->DataReviews->GetAll();
             require_once(VIEWS_PATH.'home.php');
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
     }
 
         

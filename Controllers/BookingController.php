@@ -8,6 +8,7 @@
     use DAO\BankDAODB as BankDAODB;
     use DAO\AvailabilityDAODB as AvailabilityDAODB;
     use Models\Booking as Booking;
+    use \Exception as Exception;
 
     class BookingController
     {   
@@ -31,25 +32,36 @@
 
         public function MyBookings(){
             Validation::ValidUser();
+            try{
             $booking_list = $this->BookingDAO->GetOneBooking($_SESSION['loggedUser']->getUserId());
             $coupon_list = $this->CouponDAO->GetAll();
             require_once(VIEWS_PATH."keeper-bookings.php");
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         public function ShowListReservas(){
             Validation::ValidUser();
             //PASAR lista de pets
+            try{
             $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
             $Booking_list=$this->BookingDAO->GetAllforOwner($petsofowner);
             //aca va un get for bookings, pero estaba cansado si me acuerdo lo hago 
             $coupons_list=$this->CouponDAO->GetAll();
             require_once(VIEWS_PATH."owner-reservations.php");
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         public function PayBooking($voucher, $idbooking){
             //ultimo requisito de la logica
-
+            Validation::ValidUser();
             //busco el keeper
+            try{
             $bookingselect= $this->BookingDAO->GetOnlyOneBooking($idbooking);
             $couponselect= $this->CouponDAO->GetOnlyOneCoupon($idbooking);
             $this->CouponDAO->Modify($idbooking, $couponselect->getFullPayment()/2, $voucher);
@@ -59,9 +71,15 @@
             $this->BookingDAO->ConfirmationBooking($bookingselect);
 
             header('location:'.FRONT_ROOT.'Booking/ShowListReservas');
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         public function Action($action){
+            Validation::ValidUser();
+            try{
             $actionSepared = explode(",",$action);
             $Booking = new Booking;
             $Booking = $this->BookingDAO->GetOnlyOneBooking($action[0]);
@@ -81,11 +99,15 @@
                 $this->BookingDAO->RejectBooking($Booking);
                 $this->KeeperController->ShowHome();
             }
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         public function NewBooking($first_date, $end_date, $id_mascot, $id_keeper){
-
-
+            Validation::ValidUser();
+            try{
             if($first_date > $end_date){
                 echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
                 $this->OwnerController->ShowHome();
@@ -119,17 +141,32 @@
                     $this->OwnerController->ShowHome();
                 }
             }
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         public function DeleteBooking($id_booking){
+            Validation::ValidUser();
+            try{
             $this->BookingDAO->Remove($id_booking);
             $this->KeeperController->ShowHome();
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
 
         public function ReviewBooking($booking){
             Validation::ValidUser();
 
+            try{
             $Booking = $this->BookingDAO->ConfirmReview($booking);
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
             
         }
         

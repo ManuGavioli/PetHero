@@ -4,6 +4,7 @@
     use DAO\PetDAODB as PetDAODB;
     use Models\Pet as Pet;
     use Helper\Validation as Validation;
+    use \Exception as Exception;
 
     class PetController
     {
@@ -19,15 +20,21 @@
             Validation::ValidUser();
     
             //PASAR lista de pets
+            try{
             $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
             
             require_once(VIEWS_PATH."pet-list.php");
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
         
         function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
 
             Validation::ValidUser();
-    
+            
+            try{
             $petNew=new Pet();
             $petNew->setName($name);
             $petNew->setPhoto($photo);
@@ -51,6 +58,10 @@
            //$_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
     
             $this->ShowListPetView();
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
     }
 ?>
