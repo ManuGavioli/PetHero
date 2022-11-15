@@ -83,7 +83,34 @@
                               </thead>
                               <tbody> 
                                    <tr>
-                                        <td><?php  echo $keeper->getFirstName()." ".$keeper->getLastName();  ?></td>
+                                        <td><?php  echo $keeper->getFirstName()." ".$keeper->getLastName();  ?>
+                                   
+                              <br>
+                              Puntuación: <?php  
+
+                              $promedio=0;
+                              $contador=0;
+                              foreach($reviews_list as $reviews){
+
+                                  if($reviews->getidBooking()->getKeeperId() == $keeper->getUserId()){
+                                   $promedio=$promedio+$reviews->getScore();  
+                                   $contador++;
+                                  } 
+                              }
+                              if($contador!=0){
+                                   $promedio=$promedio/$contador;
+                              }
+                              
+                              
+                              if (round($promedio)==1){echo '⭐';} 
+                              else if(round($promedio)==2){echo '⭐⭐';}
+                              else if(round($promedio)==3){echo '⭐⭐⭐';}
+                              else if(round($promedio)==4){echo '⭐⭐⭐⭐';}
+                              else if(round($promedio)==5){echo '⭐⭐⭐⭐⭐';} 
+                              else if(round($promedio)==0){echo '  sin reputación';} ?></td>
+                                   
+                                   
+                                   </td>
                                         <td><?php 
                                              if($keeper->getPetType() == "big"){
                                                   echo "GRANDE";
@@ -123,7 +150,7 @@
                                         <td><?php echo "$".$keeper->getPrice() ?></td>
                                         <td>
                                          Seleccione su mascota: <br>
-                                        <select name="id_mascot" id="lang"> 
+                                        <select name="id_mascot" id="lang" required> 
                                                        
                                                        <?php 
                                                        foreach($pets_list as $pets){

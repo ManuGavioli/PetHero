@@ -58,7 +58,7 @@
             //cambia el estado de la reserva a super confirmada
             $this->BookingDAO->ConfirmationBooking($bookingselect);
 
-            $this->ShowListReservas();
+            header('location:'.FRONT_ROOT.'Booking/ShowListReservas');
         }
 
         public function Action($action){

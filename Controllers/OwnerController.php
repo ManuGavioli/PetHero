@@ -19,6 +19,7 @@ use DAO\AvailabilityDAODB as AvailabilityDAODB;
 use DAO\BookingDAODB as BookingDAODB;
 use DAO\BankDAODB as BankDAODB;
 use DAO\CouponDAODB as CouponDAODB;
+use DAO\ReviewDAODB as ReviewDAODB;
 
 class OwnerController{
     private $DataOwners;
@@ -27,6 +28,7 @@ class OwnerController{
     private $DataBookings;
     private $DataBanks;
     private $DataCoupon;
+    private $DataReviews;
 
     function __construct(){
         //$this->DataOwners=new OwnerDAO();
@@ -39,6 +41,7 @@ class OwnerController{
         $this->DataBookings = new BookingDAODB;
         $this->DataBanks = new BankDAODB;
         $this->DataCoupon = new CouponDAODB;
+        $this->DataReviews=new ReviewDAODB();
     }
 
     function ShowRegisterView(){
@@ -131,6 +134,7 @@ class OwnerController{
         $keeper_list=$this->DataKeepers->GetAll();
         $dates_list=$this->DataDates->GetAll();
         $booking_list = $this->DataBookings->GetAll();
+        $reviews_list=$this->DataReviews->GetAll();
             require_once(VIEWS_PATH.'home.php');
     }
 

@@ -35,11 +35,17 @@
                               ?></td>
                               
                               <td><?php  
-                              $date1 = date_create($bookings->getStartDate());
+                              /*$date1 = date_create($bookings->getStartDate());
                               $date2 = date_create($bookings->getFinalDate());
-                              $diff = $date1->diff($date2);
+                              $diff = $date1->diff($date2);*/
                               // will output 2 days
-                              $Total= ($diff->days+1)*$bookings->getKeeperId()->getPrice();
+                              $Total='';
+                              foreach($coupons_list as $coupons){
+                                   if($coupons->getBookingId()==$bookings->getIdBooking()){
+                                        $Total=$coupons->getFullPayment();  
+                                   }
+                              }
+                              //$Total= ($diff->days+1)*$bookings->getKeeperId()->getPrice();
                               echo $Total;
                          
                                 ?></td>
@@ -98,12 +104,12 @@
                               else if($bookings->getConfirmed()==1){
                                 ?>  
                                               <!-- Button trigger modal -->
-                                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
                                                   Pagar 50%💰
                                                   </button>
 
                                              <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                              <div class="modal-dialog" role="document">
                                                   <div class="modal-content">
                                                        <div class="modal-header">
@@ -141,7 +147,7 @@
 
                          </tr>
                     </tbody> 
-                        </table> <?php  } ?> 
-                       
+                        </table> 
+                        <?php  } ?> 
           </div>
 </main>

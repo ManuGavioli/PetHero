@@ -22,7 +22,7 @@ class BookingDAODB implements IBookingDAODB{
         {
             $BookingList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." INNER JOIN keepers on bookings.keeperId = keepers.user_id INNER JOIN pets on bookings.petId = pets.id_pet INNER JOIN owners on pets.id_owner = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper;";
+            $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK FROM ".$this->tableName." INNER JOIN keepers on bookings.keeperId = keepers.user_id INNER JOIN pets on bookings.petId = pets.id_pet INNER JOIN owners on pets.id_owner = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper;";
 
             $this->connection = Connection::GetInstance();
 
@@ -40,8 +40,8 @@ class BookingDAODB implements IBookingDAODB{
 
                         $newKeeper = new Keeper;
                         $newKeeper->setUserId($Booking["keeperId"]);
-                        $newKeeper->setFirstName($Booking["firstName"]);
-                        $newKeeper->setLastName($Booking["lastName"]);
+                        $newKeeper->setFirstName($Booking["firstNameK"]);
+                        $newKeeper->setLastName($Booking["lastNameK"]);
                         $newKeeper->setDni($Booking["dni"]);
                         $newKeeper->setEmail($Booking["email"]);
                         $newKeeper->setPassword($Booking["pass"]);

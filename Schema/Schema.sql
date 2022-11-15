@@ -116,3 +116,32 @@ CREATE TABLE AvailabilityDate
 	CONSTRAINT fk_availability_keeperId FOREIGN KEY (keeperId) REFERENCES keepers (user_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+#Este evento es para que las reservas que finalizan ese dia puedan habilitar para hacer la review
+
+DROP EVENT IF EXISTS Booking_Finish;
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT Booking_Finish
+ON SCHEDULE EVERY 1 DAY
+STARTS '2022-11-14 00:00:00' ENABLE
+DO UPDATE Bookings
+set confirmed=4
+where finalDate<CURDATE();
+
+#Este evento es para que las reservas pendientes de aceptacion que empiezan un dia antes de hoy queden rechazadas automaticamente
+
+DROP EVENT IF EXISTS Booking_reject;
+
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT Booking_reject
+ON SCHEDULE EVERY 1 DAY
+STARTS '2022-11-14 00:00:00' ENABLE
+DO UPDATE Bookings
+set confirmed=2
+where  confirmed=0 and startDate<CURDATE();
+
+
+
+
