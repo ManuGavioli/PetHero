@@ -82,19 +82,25 @@
             try{
             $actionSepared = explode(",",$action);
             $Booking = new Booking;
-            $Booking = $this->BookingDAO->GetOnlyOneBooking($action[0]);
+            $Booking = $this->BookingDAO->GetOnlyOneBooking($action[0]); 
             
             if($actionSepared[1] == "Approve"){
-                $this->AvailablilityDAO->CancelAvailability($Booking);
-                $this->BookingDAO->ApproveBooking($Booking);
+                if($this->AutoCancel($Booking->getStartDate(),$Booking->getFinalDate()) == 1){
+                    echo "<script> confirm('Ya tiene los dias ocupados en otra reserva, esta se cancelara automaticamente, dirijase a 'MIS RESERVAS' para corroborar los datos.');</script>";
+                    $this->BookingDAO->RejectBooking($Booking);
+                    $this->KeeperController->ShowHome();
+                }else{
+                    $this->AvailablilityDAO->CancelAvailability($Booking);
+                    $this->BookingDAO->ApproveBooking($Booking);
 
-                $date1 = date_create($Booking->getStartDate());
-                $date2 = date_create($Booking->getFinalDate());
-                $diff = $date1->diff($date2);
+                    $date1 = date_create($Booking->getStartDate());
+                    $date2 = date_create($Booking->getFinalDate());
+                    $diff = $date1->diff($date2);
 
-                $precioTotal = $_SESSION['loggedUser']->getPrice() * ($diff->days+1);
-                $this->CouponDAO->Add_Coupon($precioTotal,$Booking->getIdBooking());
-                $this->KeeperController->ShowHome();
+                    $precioTotal = $_SESSION['loggedUser']->getPrice() * ($diff->days+1);
+                    $this->CouponDAO->Add_Coupon($precioTotal,$Booking->getIdBooking());
+                    $this->KeeperController->ShowHome();
+                }
             }else{
                 $this->BookingDAO->RejectBooking($Booking);
                 $this->KeeperController->ShowHome();
@@ -168,6 +174,18 @@
             require_once(VIEWS_PATH."error-page.php");
         }
             
+        }
+
+        private function AutoCancel($startDate,$endDate){
+            // si al menos una de las fechas de la reserva esta como 0 en availabilitydate, la cancelo
+            $availableDates = $this->AvailablilityDAO->GetFiltersDates($startDate,$endDate);
+            $autoCancel=0;
+            foreach($availableDates as $aDates){
+                if($aDates->getAvailable() == 0){
+                    $autoCancel = 1;
+                }
+            }
+            return $autoCancel;
         }
         
     }

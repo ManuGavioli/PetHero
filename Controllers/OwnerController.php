@@ -100,37 +100,37 @@ class OwnerController{
         Validation::ValidUser();
 
         try{
-        $_SESSION['loggedUser']->setFirstName($firstname);
-        $_SESSION['loggedUser']->setLastName($lasName);
-        $_SESSION['loggedUser']->setDni($dni);
-        $_SESSION['loggedUser']->setEmail($email);
-        $_SESSION['loggedUser']->setPassword($password);
-        $_SESSION['loggedUser']->setPhoneNumber($phonenumber);
-        $this->DataOwners->EditUser($_SESSION['loggedUser']);
-        echo "<script> confirm('Información actualizada con éxito!');</script>";
-        $this->MyProfile();
-    }catch(Exception $ex)
-    {
-        require_once(VIEWS_PATH."error-page.php");
-    }
+            $_SESSION['loggedUser']->setFirstName($firstname);
+            $_SESSION['loggedUser']->setLastName($lasName);
+            $_SESSION['loggedUser']->setDni($dni);
+            $_SESSION['loggedUser']->setEmail($email);
+            $_SESSION['loggedUser']->setPassword($password);
+            $_SESSION['loggedUser']->setPhoneNumber($phonenumber);
+            $this->DataOwners->EditUser($_SESSION['loggedUser']);
+            echo "<script> confirm('Información actualizada con éxito!');</script>";
+            $this->MyProfile();
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
     }
 
     public function FilterKeepers($beginning, $end){
         //funcion que devuelva una lista de keepers filtrada
         Validation::ValidUser();
         try{
-        $dates_list=$this->DataDates->GetFiltersDates($beginning, $end); 
-        $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
-        $pets_listAll=$this->DataPets->GetAll();
-        $keeper_list=$this->DataKeepers->GetAll();
-        $booking_list = $this->DataBookings->GetAll();
+            $dates_list=$this->DataDates->GetFiltersDates($beginning, $end); 
+            $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
+            $pets_listAll=$this->DataPets->GetAll();
+            $keeper_list=$this->DataKeepers->GetAll();
+            $booking_list = $this->DataBookings->GetAll();
         
-        require_once(VIEWS_PATH.'home.php');
-    }catch(Exception $ex)
-    {
-        require_once(VIEWS_PATH."error-page.php");
-    }
-    }
+            require_once(VIEWS_PATH.'home.php');
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
+        }
 
     /*public function ShowReservationView(){
         var_dump($selectdates);
@@ -152,12 +152,12 @@ class OwnerController{
         Validation::ValidUser();
         
         try{
-        $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
-        $pets_listAll=$this->DataPets->GetAll();
-        $keeper_list=$this->DataKeepers->GetAll();
-        $dates_list=$this->DataDates->GetAll();
-        $booking_list = $this->DataBookings->GetAll();
-        $reviews_list=$this->DataReviews->GetAll();
+            $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
+            $pets_listAll=$this->DataPets->GetAll();
+            $keeper_list=$this->DataKeepers->GetAll();
+            $dates_list=$this->DataDates->GetAll();
+            $booking_list = $this->DataBookings->GetAll();
+            $reviews_list=$this->DataReviews->GetAll();
             require_once(VIEWS_PATH.'home.php');
         }catch(Exception $ex)
         {

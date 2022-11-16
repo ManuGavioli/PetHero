@@ -4,6 +4,7 @@
     use DAO\AvailabilityDAODB as AvailabilityDAODB;
     use DAO\BankDAODB as BankDAODB;
     use \Exception as Exception;
+    use Helper\Validation as Validation;
 
     class BankController
     {

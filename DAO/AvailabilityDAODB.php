@@ -124,7 +124,6 @@ class AvailabilityDAODB implements IAvailabilityDAO{
             $availabilityList = array();
 
             $query = "SELECT * FROM ".$this->tableName.' WHERE keeperDate >= :keeperDate && keeperDate <= :keeperDateend';
-
             $parameters["keeperDate"] = $beginning;
             $parameters["keeperDateend"] = $end;
            
