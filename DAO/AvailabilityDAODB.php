@@ -211,6 +211,38 @@ class AvailabilityDAODB implements IAvailabilityDAO{
         }
     }
 
+    public function GetFiltersDatesForKeeper(Booking $Booking){
+        try
+        {
+            $availabilityList = array();
+
+            $query = "SELECT * FROM ".$this->tableName.' WHERE keeperDate >= :keeperDate && keeperDate <= :keeperDateend AND keeperId = '.$Booking->getKeeperId()->getUserId();
+            $parameters["keeperDate"] = $Booking->getStartDate();
+            $parameters["keeperDateend"] = $Booking->getFinalDate();
+           
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query, $parameters);
+            
+            foreach ($resultSet as $availability)
+            {                
+                        $availabilityNew=new Availability();
+                        $availabilityNew->setAvailabilityId($availability['availabilityId']);
+                        $availabilityNew->setKeeperId($availability['keeperId']);
+                        $availabilityNew->setKeeperDate($availability['keeperDate']);
+                        $availabilityNew->setAvailable($availability['available']);
+
+                array_push($availabilityList, $availabilityNew);
+            }
+
+            return $availabilityList;
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
 }
 
 
