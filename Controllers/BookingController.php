@@ -89,7 +89,6 @@
                 if($actionSepared[1] == "Approve"){
                     
                     $this->AvailablilityDAO->CancelAvailability($Booking);
-                    $this->BookingDAO->ApproveBooking($Booking);
 
                     foreach($keeperSessNonActiveBList as $oneBooking){
                         if($this->AutoCancel($oneBooking) == 1){
@@ -101,6 +100,7 @@
                     if($messageDrop == 1){
                         echo "<script> confirm('Alguna de las reservas que tiene pendiente coincide con el rango de fechas de la reserva que esta aceptando, automaticamente se rechazaran todas las que cumplan esa condicion. Chequee el apartado de MIS RESERVAS para corroborar la informacion!');</script>";
                     }
+                    $this->BookingDAO->ApproveBooking($Booking);
 
                     $date1 = date_create($Booking->getStartDate());
                     $date2 = date_create($Booking->getFinalDate());

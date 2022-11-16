@@ -83,12 +83,12 @@ class OwnerController{
     public function MyProfile(){
         Validation::ValidUser();
         try{
-        $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
-        require_once(VIEWS_PATH."user-profile.php");
-    }catch(Exception $ex)
-    {
-        require_once(VIEWS_PATH."error-page.php");
-    }
+            $petsofowner=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
+            require_once(VIEWS_PATH."user-profile.php");
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
     }
 
     public function Edit($user_id){
@@ -124,13 +124,14 @@ class OwnerController{
             $pets_listAll=$this->DataPets->GetAll();
             $keeper_list=$this->DataKeepers->GetAll();
             $booking_list = $this->DataBookings->GetAll();
+            $reviews_list=$this->DataReviews->GetAll();
         
             require_once(VIEWS_PATH.'home.php');
         }catch(Exception $ex)
         {
             require_once(VIEWS_PATH."error-page.php");
         }
-        }
+    }
 
     /*public function ShowReservationView(){
         var_dump($selectdates);
