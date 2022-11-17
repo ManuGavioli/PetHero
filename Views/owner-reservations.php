@@ -22,7 +22,7 @@
                               <td><?php
                                             echo $bookings->getKeeperId()->getFirstName()." ".$bookings->getKeeperId()->getLastName();
                                ?></td>
-                              <td><?php  echo "desde ".$bookings->getStartDate()." hasta ".$bookings->getFinalDate(); ?></td>
+                              <td><?php  echo "desde ".date('d-m-Y', strtotime($bookings->getStartDate()))." hasta ".date('d-m-Y', strtotime($bookings->getFinalDate())); ?></td>
                               <td><?php 
                                             echo $bookings->getPetId()->getName();
                                 ?></td>
@@ -56,6 +56,48 @@
                               }else if($bookings->getConfirmed()==3){
                                    echo "Su Reserva ya esta confirmada";
                               }else if($bookings->getConfirmed()==5){
+                                   ?>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+                                                  Pagar 50%💰
+                                                  </button>
+
+                                             <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                       <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Datos para el Pago</h5>
+                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                                 </button>
+                                                       </div>
+                                                                      <div class="modal-body">
+                                                                           <form action="<?php echo FRONT_ROOT."Booking/PayBooking"?>" method="post">
+                                                                            <div class="col-lg-4">
+               
+                                                                                <label for="">CBU: <?php  echo $bookings->getKeeperId()->getBankKeeper()->getCbu(); ?></label>
+                                                                                <br>
+                                                                                <label for="">ALIAS: <?php  echo $bookings->getKeeperId()->getBankKeeper()->getAlias(); ?></label>
+                                                                                <br>
+                                                                                <label for="">Debe transferir: <?php echo $Total/2; ?></label>
+                                                                           </div>
+                                                                           
+                                                                                <div class="form-group">
+                                                                                     <h3>Numero del Comprobante:</h3>
+                                                                                     <input maxlength="10" type="number" name="voucher" class="form-control" required>
+                                                                                </div>
+                                                                      </div>
+                                                            <div class="modal-footer">
+                                                                 <button type="submit" name="idbooking" value="<?php echo $bookings->getIdBooking(); ?>" class="btn btn-primary btn-lg btn-block" style="background-color: #48c; color: #fff" >Realizar Pago💰</button>
+                                                            </div>
+                                                            </form>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   <?php
+                              }else if($bookings->getConfirmed()==6){
                                    echo "Finalizada";
                               }else if($bookings->getConfirmed()==4){
                                    ?>  

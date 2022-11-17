@@ -24,7 +24,7 @@
                if($_SESSION['loggedUser']->isKeeperOrOwner() == 0){
           ?>   
           <span class="navbar-text">
-          <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowHome'?>" >Pet Hero</a>
+          <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowHome'?>" ><img src = "../Views/Styles/img/petHeroIcon.jpg" style="height: 30px; border-radius:5px;"> Pet Hero</a>
      </span>
      <ul class="navbar-nav ml-auto">
                <li class="nav-item">

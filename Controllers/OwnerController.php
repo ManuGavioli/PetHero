@@ -119,13 +119,18 @@ class OwnerController{
         //funcion que devuelva una lista de keepers filtrada
         Validation::ValidUser();
         try{
-            $dates_list=$this->DataDates->GetFiltersDates($beginning, $end); 
+            if($beginning > $end){
+                echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
+                $this->ShowHome();
+            }else{
+                $dates_list=$this->DataDates->GetFiltersDates($beginning, $end); 
             $pets_list=$this->DataPets->GetAllforOwner($_SESSION['loggedUser']->getUserId());
             $pets_listAll=$this->DataPets->GetAll();
             $keeper_list=$this->DataKeepers->GetAll();
             $booking_list = $this->DataBookings->GetAll();
             $reviews_list=$this->DataReviews->GetAll();
         
+            }
             require_once(VIEWS_PATH.'home.php');
         }catch(Exception $ex)
         {

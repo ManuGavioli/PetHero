@@ -61,7 +61,7 @@
                             ?></td>
                             <td><?php
                                 if($availableDatesFromKeeper != null){
-                                    echo "Desde el " . $availableDatesFromKeeper[0] . " Hasta el " . $availableDatesFromKeeper[count($availableDatesFromKeeper)-1];
+                                    echo "Desde el " . date('d-m-Y', strtotime($availableDatesFromKeeper[0])) . " Hasta el " . date('d-m-Y', strtotime($availableDatesFromKeeper[count($availableDatesFromKeeper)-1]));
                                 }else{
                                     echo "NO ASIGNADAS";
                                 }

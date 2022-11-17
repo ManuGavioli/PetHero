@@ -32,8 +32,8 @@
                                                        <td><?php echo $booking->getPetId()->getObservations(); ?></td>
                                                        <td><?php echo $booking->getPetId()->getMyowner()->getEmail(); ?></td>
                                                        <td><?php echo $booking->getPetId()->getMyowner()->getPhoneNumber(); ?></td>
-                                                       <td><?php echo $booking->getStartDate(); ?></td>
-                                                       <td><?php echo $booking->getFinalDate(); ?></td>
+                                                       <td><?php echo date('d-m-Y', strtotime($booking->getStartDate())); ?></td>
+                                                       <td><?php echo date('d-m-Y', strtotime($booking->getFinalDate())); ?></td>
                                                        <td>
                                                        <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Approve" style="background-color: green; color: #fff;margin: 5px" >Aceptar</button>
                                                        <button type="submit" class="btn" name="action" value="<?php echo $booking->getIdBooking()?>,Reject" style="background-color: #991919; color: #fff" >Rechazar</button> 
@@ -128,7 +128,7 @@
                                              <?php 
                                              foreach($dates_list as $dates){
                                                   if ($dates->getKeeperId()==$keeper->getUserId() && $dates->getAvailable()==true){
-                                                      ?> <option type="date" value="<?php echo $dates->getKeeperDate() ?>">  <?php echo $dates->getKeeperDate().'<br>'; 
+                                                      ?> <option type="date" value="<?php echo $dates->getKeeperDate() ?>">  <?php echo date('d-m-Y', strtotime($dates->getKeeperDate())).'<br>'; 
                                                   } 
                                              }
                                         ?>
@@ -140,7 +140,7 @@
                                              <?php 
                                              foreach($dates_list as $dates){
                                                   if ($dates->getKeeperId()==$keeper->getUserId() && $dates->getAvailable()==true){
-                                                      ?> <option type="date" value="<?php echo $dates->getKeeperDate() ?>">  <?php echo $dates->getKeeperDate().'<br>'; 
+                                                      ?> <option type="date" value="<?php echo $dates->getKeeperDate() ?>">  <?php echo date('d-m-Y', strtotime($dates->getKeeperDate())).'<br>'; 
                                                   } 
                                              }
                                         ?>

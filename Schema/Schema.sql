@@ -101,7 +101,7 @@ CREATE TABLE Coupon
 	paidAlready float(10) DEFAULT NULL,
 	totalPay float(10) DEFAULT NULL,
         BookingId int(11) NOT NULL,
-        VoucherCode int(11) UNIQUE,
+        VoucherCode bigint(30) UNIQUE,
 	PRIMARY KEY(idCoupon),
         CONSTRAINT fk_booking_coupon FOREIGN KEY (BookingId) REFERENCES Bookings (idBooking) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -127,7 +127,7 @@ ON SCHEDULE EVERY 1 DAY
 STARTS '2022-11-14 00:00:00' ENABLE
 DO UPDATE Bookings
 set confirmed=4
-where finalDate<CURDATE();
+where confirmed=3 and finalDate<CURDATE();
 
 #Este evento es para que las reservas pendientes de aceptacion que empiezan un dia antes de hoy queden rechazadas automaticamente
 

@@ -6,7 +6,7 @@
      <section id="listado" class="mb-5">
           
           <div class="container">
-               <h2 class="mb-4">My Pets</h2>
+               <h2 class="mb-4">Mis Mascotas</h2>
                <?php foreach($petsofowner as $pets){ ?> 
                                    <table class="table bg-light-alpha">
                
@@ -34,8 +34,13 @@
                     </thead> 
                     <tbody> 
                          <tr>
-                              <td><img width="308" height="173.25" src="<?php  echo $pets->getPhoto();  ?>"></td> 
-                              <td><img width="308" height="173.25" src="<?php  echo $pets->getVaccinationPhoto();  ?>"></td> 
+                              
+                              <td><img width="308" height="173.25" src="<?php echo "../".$pets->getPhoto(); ?>" alt="Imagen de la Macota"></td> 
+                              <?php  if(pathinfo($pets->getVaccinationPhoto(), PATHINFO_EXTENSION)=='pdf'){ ?>
+                                   <td><embed width="308" height="173.25" src="<?php  echo "../".$pets->getVaccinationPhoto();  ?>" type="application/pdf" alt="Imagen de la planilla de Vacunación"></td>               
+                                   <?php }else{ ?>
+                              <td><img width="308" height="173.25" src="<?php  echo "../".$pets->getVaccinationPhoto();  ?>" alt="Imagen de la planilla de Vacunación"></td> 
+                                        <?php  } ?>
                               <td><iframe width="308" height="173.25" src="https://www.youtube.com/embed/<?php echo $pets->getVideo(); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
                          </tr>
                         </tbody> 

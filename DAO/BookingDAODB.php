@@ -379,6 +379,20 @@ class BookingDAODB implements IBookingDAODB{
         }
     }
 
+    public function ConfirmationBookingTotalpay ($Booking){
+        try{
+            $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed WHERE idBooking = ".$Booking->getIdBooking();
+
+            $parameters["confirmed"] = 6;
+            
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
    /* public function GetAllforOwnerFinish($pets){
         $Booking_owner=array();
         $allBookingsforowner=$this->GetAllforOwner($pets);

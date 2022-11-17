@@ -68,7 +68,11 @@
                 //le agrego la plata en su banco
                 $this->BankDAO->ModifyTotal($couponselect->getFullPayment()/2, $bookingselect->getKeeperId()->getBankKeeper());
                 //cambia el estado de la reserva a super confirmada
-                $this->BookingDAO->ConfirmationBooking($bookingselect);
+                if($couponselect->getPaidAlready()==0){
+                    $this->BookingDAO->ConfirmationBooking($bookingselect);
+                }else{
+                    $this->BookingDAO->ConfirmationBookingTotalpay($bookingselect);
+                }
 
                 header('location:'.FRONT_ROOT.'Booking/ShowListReservas');
             }catch(Exception $ex)
@@ -77,16 +81,29 @@
             }
         }
 
+
+
         public function Action($action){
             Validation::ValidUser();
             try{
                 $actionSepared = explode(",",$action);
                 $Booking = new Booking;
                 $Booking = $this->BookingDAO->GetOnlyOneBooking($action[0]);
-                $keeperSessNonActiveBList = $this->BookingDAO->BookingsConfirmationPendient($_SESSION['loggedUser']->getUserId());
+                
                 $messageDrop = 0;
                 
                 if($actionSepared[1] == "Approve"){
+
+                    $this->BookingDAO->ApproveBooking($Booking);
+
+                    $date1 = date_create($Booking->getStartDate());
+                    $date2 = date_create($Booking->getFinalDate());
+                    $diff = $date1->diff($date2);
+
+                    $precioTotal = $_SESSION['loggedUser']->getPrice() * ($diff->days+1);
+                    $this->CouponDAO->Add_Coupon($precioTotal,$Booking->getIdBooking());
+
+                    $keeperSessNonActiveBList = $this->BookingDAO->BookingsConfirmationPendient($_SESSION['loggedUser']->getUserId());
                     
                     $this->AvailablilityDAO->CancelAvailability($Booking);
 
@@ -100,14 +117,7 @@
                     if($messageDrop == 1){
                         echo "<script> confirm('Alguna de las reservas que tiene pendiente coincide con el rango de fechas de la reserva que esta aceptando, automaticamente se rechazaran todas las que cumplan esa condicion. Chequee el apartado de MIS RESERVAS para corroborar la informacion!');</script>";
                     }
-                    $this->BookingDAO->ApproveBooking($Booking);
-
-                    $date1 = date_create($Booking->getStartDate());
-                    $date2 = date_create($Booking->getFinalDate());
-                    $diff = $date1->diff($date2);
-
-                    $precioTotal = $_SESSION['loggedUser']->getPrice() * ($diff->days+1);
-                    $this->CouponDAO->Add_Coupon($precioTotal,$Booking->getIdBooking());
+                    
                     $this->KeeperController->ShowHome();
 
                 }else{

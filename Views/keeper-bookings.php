@@ -33,7 +33,7 @@
                         <tr>
                             <td><?php echo $booking->getIdBooking(); ?></td>
                             <td><?php echo ucfirst($booking->getPetId()->getMyowner()->getFirstName())." ".ucfirst($booking->getPetId()->getMyowner()->getLastName()); ?></td>
-                            <td><?php echo "Desde el ".$booking->getStartDate()." hasta el ".$booking->getFinalDate(); ?></td>
+                            <td><?php echo "Desde el ".date('d-m-Y', strtotime($booking->getStartDate()))." hasta el ".date('d-m-Y', strtotime($booking->getFinalDate())); ?></td>
                             <td><?php echo ucfirst($booking->getPetId()->getName()); ?></td>
                             <?php foreach($coupon_list as $coupon){
                                 if($coupon->getBookingId() == $booking->getIdBooking()){
@@ -48,7 +48,7 @@
                                     if($booking->getConfirmed() == 3){
                                         echo "Reserva confirmada - 50% abonado";
                                     }else{
-                                        if($booking->getConfirmed() == 4 || $booking->getConfirmed() == 5){
+                                        if($booking->getConfirmed() == 4 || $booking->getConfirmed() == 5 || $booking->getConfirmed() == 6){
                                             echo "Reserva completada";
                                         }
                                     }

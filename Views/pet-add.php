@@ -5,7 +5,7 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Registro de My New Pet</h2>
-               <form action="<?php echo FRONT_ROOT.'Pet/AddPet'?>" method="post" class="bg-light-alpha p-5">
+               <form action="<?php echo FRONT_ROOT.'Pet/AddPet'?>" method="post" enctype="multipart/form-data" class="bg-light-alpha p-5">
                
                
                <div class="col-lg-4">
@@ -18,7 +18,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Foto</label>
-                                   <input  type="url" name="photo" class="form-control" required>
+                                   <input  type="file" name="photo" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
@@ -45,7 +45,7 @@
                         <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="">Foto de Vacunacion</label>
-                                   <input  type="url" name="vaccinationPhoto" class="form-control" required>
+                                   <input  type="file" name="vaccinationPhoto" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">

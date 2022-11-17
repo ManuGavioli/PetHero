@@ -30,18 +30,20 @@
         }
         }
         
-        function AddPet($name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
+        function AddPet($name, $petType, $raze, $size, $observations, $video){
 
             Validation::ValidUser();
-            
+
             try{
+            
+            if($this->chekTypeFileoutPDF('photo')==true && $this->chekTypeFileALL('vaccinationPhoto')==true){
             $petNew=new Pet();
             $petNew->setName($name);
-            $petNew->setPhoto($photo);
+            $petNew->setPhoto($this->RedirectImage('photo'));
             $petNew->setPetType($petType);
             $petNew->setRaze($raze);
             $petNew->setSize($size);
-            $petNew->setVaccinationPhoto($vaccinationPhoto);
+            $petNew->setVaccinationPhoto($this->RedirectImage('vaccinationPhoto'));
             $petNew->setObservations($observations);
     
             //convertir la url de un video para luego poder incrustarlo automaticamente en la vista 
@@ -57,11 +59,42 @@
             //no hay mas lista de pets en owner
            //$_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
     
-            $this->ShowListPetView();
+            header("location:".FRONT_ROOT."Pet/ShowListPetView");
+            }else{
+                echo "<script> confirm('Formato/s de imagenes cargados inavlidos solo se permite: PNG, JPG y PDF(solo en la planilla de vacunación)');</script>";
+                require_once(VIEWS_PATH."pet-add.php");
+            }
         }catch(Exception $ex)
         {
             require_once(VIEWS_PATH."error-page.php");
         }
         }
+
+        private function RedirectImage($filename){
+            $base_name= basename($_FILES[$filename]["name"]);
+            $final_name = date("m-d-y")."-".date("H-i-s")."-".$base_name;
+            $route= VIEWS_PATH."Styles/imgPhotoPets/".$final_name;
+            move_uploaded_file($_FILES[$filename]['tmp_name'], $route);
+
+            return $route;
+        }
+
+        private function chekTypeFileALL($filename){
+            $ok=false;
+            if($_FILES[$filename]["type"]=='image/jpeg' || $_FILES[$filename]["type"]=='image/png' || $_FILES[$filename]["type"]=='application/pdf' || $_FILES[$filename]["type"]=='image/jpg'){
+                $ok=true;
+                var_dump($_FILES[$filename]["type"]);
+            }
+            return $ok;
+        }
+
+        private function chekTypeFileoutPDF($filename){
+            $ok=false;
+            if($_FILES[$filename]["type"]=='image/jpeg' || $_FILES[$filename]["type"]=='image/png' || $_FILES[$filename]["type"]=='image/jpg'){
+                $ok=true;
+            }
+            return $ok;
+        }
+
     }
 ?>
