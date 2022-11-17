@@ -35,7 +35,7 @@
                     <tbody> 
                          <tr>
                               
-                              <td><img width="308" height="173.25" src="<?php echo "../".$pets->getPhoto(); ?>" alt="Imagen de la Macota"></td> 
+                              <td><img width="308" height="173.25" src="<?php echo "../".$pets->getPhoto(); ?>" alt="Imagen de la Mascota"></td> 
                               <?php  if(pathinfo($pets->getVaccinationPhoto(), PATHINFO_EXTENSION)=='pdf'){ ?>
                                    <td><embed width="308" height="173.25" src="<?php  echo "../".$pets->getVaccinationPhoto();  ?>" type="application/pdf" alt="Imagen de la planilla de Vacunación"></td>               
                                    <?php }else{ ?>
