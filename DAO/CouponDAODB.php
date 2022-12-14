@@ -60,7 +60,7 @@
 
         public function Modify($idBooking, $mount, $voucher){
             try{ 
-                $query = "UPDATE ". $this->tableName . " SET paidAlready=paidAlready+".$mount." , VoucherCode=".$voucher." where BookingId=".$idBooking.";"; 
+                $query = "UPDATE ". $this->tableName . " SET paidAlready=paidAlready+".$mount." , VoucherCode='".$voucher."' where BookingId=".$idBooking.";"; 
     
                     $this->connection = Connection::GetInstance();
     

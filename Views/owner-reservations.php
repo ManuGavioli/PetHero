@@ -73,7 +73,7 @@
                                                                  </button>
                                                        </div>
                                                                       <div class="modal-body">
-                                                                           <form action="<?php echo FRONT_ROOT."Booking/PayBooking"?>" method="post">
+                                                                           <form action="<?php echo FRONT_ROOT."Booking/PayBooking"?>" method="post" enctype="multipart/form-data">
                                                                             <div class="col-lg-4">
                
                                                                                 <label for="">CBU: <?php  echo $bookings->getKeeperId()->getBankKeeper()->getCbu(); ?></label>
@@ -84,8 +84,8 @@
                                                                            </div>
                                                                            
                                                                                 <div class="form-group">
-                                                                                     <h3>Numero del Comprobante:</h3>
-                                                                                     <input maxlength="10" type="number" name="voucher" class="form-control" required>
+                                                                                     <h3>Foto del Comprobante:</h3>
+                                                                                     <input  type="file" name="voucher" class="form-control" required>
                                                                                 </div>
                                                                       </div>
                                                             <div class="modal-footer">
@@ -161,7 +161,7 @@
                                                                  </button>
                                                        </div>
                                                                       <div class="modal-body">
-                                                                           <form action="<?php echo FRONT_ROOT."Booking/PayBooking"?>" method="post">
+                                                                           <form action="<?php echo FRONT_ROOT."Booking/PayBooking"?>" method="post" enctype="multipart/form-data">
                                                                             <div class="col-lg-4">
                
                                                                                 <label for="">CBU: <?php  echo $bookings->getKeeperId()->getBankKeeper()->getCbu(); ?></label>
@@ -172,8 +172,8 @@
                                                                            </div>
                                                                            
                                                                                 <div class="form-group">
-                                                                                     <h3>Numero del Comprobante:</h3>
-                                                                                     <input maxlength="10" type="number" name="voucher" class="form-control" required>
+                                                                                     <h3>Foto del Comprobante:</h3>
+                                                                                     <input  type="file" name="voucher" class="form-control" required>
                                                                                 </div>
                                                                       </div>
                                                             <div class="modal-footer">
