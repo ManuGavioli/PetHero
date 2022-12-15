@@ -6,7 +6,9 @@
           <a class="nav-link" href="<?php echo FRONT_ROOT.'Keeper/ShowHome'?>" ><img src = "../Views/Styles/img/petHeroIcon.jpg" style="height: 30px; border-radius:5px;"> Pet Hero </a>
      </span>
      <ul class="navbar-nav ml-auto">
-             
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Chat/ShowAddChatView'?>">CHATS</a>
+               </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Booking/MyBookings'?>">MIS RESERVAS</a>
                </li>
@@ -27,6 +29,9 @@
           <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowHome'?>" ><img src = "../Views/Styles/img/petHeroIcon.jpg" style="height: 30px; border-radius:5px;"> Pet Hero</a>
      </span>
      <ul class="navbar-nav ml-auto">
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Chat/ShowAddChatView'?>">CHATS</a>
+               </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowAddPetView'?>">AGREGAR NUEVA MASCOTA</a>
                </li>

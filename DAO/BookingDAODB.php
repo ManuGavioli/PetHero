@@ -260,7 +260,6 @@ class BookingDAODB implements IBookingDAODB{
                 $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
                 $newKeeper->setPetType($Booking["petType"]);
                 $newKeeper->setPrice($Booking["price"]);
-
                 $newKeeper->setBankKeeper($Booking["BankKeeper"]);
 
                 $BookingNew->setKeeperId($newKeeper);

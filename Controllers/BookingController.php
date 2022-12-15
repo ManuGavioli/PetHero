@@ -10,6 +10,7 @@
     use Models\Booking as Booking;
     use \Exception as Exception;
     use Controllers\MailController as MailController;
+    use Controllers\ChatController as ChatController;
 
     class BookingController
     {   
@@ -31,6 +32,7 @@
             $this->KeeperController = new KeeperController;
             $this->OwnerController = new OwnerController;
             $this->MailController = new MailController;
+            $this->ChatController = new ChatController;
         }
 
         public function MyBookings(){
@@ -144,6 +146,9 @@
         public function NewBooking($first_date, $end_date, $id_mascot, $id_keeper){
             Validation::ValidUser();
             try{
+                if($id_keeper=='chat'){
+
+                }else{
                 if($first_date > $end_date){
                     echo "<script> confirm('La fecha de inicio debe ser anterior a la fecha final... Vuelva a intentar');</script>";
                     $this->OwnerController->ShowHome();
@@ -176,6 +181,7 @@
                         echo "<script> confirm('El rango de fechas seleccionado no es valido');</script>";
                         $this->OwnerController->ShowHome();
                     }
+                }
                 }
             }catch(Exception $ex)
             {

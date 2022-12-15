@@ -170,14 +170,18 @@
                                         </select>
                                         <br>
                                         <br>
-                                        <button type="submit" class="btn" value="<?php echo $keeper->getUserId(); ?>" name="id_keeper" style="background-color: #FFEC00; color: #000000" >Reservar💰</button></td>
+                                        <button type="submit" class="btn" value="<?php echo $keeper->getUserId(); ?>" name="id_keeper" style="background-color: #FFEC00; color: #000000" >Reservar💰</button>    
+                                        </form>
+                                        <form action="<?php echo FRONT_ROOT.'Chat/NewChat'?>" method="post">
+                                        <button type="submit" class="btn" value="<?php echo $keeper->getUserId(); ?>" name="id_keeper" style="background-color: green; color: #fff;margin: 5px" >Chatear 💬</button></td>
+                                        </form>    
                                    </tr>
                               </tbody> 
                               
 
                               </table>
                               
-                              </form>
+                               <?php // aca estaba el form de cierre ?>
                        <?php
                     }}}}
                ?>

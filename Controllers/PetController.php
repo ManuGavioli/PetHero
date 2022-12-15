@@ -30,7 +30,7 @@
         }
         }
         
-        function AddPet( $name, $photo, $petType, $raze, $size, $vaccinationPhoto, $observations, $video){
+        function AddPet( $name, $petType, $raze, $size, $observations, $video){
 
             Validation::ValidUser();
 
