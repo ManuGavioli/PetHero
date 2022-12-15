@@ -150,7 +150,7 @@ ON SCHEDULE EVERY 1 DAY
 STARTS '2022-11-14 00:00:00' ENABLE
 DO UPDATE Bookings
 set confirmed=4
-where confirmed=3 and finalDate<CURDATE();
+where confirmed=7 and finalDate<CURDATE();
 
 #Este evento es para que las reservas pendientes de aceptacion que empiezan un dia antes de hoy queden rechazadas automaticamente
 
@@ -163,5 +163,16 @@ ON SCHEDULE EVERY 1 DAY
 STARTS '2022-11-14 00:00:00' ENABLE
 DO UPDATE Bookings
 set confirmed=2
-where  confirmed=0 and startDate<CURDATE();
+where  confirmed=0 or confirmed=1  and startDate<CURDATE();
 
+#Este evento es para que las reservas que empiezan ese dia puedan habilitar para hacer el segundo pago
+
+DROP EVENT IF EXISTS Pay_2;
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT Pay_2
+ON SCHEDULE EVERY 1 DAY
+STARTS '2022-11-14 00:00:00' ENABLE
+DO UPDATE Bookings
+set confirmed=5
+where confirmed=3 and startDate<CURDATE();

@@ -45,10 +45,10 @@
                                 if($booking->getConfirmed() == 1){
                                     echo "Reserva confirmada - pago pendiente";
                                 }else{
-                                    if($booking->getConfirmed() == 3){
+                                    if($booking->getConfirmed() == 3 || $booking->getConfirmed() == 5){
                                         echo "Reserva confirmada - 50% abonado";
                                     }else{
-                                        if($booking->getConfirmed() == 4 || $booking->getConfirmed() == 5 || $booking->getConfirmed() == 6){
+                                        if($booking->getConfirmed() == 4 || $booking->getConfirmed() == 7 || $booking->getConfirmed() == 6){
                                             echo "Reserva completada";
                                         }
                                     }
@@ -62,7 +62,40 @@
                             if($booking->getConfirmed() == 2){?>       
                                 <button type="submit" class="btn" name="id_booking" value="<?php echo $booking->getIdBooking()?>" style="background-color: #991919; color: #fff" >Borrar</button>   
                             <?php
-                            }
+                           } if($booking->getConfirmed() == 3 || $booking->getConfirmed() == 5 || $booking->getConfirmed() == 4 || $booking->getConfirmed() == 7 || $booking->getConfirmed() == 6){?>       
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="background-color: #037DFF; color: #fff" >
+                                <!-- Button trigger modal -->
+                                Comprobante 📄
+                                </button>
+
+                                             <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                       <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Comprobante</h5>
+                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                                 </button>
+                                                       </div>
+                                                        <div class="modal-body">
+                                                                          
+                                                              <label for="">Comprobantes:</label>
+                                                              <br>
+                                                                    <?php foreach ($coupon_list as $voucher){ 
+                                                                        if($voucher->getBookingId()==$booking->getIdBooking()){ 
+                                                                            if(pathinfo($voucher->getVoucherNumInic(), PATHINFO_EXTENSION)=='pdf'){ ?>
+                                                                        <embed style="max-width: 400px" src="<?php  echo "../".$voucher->getVoucherNumInic();  ?>" type="application/pdf" alt="Comprobante">
+                                                                        <?php }else { ?>
+                                                                        <img style="max-width: 400px" src="<?php  echo "../".$voucher->getVoucherNumInic();  ?>" alt="Comprobante">           
+                                                                        <?php } } } ?>
+                                                                <br>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                            <?php
+                            } 
                             ?></td>
                             
                         </tr>

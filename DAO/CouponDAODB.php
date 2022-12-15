@@ -28,6 +28,7 @@
                 $couponNew->setIdCoupon($coupon['idCoupon']);
                 $couponNew->setPaidAlready($coupon['paidAlready']);
                 $couponNew->setFullPayment($coupon['totalPay']);
+                $couponNew->setVoucherNumInic($coupon['VoucherCode']);
                 $couponNew->setBookingId($coupon['BookingId']);
 
                 array_push($couponList, $couponNew);

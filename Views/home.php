@@ -157,7 +157,7 @@
                                                             if ($pets->getPetType()==$keeper->getPetType()){
                                                                  $in=1;
                                                                  foreach($booking_list as $bookingsPETS){
-                                                                      if($pets->getId()==$bookingsPETS->getPetId()->getId() and $bookingsPETS->getConfirmed()!=2){
+                                                                      if($pets->getId()==$bookingsPETS->getPetId()->getId() and $bookingsPETS->getConfirmed()!=2 and $bookingsPETS->getConfirmed()!=6){
                                                                          $in=0;
                                                                       }
                                                                  }

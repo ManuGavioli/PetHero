@@ -52,7 +52,7 @@ class MailController{
                 $fin=$booking->getFinalDate();
 
                 $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Aceptación de Reserva';
+                $mail->Subject = 'Reserva Aceptada';
                 $mail->Body    = '<html> 
                  <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
                  <img align="center" border="0" src="https://mlo1wbhvgmgt.i.optimole.com/w:1000/h:500/q:mauto/https://pethero.co.za/wp-content/uploads/2022/08/Pet-Hero_1000x500.png" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 80%;max-width: 464px;" width="464"/>

@@ -55,6 +55,8 @@
                                    echo "Reserva Rechazada";
                               }else if($bookings->getConfirmed()==3){
                                    echo "Su Reserva ya esta confirmada";
+                              }else if($bookings->getConfirmed()==7){
+                                   echo "Estadia Pagada";
                               }else if($bookings->getConfirmed()==5){
                                    ?>
                                     <!-- Button trigger modal -->

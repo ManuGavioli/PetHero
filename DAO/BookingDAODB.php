@@ -328,7 +328,7 @@ class BookingDAODB implements IBookingDAODB{
         try{
             $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed WHERE idBooking = ".$Booking->getIdBooking();
 
-            $parameters["confirmed"] = 5;
+            $parameters["confirmed"] = 6;
             
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters);
@@ -382,7 +382,7 @@ class BookingDAODB implements IBookingDAODB{
         try{
             $query = "UPDATE ".$this->tableName." SET confirmed = :confirmed WHERE idBooking = ".$Booking->getIdBooking();
 
-            $parameters["confirmed"] = 6;
+            $parameters["confirmed"] = 7;
             
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters);
