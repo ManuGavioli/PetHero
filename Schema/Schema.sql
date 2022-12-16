@@ -34,6 +34,7 @@ CREATE TABLE Keepers
         phoneNumber varchar(15) DEFAULT NULL,
         petType varchar(20) DEFAULT NULL,
         price float(10) DEFAULT NULL, 
+        notifications int (10) DEFAULT 0, 
         BankKeeper int(11) NOT NULL,
         PRIMARY KEY(user_id),
         CONSTRAINT fk_idbank FOREIGN KEY (BankKeeper) REFERENCES Banks (IdBank) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -48,6 +49,7 @@ CREATE TABLE Owners
         dni varchar(12) DEFAULT NULL,
         email varchar(45) DEFAULT NULL,
         pass varchar(45) DEFAULT NULL,
+        notifications int (10) DEFAULT 0, 
         phoneNumber varchar(15) DEFAULT NULL,
         PRIMARY KEY(user_id)
 
@@ -104,6 +106,7 @@ CREATE TABLE Coupon
 	totalPay float(10) DEFAULT NULL,
         BookingId int(11) NOT NULL,
         VoucherCode varchar(999) DEFAULT NULL,
+        VoucherCode2 varchar(999) DEFAULT NULL,
 	PRIMARY KEY(idCoupon),
         CONSTRAINT fk_booking_coupon FOREIGN KEY (BookingId) REFERENCES Bookings (idBooking) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

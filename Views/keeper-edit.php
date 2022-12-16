@@ -22,7 +22,7 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">DNI</label>
-                                   <input maxlength="8" type="number" name="dni" class="form-control" value="<?php echo $_SESSION['loggedUser']->getDni() ?>" placeholder="<?php echo $_SESSION['loggedUser']->getDni() ?>" required>
+                                   <input pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==8) return false;" type="number" name="dni" class="form-control" value="<?php echo $_SESSION['loggedUser']->getDni() ?>" placeholder="<?php echo $_SESSION['loggedUser']->getDni() ?>" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
@@ -40,7 +40,7 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Numero de telefono</label>
-                                   <input type="number" name="phone_number" class="form-control" value="<?php echo $_SESSION['loggedUser']->getPhoneNumber() ?>" placeholder="<?php echo $_SESSION['loggedUser']->getPhoneNumber() ?>" required>
+                                   <input pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==15) return false;" type="number" name="phone_number" class="form-control" value="<?php echo $_SESSION['loggedUser']->getPhoneNumber() ?>" placeholder="<?php echo $_SESSION['loggedUser']->getPhoneNumber() ?>" required>
                               </div>
                         </div>
                         <button type="submit" class="btn btn-dark ml-auto d-block">Editar Usuario</button>

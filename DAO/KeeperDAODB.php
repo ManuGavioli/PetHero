@@ -60,6 +60,7 @@
                     $keeper->setPhoneNumber($row["phoneNumber"]);
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
+                    $keeper->setNotification($row["notifications"]);
                     // AGREGO EL BANK id
 
                     $keeper->setBankKeeper($row["BankKeeper"]);
@@ -113,6 +114,7 @@
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
                     $keeper->setBankKeeper($row["BankKeeper"]);
+                    $keeper->setNotification($row["notifications"]);
                 }else{
                     $keeper = null;
                 }
@@ -168,6 +170,7 @@
                     $keeper->setPetType($row["petType"]);
                     $keeper->setPrice($row["price"]);
                     $keeper->setBankKeeper($row["BankKeeper"]);
+                    $keeper->setNotification($row["notifications"]);
                 }else{
                     $keeper = null;
                 }
@@ -210,6 +213,24 @@
                 throw $ex;
             }
         }
+
+        public function EditNotification($editKeeper){
+            try
+            {
+                $query = "UPDATE ".$this->tableName." SET  notifications = :notifications
+                WHERE user_id = ".$editKeeper->getUserId();
+
+                $parameters["notifications"] = $editKeeper->getNotification();
+                
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+        
 
     }
 ?>

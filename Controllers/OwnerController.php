@@ -21,6 +21,7 @@ use DAO\BankDAODB as BankDAODB;
 use DAO\CouponDAODB as CouponDAODB;
 use DAO\ReviewDAODB as ReviewDAODB;
 use \Exception as Exception;
+use Controllers\MailController as MailController;
 
 class OwnerController{
     private $DataOwners;
@@ -30,6 +31,7 @@ class OwnerController{
     private $DataBanks;
     private $DataCoupon;
     private $DataReviews;
+    private $MailController;
 
     function __construct(){
         //$this->DataOwners=new OwnerDAO();
@@ -43,6 +45,7 @@ class OwnerController{
         $this->DataBanks = new BankDAODB;
         $this->DataCoupon = new CouponDAODB;
         $this->DataReviews=new ReviewDAODB();
+        $this->MailController = new MailController;
     }
 
     function ShowRegisterView(){
@@ -57,7 +60,7 @@ class OwnerController{
     function AddOwner($firstname, $lasName, $dni, $email, $password, $phonenumber){
         
         try{
-            if($this->DataOwners->SearchEmail($email) == null){
+            if($this->DataOwners->SearchEmail($email) == null && $this->DataKeepers->SearchEmail($email) == null){
                 $ownerNew=new Owner();
                 $ownerNew->setFirstName($firstname);
                 $ownerNew->setLastName($lasName);
@@ -169,6 +172,24 @@ class OwnerController{
         {
             require_once(VIEWS_PATH."error-page.php");
         }
+    }
+
+    public function EditNotification($owner){
+        Validation::ValidUser();
+    try{
+            if($owner->getNotification()==1){
+                $this->DataOwners->EditNotification($owner);
+                //mandar mail
+                $this->MailController->sendChatPending($owner);
+            }else if($owner->getNotification()>1){
+                $this->DataOwners->EditNotification($owner);
+            }else{
+                $this->DataOwners->EditNotification($owner);
+            }
+    }catch(Exception $ex)
+    {
+        require_once(VIEWS_PATH."error-page.php");
+    }
     }
 
         

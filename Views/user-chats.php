@@ -29,7 +29,7 @@
                             <td><?php echo $chatsowner->getOwnerId()->getLastName(); ?></td>
                             <td>  <button type="submit" class="btn" name="chatid" value="<?php echo $chatsowner->getIdChat()?>" style="background-color: green; color: #fff;margin: 5px" >Chatear 💬</button></td>                                                                                                                                                   
                         </tr>
-                        <br>
+                        
                         <?php } }else{  foreach($chatsofowner as $chatsowner){ 
                         ?>
                         <tr>
@@ -38,7 +38,7 @@
                             <td><?php echo $chatsowner->getKeeperId()->getPrice(); ?></td>
                             <td>  <button type="submit" class="btn" name="chatid" value="<?php echo $chatsowner->getIdChat()?>" style="background-color: green; color: #fff;margin: 5px" >Chatear 💬</button></td>                                                                                                                                                   
                         </tr>
-                        <br>
+                        
                         <?php } }?> 
                     </tbody>
                     

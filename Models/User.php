@@ -11,6 +11,7 @@ class User{
     private $email;
     private $password;
     private $phoneNumber;
+    private $notification;
  
 
     public function getUserId()
@@ -92,6 +93,17 @@ class User{
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+
+    }
+
+    public function getNotification()
+    {
+        return $this->notification;
+    }
+
+    public function setNotification($notification)
+    {
+        $this->notification = $notification;
 
     }
 }

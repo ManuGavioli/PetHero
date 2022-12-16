@@ -8,7 +8,7 @@ class Coupon{
     private $paidAlready;       //cantidad pagada hasta el momento
     private $fullPayment;       //cantidad total a pagar
     private $voucherNumInic;    //nro del comprobante 
-    //private $voucherNumFinal;
+    private $voucherNumFinal;
     private $BookingId;    
 
 
@@ -66,6 +66,17 @@ class Coupon{
     public function setVoucherNumInic($voucherNumInic)
     {
         $this->voucherNumInic = $voucherNumInic;
+
+    }
+
+    public function getVoucherNumFinal()
+    {
+        return $this->voucherNumFinal;
+    }
+
+    public function setVoucherNumFinal($voucherNumFinal)
+    {
+        $this->voucherNumFinal = $voucherNumFinal;
 
     }
 }

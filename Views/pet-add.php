@@ -11,7 +11,7 @@
                <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Nombre</label>
-                                   <input type="text" name="name" class="form-control" required>
+                                   <input maxlength="30" type="text" name="name" class="form-control" required>
                               </div>
                         </div>
               
@@ -33,13 +33,13 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Raza</label>
-                                   <input type="text" name="raze" class="form-control" required>
+                                   <input maxlength="30" type="text" name="raze" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Tamaño</label>
-                                   <input type="number" name="size" class="form-control" required>
+                                   <label for="">Peso en KG</label>
+                                   <input pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==6) return false;" type="number" name="size" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">
@@ -51,7 +51,7 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Observaciones</label>
-                                   <input type="text" name="observations" class="form-control" required>
+                                   <input maxlength="270" type="text" name="observations" class="form-control" required>
                               </div>
                         </div>
                         <div class="col-lg-4">

@@ -29,6 +29,7 @@
                 $couponNew->setPaidAlready($coupon['paidAlready']);
                 $couponNew->setFullPayment($coupon['totalPay']);
                 $couponNew->setVoucherNumInic($coupon['VoucherCode']);
+                $couponNew->setVoucherNumFinal($coupon['VoucherCode2']);
                 $couponNew->setBookingId($coupon['BookingId']);
 
                 array_push($couponList, $couponNew);
@@ -72,6 +73,19 @@
             }
         }
 
+        public function Modify2($idBooking, $mount, $voucher){
+            try{ 
+                $query = "UPDATE ". $this->tableName . " SET paidAlready=paidAlready+".$mount." , VoucherCode2='".$voucher."' where BookingId=".$idBooking.";"; 
+    
+                    $this->connection = Connection::GetInstance();
+    
+                    $this->connection->ExecuteNonQuery($query); 
+    
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
         public function GetOnlyOneCoupon($id){ //retorna cuando la id del booking es la pasada por parametro
             try
             {
@@ -92,6 +106,7 @@
                     $couponNew->setPaidAlready($coupon['paidAlready']);
                     $couponNew->setFullPayment($coupon['totalPay']);
                     $couponNew->setVoucherNumInic($coupon['VoucherCode']);
+                    $couponNew->setVoucherNumFinal($coupon['VoucherCode2']);
                     $couponNew->setBookingId($coupon['BookingId']);
     
                     

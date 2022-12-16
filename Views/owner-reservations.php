@@ -187,7 +187,12 @@
                                              </div>
                                         </div>
                                     <?php
-                              }?></td>
+                              }  if ($bookings->getConfirmed()==1 || $bookings->getConfirmed()==3 ||$bookings->getConfirmed()==5 ||$bookings->getConfirmed()==7){ ?>
+                              
+                              <form action="<?php echo FRONT_ROOT."Chat/ChatBooking"?>" method="post">
+                                  <button type="submit" class="btn" name="keeperId" value="<?php echo $bookings->getKeeperId()->getUserId() ?>" style="background-color: green; color: #fff;" >Chatear 💬</button></td>                                                                                                     
+                              </form> <?php } ?>
+                         </td>
 
                          </tr>
                     </tbody> 

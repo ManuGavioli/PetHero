@@ -9,10 +9,13 @@
     use DAO\CouponDAODB as CouponDAODB;
     use DAO\KeeperDAODB as KeeperDAODB;
     use DAO\BankDAODB as BankDAODB;
+    use DAO\OwnerDAODB as OwnerDAODB;
     use Models\Keeper as Keeper;
+    use Models\Owner as Owner;
     use Models\Booking as Booking;
     use Models\Bank as Bank;
     use \Exception as Exception;
+    use Controllers\MailController as MailController;
 
 
     class KeeperController{
@@ -21,6 +24,8 @@
         private $BookingDAO;
         private $CouponDAO;
         private $BankDAO;
+        private $MailController;
+        private $OwnerDAO;
         
 
         public function __construct(){
@@ -30,6 +35,9 @@
             $this->BookingDAO = new BookingDAODB;
             $this->CouponDAO = new CouponDAODB;
             $this->BankDAO = new BankDAODB;
+            $this->MailController = new MailController;
+            $this->OwnerDAO = new OwnerDAODB;
+
         }
         
         
@@ -38,7 +46,7 @@
             try{
             $this->KeeperDAO->GetAll(); 
 
-            if($this->KeeperDAO->SearchEmail($email) == null){
+            if($this->KeeperDAO->SearchEmail($email) == null && $this->OwnerDAO->SearchEmail($email) == null){
 
                 $Keeper = new Keeper;
                 $Keeper->setFirstName($first_name);
@@ -246,6 +254,24 @@
                 }
             }
             return $validation;
+        }
+
+        public function EditNotification($keeper){
+            Validation::ValidUser();
+        try{
+                if($keeper->getNotification()==1){
+                    $this->KeeperDAO->EditNotification($keeper);
+                    //mandar mail
+                    $this->MailController->sendChatPending($keeper);
+                }else if($keeper->getNotification()>1){
+                    $this->KeeperDAO->EditNotification($keeper);
+                }else{
+                    $this->KeeperDAO->EditNotification($keeper);
+                }
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
         }
     }
 ?>     

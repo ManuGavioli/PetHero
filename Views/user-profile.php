@@ -142,11 +142,11 @@
                                             <form action="<?php echo FRONT_ROOT."Bank/EditBank"?>" method="post">  
                                                 <div class="col-lg-4">
                                                     <label>CBU:
-                                                        <input type="number" name="cbu" class="form-control" required>
+                                                        <input pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==22) return false;" type="number" name="cbu" class="form-control" required>
                                                     </label>
                                                     <br>
                                                     <label>ALIAS:
-                                                        <input type="text" name="alias" class="form-control" required>
+                                                        <input minlength="6" maxlength="20" type="text" name="alias" class="form-control" required>
                                                     </label>
                                                     <br>
                                                 </div>

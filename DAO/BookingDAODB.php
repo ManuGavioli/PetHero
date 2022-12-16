@@ -238,7 +238,7 @@ class BookingDAODB implements IBookingDAODB{
         {
             $BookingList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." INNER JOIN keepers on bookings.keeperId = keepers.user_id INNER JOIN pets on bookings.petId = pets.id_pet INNER JOIN owners on pets.id_owner = owners.user_id
+            $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK FROM ".$this->tableName." INNER JOIN keepers on bookings.keeperId = keepers.user_id INNER JOIN pets on bookings.petId = pets.id_pet INNER JOIN owners on pets.id_owner = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper 
             WHERE idBooking = ".$id;
 
             $this->connection = Connection::GetInstance();
@@ -250,50 +250,53 @@ class BookingDAODB implements IBookingDAODB{
 
                 $BookingNew=new Booking();
 
-                $newKeeper = new Keeper;
-                $newKeeper->setUserId($Booking["keeperId"]);
-                $newKeeper->setFirstName($Booking["firstName"]);
-                $newKeeper->setLastName($Booking["lastName"]);
-                $newKeeper->setDni($Booking["dni"]);
-                $newKeeper->setEmail($Booking["email"]);
-                $newKeeper->setPassword($Booking["pass"]);
-                $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
-                $newKeeper->setPetType($Booking["petType"]);
-                $newKeeper->setPrice($Booking["price"]);
-                $newKeeper->setBankKeeper($Booking["BankKeeper"]);
+                        $newBank = new Bank;
+                        $newBank->setIdBank($Booking['IdBank']);
+                        $newBank->setCbu($Booking['cbu']);
+                        $newBank->setAlias($Booking['alias']);
+                        $newBank->setTotal($Booking['total']);
 
-                $BookingNew->setKeeperId($newKeeper);
+                        $newKeeper = new Keeper;
+                        $newKeeper->setUserId($Booking["keeperId"]);
+                        $newKeeper->setFirstName($Booking["firstNameK"]);
+                        $newKeeper->setLastName($Booking["lastNameK"]);
+                        $newKeeper->setDni($Booking["dni"]);
+                        $newKeeper->setEmail($Booking["email"]);
+                        $newKeeper->setPassword($Booking["pass"]);
+                        $newKeeper->setPhoneNumber($Booking["phoneNumber"]);
+                        $newKeeper->setPetType($Booking["petType"]);
+                        $newKeeper->setPrice($Booking["price"]);
+                        $newKeeper->setBankKeeper($newBank);
+                        $BookingNew->setKeeperId($newKeeper);
 
-                
+                        $newOwner = new Owner;
+                        $newOwner->setUserId($Booking['id_owner']);
+                        $newOwner->setFirstName($Booking['firstName']);
+                        $newOwner->setLastName($Booking['lastName']);
+                        $newOwner->setDni($Booking['dni']);
+                        $newOwner->setEmail($Booking['email']);
+                        $newOwner->setPassword($Booking['pass']);
+                        $newOwner->setPhoneNumber($Booking['phoneNumber']);
 
-                $newOwner = new Owner;
-                $newOwner->setUserId($Booking['id_owner']);
-                $newOwner->setFirstName($Booking['firstName']);
-                $newOwner->setLastName($Booking['lastName']);
-                $newOwner->setDni($Booking['dni']);
-                $newOwner->setEmail($Booking['email']);
-                $newOwner->setPassword($Booking['pass']);
-                $newOwner->setPhoneNumber($Booking['phoneNumber']);
+                        $newPet = new Pet;
+                        $newPet->setId($Booking['petId']);
+                        $newPet->setName($Booking['name_pet']);
+                        $newPet->setPhoto($Booking['photo']);
+                        $newPet->setPetType($Booking['petType']);
+                        $newPet->setRaze($Booking['raze']);
+                        $newPet->setSize($Booking['size']);
+                        $newPet->setVaccinationPhoto($Booking['vaccinationPhoto']);
+                        $newPet->setObservations($Booking['observations']);
+                        $newPet->setVideo($Booking['video']);
+                        $newPet->setMyowner($newOwner);
+                        $BookingNew->setPetId($newPet);
+                        
+                      //  $BookingNew->setAmountPaid($Booking['amountPaid']); // es un objeto coupon?
 
-                $newPet = new Pet;
-                $newPet->setId($Booking['petId']);
-                $newPet->setName($Booking['name_pet']);
-                $newPet->setPhoto($Booking['photo']);
-                $newPet->setPetType($Booking['petType']);
-                $newPet->setRaze($Booking['raze']);
-                $newPet->setSize($Booking['size']);
-                $newPet->setVaccinationPhoto($Booking['vaccinationPhoto']);
-                $newPet->setObservations($Booking['observations']);
-                $newPet->setVideo($Booking['video']);
-                $newPet->setMyowner($newOwner);
-                $BookingNew->setPetId($newPet);
-                            
-                //$BookingNew->setAmountPaid($Booking['amountPaid']); // es un objeto coupon?
-
-                $BookingNew->setIdBooking($Booking['idBooking']);
-                $BookingNew->setStartDate($Booking['startDate']);
-                $BookingNew->setFinalDate($Booking['finalDate']);
-                $BookingNew->setConfirmed($Booking['confirmed']);
+                        $BookingNew->setIdBooking($Booking['idBooking']);
+                        $BookingNew->setStartDate($Booking['startDate']);
+                        $BookingNew->setFinalDate($Booking['finalDate']);
+                        $BookingNew->setConfirmed($Booking['confirmed']);
 
                 array_push($BookingList,$BookingNew);
                 

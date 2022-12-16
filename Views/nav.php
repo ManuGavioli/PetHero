@@ -7,7 +7,14 @@
      </span>
      <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Chat/ShowAddChatView'?>">CHATS</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Chat/ShowAddChatView'?>"><?php
+                    if($_SESSION['loggedUser']->getNotification()==0){
+                         echo 'CHATS';
+                    }else{
+                         echo 'CHATS 💬'.$_SESSION['loggedUser']->getNotification();
+                    }
+                    
+                    ?></a>
                </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Booking/MyBookings'?>">MIS RESERVAS</a>
@@ -30,7 +37,14 @@
      </span>
      <ul class="navbar-nav ml-auto">
                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Chat/ShowAddChatView'?>">CHATS</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT.'Chat/ShowAddChatView'?>"> <?php
+                    if($_SESSION['loggedUser']->getNotification()==0){
+                         echo 'CHATS';
+                    }else{
+                         echo 'CHATS 💬'.$_SESSION['loggedUser']->getNotification();
+                    }
+                    
+                    ?></a>
                </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT.'Owner/ShowAddPetView'?>">AGREGAR NUEVA MASCOTA</a>

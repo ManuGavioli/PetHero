@@ -70,15 +70,16 @@
                 if($this->chekTypeFileALL('voucher')==true){
                 $bookingselect= $this->BookingDAO->GetOnlyOneBooking($idbooking);
                 $couponselect= $this->CouponDAO->GetOnlyOneCoupon($idbooking);
-                var_dump($couponselect);
-                var_dump($this->RedirectImage('voucher'));
-                $this->CouponDAO->Modify($idbooking, $couponselect->getFullPayment()/2, $this->RedirectImage('voucher'));
                 //le agrego la plata en su banco
+                var_dump($bookingselect->getKeeperId());
                 $this->BankDAO->ModifyTotal($couponselect->getFullPayment()/2, $bookingselect->getKeeperId()->getBankKeeper());
+                
                 //cambia el estado de la reserva a super confirmada
                 if($couponselect->getPaidAlready()==0){
+                    $this->CouponDAO->Modify($idbooking, $couponselect->getFullPayment()/2, $this->RedirectImage('voucher'));
                     $this->BookingDAO->ConfirmationBooking($bookingselect);
                 }else{
+                    $this->CouponDAO->Modify2($idbooking, $couponselect->getFullPayment()/2, $this->RedirectImage('voucher'));
                     $this->BookingDAO->ConfirmationBookingTotalpay($bookingselect);
                 }
 
@@ -135,6 +136,7 @@
 
                 }else{
                     $this->BookingDAO->RejectBooking($Booking);
+                    $this->MailController->sendRejectBooking($Booking);
                     $this->KeeperController->ShowHome();
                 }
             }catch(Exception $ex)

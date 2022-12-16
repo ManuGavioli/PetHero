@@ -35,6 +35,7 @@
                     $ownerNew->setEmail($owner['email']);
                     $ownerNew->setPassword($owner['pass']);
                     $ownerNew->setPhoneNumber($owner['phoneNumber']);
+                    $ownerNew->setNotification($owner["notifications"]);
 
                     array_push($ownerList, $ownerNew);
                 }
@@ -97,6 +98,7 @@
                     $owner->setEmail($row["email"]);
                     $owner->setPassword($row["pass"]);
                     $owner->setPhoneNumber($row["phoneNumber"]);
+                    $owner->setNotification($row["notifications"]);
                     
                 }else
                 {
@@ -136,6 +138,23 @@
             }
 
 
+        }
+
+        public function EditNotification($editOwner){
+            try
+            {
+                $query = "UPDATE ".$this->tableName." SET  notifications = :notifications
+                WHERE user_id = ".$editOwner->getUserId();
+
+                $parameters["notifications"] = $editOwner->getNotification();
+                
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
         
 

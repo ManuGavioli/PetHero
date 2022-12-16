@@ -65,7 +65,7 @@
                            } if($booking->getConfirmed() == 3 || $booking->getConfirmed() == 5 || $booking->getConfirmed() == 4 || $booking->getConfirmed() == 7 || $booking->getConfirmed() == 6){?>       
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="background-color: #037DFF; color: #fff" >
                                 <!-- Button trigger modal -->
-                                Comprobante 📄
+                                Comprobante/s 📄
                                 </button>
 
                                              <!-- Modal -->
@@ -80,15 +80,24 @@
                                                        </div>
                                                         <div class="modal-body">
                                                                           
-                                                              <label for="">Comprobantes:</label>
                                                               <br>
                                                                     <?php foreach ($coupon_list as $voucher){ 
                                                                         if($voucher->getBookingId()==$booking->getIdBooking()){ 
                                                                             if(pathinfo($voucher->getVoucherNumInic(), PATHINFO_EXTENSION)=='pdf'){ ?>
+                                                                        <label for="">Comprobante 1:</label>
                                                                         <embed style="max-width: 400px" src="<?php  echo "../".$voucher->getVoucherNumInic();  ?>" type="application/pdf" alt="Comprobante">
                                                                         <?php }else { ?>
+                                                                            <label for="">Comprobante 1:</label>
                                                                         <img style="max-width: 400px" src="<?php  echo "../".$voucher->getVoucherNumInic();  ?>" alt="Comprobante">           
-                                                                        <?php } } } ?>
+                                                                        <?php } 
+                                                                        if($voucher->getVoucherNumFinal()!=null){
+                                                                        if(pathinfo($voucher->getVoucherNumFinal(), PATHINFO_EXTENSION)=='pdf'){ ?>
+                                                                        <label for="">Comprobante 2:</label>
+                                                                        <embed style="max-width: 400px" src="<?php  echo "../".$voucher->getVoucherNumFinal();  ?>" type="application/pdf" alt="Comprobante">
+                                                                        <?php }else { ?>
+                                                                            <label for="">Comprobante 2:</label>
+                                                                        <img style="max-width: 400px" src="<?php  echo "../".$voucher->getVoucherNumFinal();  ?>" alt="Comprobante">           
+                                                                        <?php } } } } ?>
                                                                 <br>
                                                        </div>
                                                   </div>

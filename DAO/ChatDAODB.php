@@ -19,7 +19,7 @@
                 {
                     $chatList = array();
 
-                    $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK FROM ".$this->tableName." INNER JOIN keepers on Chats.KeeperId = keepers.user_id INNER JOIN owners on Chats.KeeperId = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper where Chats.OwnerId=".$owner->getUserId().";";
+                    $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK FROM ".$this->tableName." LEFT JOIN keepers on Chats.KeeperId = keepers.user_id LEFT JOIN owners on Chats.OwnerId = owners.user_id LEFT JOIN banks on banks.IdBank = keepers.BankKeeper where Chats.OwnerId=".$owner->getUserId().";";
 
                     $this->connection = Connection::GetInstance();
 
@@ -38,6 +38,7 @@
                             $newOwner->setEmail($chat['email']);
                             $newOwner->setPassword($chat['pass']);
                             $newOwner->setPhoneNumber($chat['phoneNumber']);
+                            $newOwner->setNotification($chat['notifications']);
 
                         $chatNew->setOwnerId($newOwner);
 
@@ -58,13 +59,13 @@
                         $newKeeper->setPhoneNumber($chat["phoneNumber"]);
                         $newKeeper->setPetType($chat["petType"]);
                         $newKeeper->setPrice($chat["price"]);
+                        $newKeeper->setNotification($chat['notifications']);
                         $newKeeper->setBankKeeper($newBank);
 
                         $chatNew->setKeeperId($newKeeper);
 
                         array_push($chatList, $chatNew);
                     }
-
                     return $chatList;
                 }
                 catch(Exception $ex)
@@ -79,7 +80,7 @@
                 {
                     $chatList = array();
 
-                    $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK FROM ".$this->tableName." INNER JOIN keepers on Chats.KeeperId = keepers.user_id INNER JOIN owners on Chats.KeeperId = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper where Chats.OwnerId=".$keeper->getUserId().";";
+                    $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK FROM ".$this->tableName." LEFT JOIN keepers on Chats.KeeperId = keepers.user_id LEFT JOIN owners on Chats.OwnerId = owners.user_id LEFT JOIN banks on banks.IdBank = keepers.BankKeeper where Chats.KeeperId=".$keeper->getUserId().";";
 
                     $this->connection = Connection::GetInstance();
 
@@ -98,6 +99,7 @@
                             $newOwner->setEmail($chat['email']);
                             $newOwner->setPassword($chat['pass']);
                             $newOwner->setPhoneNumber($chat['phoneNumber']);
+                            $newOwner->setNotification($chat['notifications']);
 
                         $chatNew->setOwnerId($newOwner);
 
@@ -118,6 +120,7 @@
                         $newKeeper->setPhoneNumber($chat["phoneNumber"]);
                         $newKeeper->setPetType($chat["petType"]);
                         $newKeeper->setPrice($chat["price"]);
+                        $newKeeper->setNotification($chat['notifications']);
                         $newKeeper->setBankKeeper($newBank);
 
                         $chatNew->setKeeperId($newKeeper);
@@ -156,7 +159,7 @@
             {
                 $chatList = array();
     
-                $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK FROM ".$this->tableName." INNER JOIN keepers on Chats.KeeperId = keepers.user_id INNER JOIN owners on Chats.OwnerId = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper WHERE idChat =".$id.';';
+                $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK, keepers.notifications as notificationsK FROM ".$this->tableName." INNER JOIN keepers on Chats.KeeperId = keepers.user_id INNER JOIN owners on Chats.OwnerId = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper WHERE idChat =".$id.';';
     
                 $this->connection = Connection::GetInstance();
     
@@ -176,6 +179,7 @@
                             $newOwner->setEmail($chat['email']);
                             $newOwner->setPassword($chat['pass']);
                             $newOwner->setPhoneNumber($chat['phoneNumber']);
+                            $newOwner->setNotification($chat['notifications']);
 
                         $chatNew->setOwnerId($newOwner);
 
@@ -196,6 +200,7 @@
                         $newKeeper->setPhoneNumber($chat["phoneNumber"]);
                         $newKeeper->setPetType($chat["petType"]);
                         $newKeeper->setPrice($chat["price"]);
+                        $newKeeper->setNotification($chat['notificationsK']);
                         $newKeeper->setBankKeeper($newBank);
 
                         $chatNew->setKeeperId($newKeeper);

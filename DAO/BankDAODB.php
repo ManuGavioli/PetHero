@@ -83,7 +83,7 @@ class BankDAODB implements IBankDAO{
     public function ModifyTotal($mount, $idBank){
         try
         {
-            $query = "UPDATE ".$this->tableName." SET total=total+".$mount." where IdBank=".$idBank.";";
+            $query = "UPDATE ".$this->tableName." SET total=total+".$mount." where IdBank=".$idBank->getIdBank().";";
 
             $this->connection = Connection::GetInstance();
 
