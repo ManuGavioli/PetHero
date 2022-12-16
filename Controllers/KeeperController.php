@@ -78,7 +78,7 @@
             } 
         }catch(Exception $ex)
         {
-            $message='Motivo: Alias Repetido en el Sistema';
+            $message='Motivo: Alguno de los datos pueden estar siendo usados por otro User ya registrado (DNI, EMAIL, DATOS BANCARIOS)';
             require_once(VIEWS_PATH."error-page.php");
         }
         }

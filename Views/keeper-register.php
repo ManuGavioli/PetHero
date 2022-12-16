@@ -48,7 +48,7 @@
                                    <input minlength="6" maxlength="20" type="text" name="alias" class="form-control" placeholder="ingrese su alias para recibir pagos" required>
                               </div>
                         </div>
-                        <button type="submit" class="btn btn-dark ml-auto d-block">Registrarse en el sistema</button>
+                        <a class="btn btn-outline-secondary" href="<?php echo FRONT_ROOT.'User/Logout'?>">🔙</a> <button type="submit" class="btn btn-dark ml-auto d-block">Registrarse en el sistema</button>
                     </div>
                </form>
           </div>

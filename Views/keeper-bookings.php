@@ -63,17 +63,17 @@
                                 <button type="submit" class="btn" name="id_booking" value="<?php echo $booking->getIdBooking()?>" style="background-color: #991919; color: #fff" >Borrar</button>   
                             <?php
                            } if($booking->getConfirmed() == 3 || $booking->getConfirmed() == 5 || $booking->getConfirmed() == 4 || $booking->getConfirmed() == 7 || $booking->getConfirmed() == 6){?>       
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="background-color: #037DFF; color: #fff" >
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?php echo $booking->getIdBooking(); ?>" style="background-color: #037DFF; color: #fff" >
                                 <!-- Button trigger modal -->
                                 Comprobante/s 📄
                                 </button>
 
                                              <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal<?php echo $booking->getIdBooking(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                              <div class="modal-dialog" role="document">
                                                   <div class="modal-content">
                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Comprobante</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel<?php echo $booking->getIdBooking(); ?>">Comprobante</h5>
                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                                  </button>
