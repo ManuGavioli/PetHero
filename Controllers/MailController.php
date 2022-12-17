@@ -30,15 +30,15 @@ class MailController{
                 //Server settings
                 $mail->SMTPDebug = 0;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'federicomatiastorres@caraludme.edu.ar';                     //SMTP username
+                $mail->Username   = 'pethero123@outlook.com';                     //SMTP username
                 $mail->Password   = 'matimaster1';                               //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                $mail->SMTPSecure = 'STARTTLS';            //Enable implicit TLS encryption
+                $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
-                $mail->setFrom('federicomatiastorres@caraludme.edu.ar', 'PetHero');
+                $mail->setFrom('pethero123@outlook.com', 'PetHero');
                 $mail->addAddress($booking->getPetId()->getMyowner()->getEmail());     //Add a recipient
 
                 //Attachments
@@ -89,18 +89,18 @@ class MailController{
                     $mail = new PHPMailer(true);
             
                         try {
-                            //Server settings
+                                    //Server settings
                             $mail->SMTPDebug = 0;                      //Enable verbose debug output
                             $mail->isSMTP();                                            //Send using SMTP
-                            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                            $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
                             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                            $mail->Username   = 'federicomatiastorres@caraludme.edu.ar';                     //SMTP username
+                            $mail->Username   = 'pethero123@outlook.com';                     //SMTP username
                             $mail->Password   = 'matimaster1';                               //SMTP password
-                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-            
+                            $mail->SMTPSecure = 'STARTTLS';            //Enable implicit TLS encryption
+                            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
                             //Recipients
-                            $mail->setFrom('federicomatiastorres@caraludme.edu.ar', 'PetHero');
+                            $mail->setFrom('pethero123@outlook.com', 'PetHero');
                             $mail->addAddress($booking->getPetId()->getMyowner()->getEmail());     //Add a recipient
             
                             //Attachments
@@ -148,15 +148,15 @@ class MailController{
                                         //Server settings
                                         $mail->SMTPDebug = 0;                      //Enable verbose debug output
                                         $mail->isSMTP();                                            //Send using SMTP
-                                        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                                        $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
                                         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                                        $mail->Username   = 'federicomatiastorres@caraludme.edu.ar';                     //SMTP username
+                                        $mail->Username   = 'pethero123@outlook.com';                     //SMTP username
                                         $mail->Password   = 'matimaster1';                               //SMTP password
-                                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                                        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-                        
+                                        $mail->SMTPSecure = 'STARTTLS';            //Enable implicit TLS encryption
+                                        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
                                         //Recipients
-                                        $mail->setFrom('federicomatiastorres@caraludme.edu.ar', 'PetHero');
+                                        $mail->setFrom('pethero123@outlook.com', 'PetHero');
                                         $mail->addAddress($user->getEmail());     //Add a recipient
                         
                                         //Attachments
