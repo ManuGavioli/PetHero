@@ -17,7 +17,13 @@
                     } ?>" alt="img">
             </div>
             <div class="cuerpo">
-                <span><?php echo $chatnew->getKeeperId()->getFirstName().' '.$chatnew->getKeeperId()->getLastName() ?></span>
+                <span>
+                <?php 
+                    if ($_SESSION['loggedUser']->isKeeperOrOwner() == 0){
+                        echo $chatnew->getKeeperId()->getFirstName().' '.$chatnew->getKeeperId()->getLastName(); 
+                    }else{
+                        echo $chatnew->getOwnerId()->getFirstName().' '.$chatnew->getOwnerId()->getLastName(); 
+                    } ?> </span>
                 <span> <?php 
                     if ($_SESSION['loggedUser']->isKeeperOrOwner() == 0){
                         echo 'Cuidador';
