@@ -17,7 +17,7 @@
               
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Foto</label>
+                                   <label for="">Foto</label>
                                    <input  type="file" name="photo" class="form-control" required>
                               </div>
                         </div>
@@ -60,8 +60,8 @@
                                    <input  type="url" name="video" class="form-control" required>
                               </div>
                         </div>
-                        <button type="submit" class="btn btn-dark ml-auto d-block">Registrar My Pet</button>
                     </div>
+                    <button type="submit" class="btn btn-dark ml-auto d-block">Registrar My Pet</button>
                </form>
           </div>
      </section>

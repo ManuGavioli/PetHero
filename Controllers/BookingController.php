@@ -125,6 +125,7 @@
                         if($this->AutoCancel($oneBooking) == 1){
                             $messageDrop = 1;
                             $this->BookingDAO->RejectBooking($oneBooking);
+                            $this->MailController->sendRejectBooking($oneBooking);
                         }
                     }
 

@@ -159,7 +159,7 @@
             {
                 $chatList = array();
     
-                $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK, keepers.notifications as notificationsK FROM ".$this->tableName." INNER JOIN keepers on Chats.KeeperId = keepers.user_id INNER JOIN owners on Chats.OwnerId = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper WHERE idChat =".$id.';';
+                $query = "SELECT *, keepers.firstName as firstNameK, keepers.lastName as lastNameK, keepers.notifications as notificationsK, keepers.email as emailK FROM ".$this->tableName." INNER JOIN keepers on Chats.KeeperId = keepers.user_id INNER JOIN owners on Chats.OwnerId = owners.user_id INNER JOIN banks on banks.IdBank = keepers.BankKeeper WHERE idChat =".$id.';';
     
                 $this->connection = Connection::GetInstance();
     
@@ -195,7 +195,7 @@
                         $newKeeper->setFirstName($chat["firstNameK"]);
                         $newKeeper->setLastName($chat["lastNameK"]);
                         $newKeeper->setDni($chat["dni"]);
-                        $newKeeper->setEmail($chat["email"]);
+                        $newKeeper->setEmail($chat["emailK"]);
                         $newKeeper->setPassword($chat["pass"]);
                         $newKeeper->setPhoneNumber($chat["phoneNumber"]);
                         $newKeeper->setPetType($chat["petType"]);

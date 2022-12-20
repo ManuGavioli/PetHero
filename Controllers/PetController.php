@@ -30,44 +30,49 @@
         }
         }
         
-        function AddPet( $name, $petType, $raze, $size, $observations, $video){
-
-            Validation::ValidUser();
-
-            try{
+        function AddPet( $name=0, $petType=0, $raze=0, $size=0, $observations=0, $video=0){
             
-            if($this->chekTypeFileoutPDF('photo')==true && $this->chekTypeFileALL('vaccinationPhoto')==true){
-            $petNew=new Pet();
-            $petNew->setName($name);
-            $petNew->setPhoto($this->RedirectImage('photo'));
-            $petNew->setPetType($petType);
-            $petNew->setRaze($raze);
-            $petNew->setSize($size);
-            $petNew->setVaccinationPhoto($this->RedirectImage('vaccinationPhoto'));
-            $petNew->setObservations($observations);
-    
-            //convertir la url de un video para luego poder incrustarlo automaticamente en la vista 
-    
-            $video=substr($video, 32);
-    
-            $petNew->setVideo($video);
-            //agrego solo el id //pasar el owner completo 
-            $petNew->setMyowner($_SESSION['loggedUser']);
-    
-            $this->DataPets->AddPet($petNew);
-    
-            //no hay mas lista de pets en owner
-           //$_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
-    
-            header("location:".FRONT_ROOT."Pet/ShowListPetView");
+            Validation::ValidUser();
+            if($petType!=0){
+                try{
+            
+                    if($this->chekTypeFileoutPDF('photo')==true && $this->chekTypeFileALL('vaccinationPhoto')==true){
+                    $petNew=new Pet();
+                    $petNew->setName($name);
+                    $petNew->setPhoto($this->RedirectImage('photo'));
+                    $petNew->setPetType($petType);
+                    $petNew->setRaze($raze);
+                    $petNew->setSize($size);
+                    $petNew->setVaccinationPhoto($this->RedirectImage('vaccinationPhoto'));
+                    $petNew->setObservations($observations);
+            
+                    //convertir la url de un video para luego poder incrustarlo automaticamente en la vista 
+            
+                    $video=substr($video, 32);
+            
+                    $petNew->setVideo($video);
+                    //agrego solo el id //pasar el owner completo 
+                    $petNew->setMyowner($_SESSION['loggedUser']);
+            
+                    $this->DataPets->AddPet($petNew);
+            
+                    //no hay mas lista de pets en owner
+                   //$_SESSION['loggedUser']=$this->DataOwners->AddPet($_SESSION['loggedUser']->getUserId(), $petNew);
+            
+                    header("location:".FRONT_ROOT."Pet/ShowListPetView");
+                    }else{
+                        echo "<script> confirm('Formato/s de imagenes cargados inavlidos solo se permite: PNG, JPG y PDF(solo en la planilla de vacunación)');</script>";
+                        require_once(VIEWS_PATH."pet-add.php");
+                    }
+                }catch(Exception $ex)
+                {
+                    require_once(VIEWS_PATH."error-page.php");
+                }
             }else{
                 echo "<script> confirm('Formato/s de imagenes cargados inavlidos solo se permite: PNG, JPG y PDF(solo en la planilla de vacunación)');</script>";
                 require_once(VIEWS_PATH."pet-add.php");
             }
-        }catch(Exception $ex)
-        {
-            require_once(VIEWS_PATH."error-page.php");
-        }
+           
         }
 
         private function RedirectImage($filename){

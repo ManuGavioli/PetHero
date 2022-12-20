@@ -34,7 +34,7 @@
         </div>
         <?php foreach($messagechat as $msg){  ?>
             <?php  if ($msg->getUser()==1) {  ?>
-                <div class="panel-chat">
+        <div class="panel-chat">
             <div class="mensaje">
                 <div class="avatar">
                     <img src="https://cdn-icons-png.flaticon.com/512/236/236832.png" alt="img">
@@ -50,6 +50,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             <?php }else{ ?>
             <!-- derecha -->
             <div class="panel-chat">
