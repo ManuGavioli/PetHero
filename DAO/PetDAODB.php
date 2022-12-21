@@ -109,6 +109,82 @@ class PetDAODB implements IPetDAO{
         return $pet_owner;
     }
 
+    function GetOnePet($idpet){
+        try
+        {
+            $query = "SELECT * FROM ".$this->tableName." inner join Owners on Owners.user_id= ".$this->tableName.".id_owner where pets.id_pet=".$idpet.';';
+
+          
+            $this->connection = Connection::GetInstance();
+            $result = $this->connection->Execute($query);
+            
+            
+            $petNew=new Pet();
+
+            if(isset($result[0])){
+                $row = $result[0];
+
+                        $petNew->setId($row['id_pet']);
+                        $petNew->setName($row['name_pet']);
+                        $petNew->setPhoto($row['photo']);
+                        $petNew->setPetType($row['petType']);
+                        $petNew->setRaze($row['raze']);
+                        $petNew->setSize($row['size']);
+                        $petNew->setVaccinationPhoto($row['vaccinationPhoto']);
+                        $petNew->setObservations($row['observations']);
+                        $petNew->setVideo($row['video']);
+
+                    $ownerNew=new Owner();
+                    $ownerNew->setUserId($row['user_id']);
+                    $ownerNew->setFirstName($row['firstName']);
+                    $ownerNew->setLastName($row['lastName']);
+                    $ownerNew->setDni($row['dni']);
+                    $ownerNew->setEmail($row['email']);
+                    $ownerNew->setPassword($row['pass']);
+                    $ownerNew->setPhoneNumber($row['phoneNumber']);
+
+                    $petNew->setMyOwner($ownerNew);
+            }else
+            {
+                $petNew=null;
+            }
+            return $petNew;
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+
+    }
+
+    public function EditPet($newPet){
+        try
+        {
+           if ($newPet->getPhoto()!=null){
+            $query = "UPDATE ".$this->tableName." SET photo= :photo, petType= :petType, size= :size, observations= :observations, video= :video WHERE id_pet= :id_pet;";
+            $parameters['photo']=$newPet->getPhoto();
+           }else{
+            $query = "UPDATE ".$this->tableName." SET petType= :petType, size= :size, observations= :observations, video= :video WHERE id_pet= :id_pet;";
+           }
+            
+            $parameters['petType']=$newPet->getPetType();
+            $parameters['size']=$newPet->getSize();
+            $parameters['observations']=$newPet->getObservations();
+            $parameters['video']=$newPet->getVideo();
+            $parameters['id_pet']=$newPet->getId();
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+
+
+    }
+
 }
 
 

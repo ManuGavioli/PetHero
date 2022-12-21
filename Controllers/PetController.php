@@ -33,7 +33,7 @@
         function AddPet( $name=0, $petType=0, $raze=0, $size=0, $observations=0, $video=0){
             
             Validation::ValidUser();
-            if($petType!=0){
+            if($size!=0){
                 try{
             
                     if($this->chekTypeFileoutPDF('photo')==true && $this->chekTypeFileALL('vaccinationPhoto')==true){
@@ -99,6 +99,64 @@
                 $ok=true;
             }
             return $ok;
+        }
+
+        public function EditPet($idPet){
+            Validation::ValidUser();
+        try{
+                $petedit=$this->DataPets->GetOnePet($idPet);
+                require_once(VIEWS_PATH."pet-edit.php");  
+        }catch(Exception $ex)
+        {
+            require_once(VIEWS_PATH."error-page.php");
+        }
+        }
+
+        public function PetEditOk($petType=0, $size=0, $observations=0, $video=0, $idpet=0){
+            Validation::ValidUser();
+            if($size!=0){
+                try{
+                    if($_FILES['photoedit']['type']!=''){
+                             if($this->chekTypeFileoutPDF('photoedit')==true){
+                            $petNew=new Pet();
+                            $petNew->setPhoto($this->RedirectImage('photoedit'));
+                            $petNew->setPetType($petType);
+                            $petNew->setSize($size);
+                            $petNew->setObservations($observations);
+                            $video=substr($video, 32);
+                            $petNew->setVideo($video);
+                            $petNew->setId($idpet);
+                    
+                            $this->DataPets->EditPet($petNew);
+                            header("location:".FRONT_ROOT."Pet/ShowListPetView");
+                            
+                            }else{
+                                echo "<script> confirm('Formato/s de imagenes cargados inavlidos solo se permite: PNG, JPG y PDF(solo en la planilla de vacunación)');</script>";
+                                $this->EditPet($idpet);
+                            }
+                    }else{
+                            $petNew=new Pet();
+                            $petNew->setPhoto(null);
+                            $petNew->setPetType($petType);
+                            $petNew->setSize($size);
+                            $petNew->setObservations($observations);
+                            $video=substr($video, 32);
+                            $petNew->setVideo($video);
+                            $petNew->setId($idpet);
+                    
+                            $this->DataPets->EditPet($petNew);
+                            header("location:".FRONT_ROOT."Pet/ShowListPetView");
+                    }
+                    
+                }catch(Exception $ex)
+                {
+                    echo $ex;
+                    require_once(VIEWS_PATH."error-page.php");
+                }
+            }else{
+                echo "<script> confirm('Formato/s de imagenes cargados inavlidos solo se permite: PNG, JPG y PDF(solo en la planilla de vacunación)');</script>";
+                $this->ShowListPetView();
+            }
         }
 
     }

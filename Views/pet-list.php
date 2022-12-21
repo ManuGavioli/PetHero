@@ -41,6 +41,10 @@
                                         <?php  } ?>
                               <td><iframe width="308" height="173.25" src="https://www.youtube.com/embed/<?php echo $pets->getVideo(); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
                                    <td><?php  echo $pets->getObservations();  ?></td>
+                                   <form action="<?php echo FRONT_ROOT.'Pet/EditPet'?>" method="post">
+                                   <button type="submit" class="btn" name="idPet" value="<?php echo $pets->getId();;?>" style="background-color: #48c; color: #fff" >Editar Mascota</button> 
+                                   </form>
+                                   
                          </tr>
                         </tbody> 
                     
